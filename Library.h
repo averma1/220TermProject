@@ -7,11 +7,12 @@
 
 
 #include "ArrayList.h"
+#include "Song.h"
 
 class Library {
 private:
     ArrayList<playlist*>* playList;
-    ArrayList<song*>* songList;
+    ArrayList<Song*>* songList;
     int numOfPlaylists;
     int numOfSongs;
 public:

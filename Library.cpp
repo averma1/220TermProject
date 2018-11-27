@@ -3,11 +3,12 @@
 //
 #include "Library.h"
 #include "ArrayList.h"
+#include "Song.h"
 
 Library::Library(){
     //read files and add songs and playlists
     playList= new ArrayList<playlist*>(10);
-    songList= new ArrayList<songt*>(10);
+    songList= new ArrayList<Song*>(10);
     //count number of both
     numOfSongs=10;
     numOfPlaylists=10;
@@ -18,8 +19,8 @@ Library::~Library(){
     delete[] songList;
 }
 
-void Library::addSongToList(std::string songName, std::string artist){
-    song* newSong= new song(songName, artist);
+void Library::addSongToList(std::string songName, std::string artist, double duration){
+    Song* newSong= new Song(artist, songName, duration);
     songList->insertAtEnd(newSong);
     //write the song to the file
 }
@@ -58,7 +59,7 @@ void Library::createRandomPlaylist(int numbOfSongs, std::string playlistName){
     playList->insertAtEnd(newPlaylist);
     for(int i=0; i<numbOfSongs; i++){
         int randInt= genRandNumber();
-        song* randSong= songList->getValueAt(randInt);
+        Song* randSong= songList->getValueAt(randInt);
         newPlaylist->addSong(randSong);
     }
     //update file
