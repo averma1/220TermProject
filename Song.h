@@ -5,7 +5,7 @@
 #ifndef TERMPROJECT_SONG_H
 #define TERMPROJECT_SONG_H
 
-//#include "ArrayList.h"
+#include "ArrayList.h"
 #include<iostream>
 
 class Song{
@@ -17,6 +17,7 @@ private:
     int playCount; //number of times we played the song
 
 public:
+    Song(std::string artist, std::string title, double duration);
     void addToPlayCount(int playCount);
 
 };
