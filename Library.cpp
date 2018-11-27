@@ -2,11 +2,12 @@
 // Created by Aine on 11/23/2018.
 //
 #include "Library.h"
+#include "ArrayList.h"
 
 Library::Library(){
     //read files and add songs and playlists
-    playList= new ArrayList(10);
-    songList= new ArrayList(10);
+    playList= new ArrayList<playlist*>(10);
+    songList= new ArrayList<songt*>(10);
     //count number of both
     numOfSongs=10;
     numOfPlaylists=10;
