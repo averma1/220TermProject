@@ -4,8 +4,11 @@
 
 #include "Song.h"
 
-Song::Song(){
+Song::Song(std::string artist, std::string title, double duration){
 
+    this->artist = artist;
+    this->title = title;
+    this->duration = duration;
     playCount = 0;
 
 }
