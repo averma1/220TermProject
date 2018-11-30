@@ -7,7 +7,7 @@
 
 Library::Library(){
     //read files and add songs and playlists
-    playList= new ArrayList<playlist*>(10);
+    playList= new ArrayList<Playlist*>(10);
     songList= new ArrayList<Song*>(10);
     //count number of both
     numOfSongs=10;
@@ -35,7 +35,7 @@ void addSongToPlaylist(std::string songName, std::string playlistName){
 }
 
 void Library::createPlaylist(int numOfSongs, std::string playlistName){
-    playlist* newPlaylist= new playlist(numOfSongs, playlistName);
+    Playlist* newPlaylist= new Playlist(numOfSongs, playlistName);
     playList->insertAtEnd(newPlaylist);
     //ask user which songs to add then add them until done
     //add the playlist to the file
@@ -54,11 +54,34 @@ void Library::deletePlaylist(std::string playlistName){
     }
 }
 
+int genRandInt(int min, int max){
+    int min1=min;
+    int max1=max;
+    if(min>max){
+        min=max1;
+        max=min1;
+    }
+    bool end= false;
+    while(end==false) {
+        int rando = rand()%(max-min + 1) + min;
+        if(rando>=min) {
+            return rando;
+        } else {
+            end=false;
+        }
+    }
+}
+
+/**
+ * NEED TO CALL SRAND IN MAIN
+ * @param numbOfSongs
+ * @param playlistName
+ */
 void Library::createRandomPlaylist(int numbOfSongs, std::string playlistName){
-    playlist* newPlaylist= new playlist(numbOfSongs, playlistName);
+    Playlist* newPlaylist= new Playlist(numbOfSongs, playlistName);
     playList->insertAtEnd(newPlaylist);
     for(int i=0; i<numbOfSongs; i++){
-        int randInt= genRandNumber();
+        int randInt= genRandInt(0,numOfSongs-1);
         Song* randSong= songList->getValueAt(randInt);
         newPlaylist->addSong(randSong);
     }

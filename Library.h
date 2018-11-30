@@ -8,10 +8,11 @@
 
 #include "ArrayList.h"
 #include "Song.h"
+#include "LibraryMain.h"
 
-class Library {
+class Library: public LibraryMain {
 private:
-    ArrayList<playlist*>* playList;
+    ArrayList<Playlist*>* playList;
     ArrayList<Song*>* songList;
     int numOfPlaylists;
     int numOfSongs;
@@ -19,7 +20,7 @@ public:
     Library();
     ~Library();
 
-    void addSongToList(std::string songName, std::string artist);
+    void addSongToList(std::string songName, std::string artist, double duration);
     void addSongToPlaylist(std::string songName, std::string playlistName);
     void createPlaylist(int numOfSongs, std::string playlistName);
     void deletePlaylist(std::string playlistName);
