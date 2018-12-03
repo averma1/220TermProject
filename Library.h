@@ -9,6 +9,7 @@
 #include "ArrayList.h"
 #include "Song.h"
 #include "LibraryMain.h"
+#include "Playlist.h"
 
 class Library: public LibraryMain {
 private:

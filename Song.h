@@ -19,7 +19,7 @@ private:
 public:
     Song(std::string artist, std::string title, double duration);
     void addToPlayCount(int playCount);
-
+    //double getDuration();
 };
 
 

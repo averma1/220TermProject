@@ -5,12 +5,15 @@
 #ifndef TERMPROJECT_PLAYLIST_H
 #define TERMPROJECT_PLAYLIST_H
 #include <string>
+#include "Song.h"
+#include "List.h"
+#include"ArrayList.h"
 
 class Playlist{
 
 private:
     std::string name;
-    List songList;
+    ArrayList<Song*>* songList;
     double duration;
 
 
@@ -21,10 +24,11 @@ public:
     Playlist(const Playlist& playlistToCopy);//copy constructor
     Playlist& operator=(const Playlist& playlistToCopy);//assignment operator
 
-    void addSong(Song songToAdd);
+    void addSong(std::string songToAdd);
     void playNext();
-    void removeSong(Song songToRemove);
+    void removeSong(std::string songToRemove);
     void rename(std::string newName);
+    std::string getName();
 
 
 
