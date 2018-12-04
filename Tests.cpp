@@ -5,6 +5,9 @@
 #include "TestLib.h"
 #include "Song.h"
 #include "Playlist.h"
+#include "LibraryMain.h"
+#include "Library.h"
+
 
 
 /*Can you create a song
