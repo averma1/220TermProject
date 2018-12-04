@@ -22,6 +22,8 @@ public:
     std::string getName();
     double getDuration();
     Song();
+    std::string getArtist();
+    int getPlayCount();
 };
 
 

@@ -15,6 +15,15 @@
 void printAssertEquals(int expected, int actual);
 
 /**
+ * reports whether doubles are equal or not
+ * @param expected - the value you expect the actual value to be
+ * @param actual - the actual value to test
+ * @post prints only "pass" if the values are equal,
+ *      Else it prints "FAIL" and their respective values
+ */
+void printAssertEqualsDouble(double expected, double actual);
+
+/**
  * reports whether floats are equal or not, within a threshold
  * @param expected - the value you expect the actual value to be
  * @param actual - the actual value to test
