@@ -13,6 +13,15 @@ void printAssertEquals(int expected, int actual){
     }
 }
 
+void printAssertEqualsDouble(double expected, double actual){
+    if (expected == actual){
+        std::cout << "pass" << std::endl;
+    }
+    else {
+        std::cout << "FAIL, expected: " << expected << "\tactual: " << actual << std::endl;
+    }
+}
+
 void printAssertEquals(float expected, float actual, float threshold){
     float diff = (expected - actual);
     if (diff < 0){
