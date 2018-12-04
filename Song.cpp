@@ -19,5 +19,9 @@ void addToPlayCount(int playCount){
 
 }
 
+std::string Song::getName() {
+    return title;
+}
+
 
 
