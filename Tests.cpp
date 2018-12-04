@@ -26,7 +26,7 @@ void createSongAndPlaylistTest(){
     Song* song2=new Song("","", 33.333340);
     printAssertEquals("", song2->getName());
     printAssertEquals("", song2->getArtist());
-    printAssertEquals(33.333340, song2->getDuration());
+    printAssertEqualsDouble(33.333340, song2->getDuration());
 
     Playlist* playlist1=new Playlist("playlist1");
     printAssertEquals("playlist1", playlist1->getName());
