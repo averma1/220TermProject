@@ -28,6 +28,7 @@ public:
     void createRandomPlaylist(int numOfSongs, std::string playlistName);
     bool isSonginList(std::string songName);
     void removeSongToPlaylist(std::string songName, std::string playlistName);
+    std::string libraryString();
 };
 
 #endif //FINAL_LIBRARY_H

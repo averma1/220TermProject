@@ -136,3 +136,7 @@ void Library::removeSongToPlaylist(std::string songName, std::string playlistNam
         }
     }
 }
+
+std::string Library::libraryString(){
+
+};

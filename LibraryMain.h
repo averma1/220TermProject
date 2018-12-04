@@ -9,6 +9,7 @@
 #include "Song.h"
 #include "Playlist.h"
 
+
 class LibraryMain {
 private:
     ArrayList<Playlist>* playListList;
@@ -25,6 +26,7 @@ public:
     virtual void createRandomPlaylist(int numOfSongs, std::string playlistName)=0;
     virtual bool isSonginList(std::string songName)=0;
     virtual void removeSongToPlaylist(std::string songName, std::string playlistName)=0;
+    virtual std::string libraryString()=0;
 };
 
 #endif //INC_220TERMPROJECT_LIBRARYMAIN_H
