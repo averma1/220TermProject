@@ -13,8 +13,8 @@
 
 class Library: public LibraryMain {
 private:
-    ArrayList<Playlist*>* playList;
-    ArrayList<Song*>* songList;
+    ArrayList<Playlist>* playListList;
+    ArrayList<Song>* songList;
     int numOfPlaylists;
     int numOfSongs;
 public:
@@ -26,6 +26,8 @@ public:
     void createPlaylist(int numOfSongs, std::string playlistName);
     void deletePlaylist(std::string playlistName);
     void createRandomPlaylist(int numOfSongs, std::string playlistName);
+    bool isSonginList(std::string songName);
+    void removeSongToPlaylist(std::string songName, std::string playlistName);
 };
 
 #endif //FINAL_LIBRARY_H

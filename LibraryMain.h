@@ -7,11 +7,12 @@
 
 #include "ArrayList.h"
 #include "Song.h"
+#include "Playlist.h"
 
 class LibraryMain {
 private:
-    ArrayList<Playlist*>* playList;
-    ArrayList<Song*>* songList;
+    ArrayList<Playlist>* playListList;
+    ArrayList<Song>* songList;
     int numOfPlaylists;
     int numOfSongs;
 public:
@@ -22,6 +23,8 @@ public:
     virtual void createPlaylist(int numOfSongs, std::string playlistName)=0;
     virtual void deletePlaylist(std::string playlistName)=0;
     virtual void createRandomPlaylist(int numOfSongs, std::string playlistName)=0;
+    virtual bool isSonginList(std::string songName)=0;
+    virtual void removeSongToPlaylist(std::string songName, std::string playlistName)=0;
 };
 
 #endif //INC_220TERMPROJECT_LIBRARYMAIN_H
