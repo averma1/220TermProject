@@ -4,6 +4,8 @@
 #include "Library.h"
 #include "ArrayList.h"
 #include "Song.h"
+#include "List.h"
+#include "Playlist.h"
 
 Library::Library(){
     //read files and add songs and playlists
@@ -35,7 +37,7 @@ void addSongToPlaylist(std::string songName, std::string playlistName){
 }
 
 void Library::createPlaylist(int numOfSongs, std::string playlistName){
-    Playlist* newPlaylist= new Playlist(numOfSongs, playlistName);
+    Playlist* newPlaylist= new Playlist(playlistName);
     playList->insertAtEnd(newPlaylist);
     //ask user which songs to add then add them until done
     //add the playlist to the file
