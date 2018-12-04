@@ -28,13 +28,13 @@ Playlist::Playlist(const Playlist& playlistToCopy){
     duration=playlistToCopy.duration;
     songList=playlistToCopy.songList;
 }
-Playlist& Playlist:: operator=(const Playlist& playlistToCopy){
+Playlist& Playlist:: operator=(Playlist* playlistToCopy){
     if(this != playlistToCopy){
         delete songList;
         songList=nullptr;
-        name=playlistToCopy.name;
-        duration=playlistToCopy.duration;
-        songList=playlistToCopy.songList;
+        name=playlistToCopy->name;
+        duration=playlistToCopy->duration;
+        songList=playlistToCopy->songList;
     }
     return *this;
 }

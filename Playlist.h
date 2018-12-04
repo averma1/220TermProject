@@ -22,7 +22,7 @@ public:
     Playlist(); //default constructor
     ~Playlist();//destructor
     Playlist(const Playlist& playlistToCopy);//copy constructor
-    Playlist& operator=(const Playlist& playlistToCopy);//assignment operator
+    Playlist& operator=(Playlist* playlistToCopy);//assignment operator
 
     void addSong(Song songToAdd);
     void playNext();
