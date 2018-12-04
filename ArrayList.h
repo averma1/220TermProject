@@ -47,7 +47,7 @@ public:
 
     bool campareAt(int location, T thing);
 
-    int find1(ArrayList<std::string>* arrayPtr, int size, std::string numToFind);
+    int find(T numToFind);
 
     /**
      * appends the new item to the end of the list

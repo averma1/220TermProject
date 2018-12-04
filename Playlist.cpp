@@ -8,13 +8,13 @@
 
 Playlist::Playlist(std::string nameIn){
     name=nameIn;
-    songList= new ArrayList<Song*>(10);
+    songList= new ArrayList<Song>(10);
     duration=0;
 }
 
 Playlist::Playlist(){
     name="default";
-    songList=new ArrayList<Song*>(10);
+    songList=new ArrayList<Song>(10);
     duration=0;
 }
 
@@ -39,23 +39,23 @@ Playlist& Playlist:: operator=(const Playlist& playlistToCopy){
     return *this;
 }
 
-void Playlist::addSong(std::string songToAdd){
-    std::string artist="";
-    Song*newSongToAdd=new Song(artist,songToAdd,0);  //need to get the actual artist and duration for the song
-    songList->insertAtEnd(newSongToAdd);
+void Playlist::addSong(Song songToAdd){
+    songList->insertAtEnd(songToAdd);
+    duration+=songToAdd.getDuration();
 }
 
 
 
 void Playlist::playNext(){
-    Song*songPlayed=songList->removeValueAtFront();
-    duration-=songPlayed->getDuration(); //does this work since songPlayed is a pointer?
+    Song songPlayed=songList->removeValueAtFront();
+    duration-=songPlayed.getDuration();
 
 }
 
-void Playlist::removeSong(std::string songToRemove){
+void Playlist::removeSong(Song songToRemove){
     int index=songList->find(songToRemove);
     songList->removeValueAt(index);
+    duration-=songToRemove.getDuration();
 }
 
 void Playlist::rename(std::string newName){

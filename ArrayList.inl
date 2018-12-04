@@ -160,43 +160,27 @@ void ArrayList<T>::clearList(){
  * @post numLinesRun is updated to include lines run by this function
  * @return the index of the first occurrence of numToFind if it is present, otherwise returns -1
  */
+
+
 template <class T>
-int ArrayList<T>::find1( ArrayList<std::string>* arrayPtr, int size, std::string numToFind) {
-    int middle;
-    if (size > 2) {
-        if (size % 2 == 0) {
-            middle = size / 2;
-        } else {
-            middle = (size - 1) / 2;
-        }
-        if (arrayPtr->campareAt(middle, numToFind)) {
-            return middle;
-        } else if (numToFind > arrayPtr->getValueAt(middle)) {
-            int found = find((arrayPtr + middle), middle + 1, numToFind);
-            if (found == -1) {
-                return found;
-            } else {
-                return found + middle;
-            }
-        } else if (numToFind < arrayPtr->getValueAt(middle)) {
-            return find(arrayPtr, middle + 1, numToFind);
-        }
-    } else if (size == 1) {
-        if (arrayPtr->campareAt(0, numToFind)) {
-            return 0;
-        } else {
-            return -1;
-        }
-    } else {
-        if (arrayPtr->campareAt(0, numToFind)) {
-            return 0;
-        } else if (arrayPtr->campareAt(1, numToFind)) {
-            return 1;
-        } else {
-            return -1;
+int ArrayList<T>:: find(T numToFind){
+    for(int i=0;i<currItemCount;i++){
+        if(*(array+i)==numToFind){
+            return i;
         }
     }
+    return -1;
 }
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Searches an int array for a certain value
