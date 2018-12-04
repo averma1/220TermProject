@@ -52,8 +52,7 @@ void Playlist::playNext(){
 
 }
 
-void Playlist::removeSong(Song songToRemove){
-    int index=songList->find(songToRemove);
+void Playlist::removeSong(Song songToRemove, int index){
     songList->removeValueAt(index);
     duration-=songToRemove.getDuration();
 }
