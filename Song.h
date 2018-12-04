@@ -21,6 +21,7 @@ public:
     void addToPlayCount(int playCount);
     std::string getName();
     double getDuration();
+    Song();
 };
 
 

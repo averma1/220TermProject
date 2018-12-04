@@ -13,6 +13,13 @@ Song::Song(std::string artist, std::string title, double duration){
 
 }
 
+Song::Song(){
+    this->artist = "defualt";
+    this->title = "defualt";
+    this->duration = 0;
+    playCount = 0;
+}
+
 void Song::addToPlayCount(int playCount){
     playCount++;
 }
