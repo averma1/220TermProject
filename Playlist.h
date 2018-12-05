@@ -29,6 +29,7 @@ public:
     void removeSong(Song songToRemove, int index);
     void rename(std::string newName);
     std::string getName();
+    double getDuration();
 
 
 

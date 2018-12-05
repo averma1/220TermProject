@@ -33,6 +33,15 @@ void createSongAndPlaylistTest(){
 
     Playlist* playlist1=new Playlist("playlist1");
     printAssertEquals("playlist1", playlist1->getName());
+    playlist1->rename("playlist2");
+    printAssertEquals("playlist2", playlist1->getName());
+
+    playlist1->addSong(*song1);
+
+    playlist1->addSong(*song2);
+
+    printAssertEqualsDouble(2+33.333340,playlist1->getDuration());
+
 
 
 }

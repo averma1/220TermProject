@@ -64,3 +64,7 @@ void Playlist::rename(std::string newName){
 std::string Playlist::getName(){
     return name;
 }
+
+double Playlist::getDuration() {
+    return duration;
+}
