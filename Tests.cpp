@@ -36,8 +36,20 @@ void createSongAndPlaylistTest(){
 
 }
 
+void createLibrarytest(){
+    std::cout << "-------createLibraryTest---------" <<std::endl;
+    Library* library1=new Library();
+    library1->addSongToList("Moss", "someone", 3.50);
+    library1->createPlaylist(2, "newPlaylist");
+    //library1->addSongToPlaylist("Moss", "newPlaylist");
+    printAssertEquals(true, library1->isSonginList("Moss"));
+    std::cout<<library1->libraryString()<<std::endl;
+
+}
+
 
 int main(){
     createSongAndPlaylistTest();
+    createLibrarytest();
 
 }
