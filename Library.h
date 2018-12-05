@@ -8,10 +8,9 @@
 
 #include "ArrayList.h"
 #include "Song.h"
-#include "LibraryMain.h"
 #include "Playlist.h"
 
-class Library: public LibraryMain {
+class Library {
 private:
     ArrayList<Playlist>* playListList;
     ArrayList<Song>* songList;
@@ -28,6 +27,7 @@ public:
     void createRandomPlaylist(int numOfSongs, std::string playlistName);
     bool isSonginList(std::string songName);
     void removeSongToPlaylist(std::string songName, std::string playlistName);
+    std::string libraryString();
 };
 
 #endif //FINAL_LIBRARY_H

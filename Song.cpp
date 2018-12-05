@@ -13,6 +13,13 @@ Song::Song(std::string artist, std::string title, double duration){
 
 }
 
+Song::Song(){
+    this->artist = "default";
+    this->title = "default";
+    this->duration = 0;
+    playCount = 0;
+}
+
 void Song::addToPlayCount(int playCount){
     playCount++;
 }
@@ -24,3 +31,14 @@ std::string Song::getName() {
 double Song::getDuration(){
     return duration;
 }
+
+int Song::getPlayCount() {
+    return playCount;
+}
+
+std::string Song::getArtist() {
+    return artist;
+}
+
+
+

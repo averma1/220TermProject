@@ -2,9 +2,18 @@
 // Created by Toby Dragon on 9/4/18.
 //
 #include <iostream>
-#include "../../Downloads/COMP220-lab9MapFiles-withTemplates/TestLib.h"
+#include "TestLib.h"
 
 void printAssertEquals(int expected, int actual){
+    if (expected == actual){
+        std::cout << "pass" << std::endl;
+    }
+    else {
+        std::cout << "FAIL, expected: " << expected << "\tactual: " << actual << std::endl;
+    }
+}
+
+void printAssertEqualsDouble(double expected, double actual){
     if (expected == actual){
         std::cout << "pass" << std::endl;
     }

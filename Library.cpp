@@ -130,9 +130,13 @@ void Library::removeSongToPlaylist(std::string songName, std::string playlistNam
             Playlist current = playListList->getValueAt(i);
             if (current.getName() == playlistName) {
                 Song addsong = songList->getValueAt(found);
-                current.removeSong(addsong);
+                current.removeSong(addsong, found);
                 //update file
             }
         }
     }
 }
+
+std::string Library::libraryString(){
+
+};
