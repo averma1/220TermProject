@@ -8,10 +8,9 @@
 
 #include "ArrayList.h"
 #include "Song.h"
-#include "LibraryMain.h"
 #include "Playlist.h"
 
-class Library: public LibraryMain {
+class Library {
 private:
     ArrayList<Playlist>* playListList;
     ArrayList<Song>* songList;
