@@ -5,7 +5,6 @@
 #ifndef TERMPROJECT_SONG_H
 #define TERMPROJECT_SONG_H
 
-#include "ArrayList.h"
 #include<iostream>
 
 class Song{

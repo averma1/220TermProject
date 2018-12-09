@@ -62,7 +62,7 @@ int main(){
             std::string file;
             std::cout<<"What is the name of the file you want to import:"<<std::endl;
             std::cin>> file;
-            std::cout<<mainLibrary->readFile(file)<<std::endl;
+            mainLibrary->readFile(file);
         }
         else if (choice == 7) {
             std::cout<<mainLibrary->printPlaylists()<<std::endl;
