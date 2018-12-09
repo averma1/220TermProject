@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include "ArrayList.h"
+#include "Song.h"
+#include "Playlist.h"
 
 
 /**

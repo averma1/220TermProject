@@ -7,6 +7,8 @@
 
 #include "List.h"
 #include "LinkedNode.h"
+#include "Song.h"
+#include "Playlist.h"
 
 template <class T>
 class LinkedList : public List<T>{

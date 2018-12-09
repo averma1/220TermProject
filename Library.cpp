@@ -9,11 +9,11 @@
 
 Library::Library(){
     //read files and add songs and playlists
-    playListList= new ArrayList<Playlist>(1);
-    songList= new ArrayList<Song>(1);
+    playListList= new ArrayList<Playlist>;
+    songList= new ArrayList<Song>;
     //count number of both
-    numOfSongs=1;
-    numOfPlaylists=1;
+    numOfSongs=0;
+    numOfPlaylists=0;
 }
 
 Library::~Library(){

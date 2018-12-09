@@ -8,6 +8,8 @@
 #include <stdexcept>
 #include <string>
 #include "List.h"
+#include "Song.h"
+#include "Playlist.h"
 
 template <class T>
 class ArrayList:public List<T> {

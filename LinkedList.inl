@@ -3,7 +3,8 @@
 //
 
 #include "LinkedList.h"
-
+#include "Song.h"
+#include "Playlist.h"
 /**
      * Constructor
      */
