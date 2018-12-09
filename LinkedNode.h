@@ -12,13 +12,11 @@ class LinkedNode {
 private:
     T* item;
     LinkedNode* next;
-    std::string key;
 
 public:
-    LinkedNode(std::string key,const T& item);
+    LinkedNode(const T& item);
     LinkedNode(const LinkedNode& nodeToCopy); //only copies item, next is set to nullptr
     T getItem();
-    std::string getKey();
     LinkedNode* getNext();
     void setItem(const T newItem);
     void setNext(LinkedNode* newNext);
