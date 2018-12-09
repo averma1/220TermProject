@@ -23,15 +23,15 @@ Library::~Library(){
 
 void Library::addSongToList(std::string songName, std::string artist, double duration){
     Song* newSong= new Song(artist, songName, duration);
-    songList->insertAtEnd(*newSong);
+    songList->insertAtEnd(newSong);
     //write the song to the file
 }
 
 bool Library::isSonginList(std::string songName){
     int found=-1;
     for(int i=0; i<numOfSongs; i++){
-        Song current= songList->getValueAt(i);
-        if(current.getName()==songName){
+        Song* current= songList->getValueAt(i);
+        if(current->getName()==songName){
             found=i;
         }
     }
@@ -45,17 +45,17 @@ bool Library::isSonginList(std::string songName){
 void Library::addSongToPlaylist(std::string songName, std::string playlistName){
     int found=-1;
     for(int i=0; i<numOfSongs; i++){
-        Song current= songList->getValueAt(i);
-        if(current.getName()==songName){
+        Song* current= songList->getValueAt(i);
+        if(current->getName()==songName){
             found=i;
         }
     }
     if(found>-1) {
         for (int i = 0; i < numOfPlaylists; i++) {
-            Playlist current = playListList->getValueAt(i);
-            if (current.getName() == playlistName) {
-                Song addsong = songList->getValueAt(found);
-                current.addSong(addsong);
+            Playlist* current = playListList->getValueAt(i);
+            if (current->getName() == playlistName) {
+                Song* addsong = songList->getValueAt(found);
+                current->addSong(addsong);
                 //update file
             }
         }
@@ -64,7 +64,7 @@ void Library::addSongToPlaylist(std::string songName, std::string playlistName){
 
 void Library::createPlaylist(int numOfSongs, std::string playlistName){
     Playlist* newPlaylist= new Playlist(playlistName);
-    playListList->insertAtEnd(*newPlaylist);
+    playListList->insertAtEnd(newPlaylist);
     //ask user which songs to add then add them until done
     //add the playlist to the file
 }
@@ -72,8 +72,8 @@ void Library::createPlaylist(int numOfSongs, std::string playlistName){
 void Library::deletePlaylist(std::string playlistName){
     int found=-1;
     for(int i=0; i<numOfPlaylists; i++){
-        Playlist current= playListList->getValueAt(i);
-        if(current.getName()==playlistName){
+        Playlist* current= playListList->getValueAt(i);
+        if(current->getName()==playlistName){
             found=i;
         }
     }
@@ -108,10 +108,10 @@ int genRandInt(int min, int max){
  */
 void Library::createRandomPlaylist(int numbOfSongs, std::string playlistName){
     Playlist* newPlaylist= new Playlist(playlistName);
-    playListList->insertAtEnd(*newPlaylist);
+    playListList->insertAtEnd(newPlaylist);
     for(int i=0; i<numbOfSongs; i++){
         int randInt= genRandInt(0,numOfSongs-1);
-        Song randSong= songList->getValueAt(randInt);
+        Song* randSong= songList->getValueAt(randInt);
         newPlaylist->addSong(randSong);
     }
     //update file
@@ -120,17 +120,17 @@ void Library::createRandomPlaylist(int numbOfSongs, std::string playlistName){
 void Library::removeSongToPlaylist(std::string songName, std::string playlistName){
     int found=-1;
     for(int i=0; i<numOfSongs; i++){
-        Song current= songList->getValueAt(i);
-        if(current.getName()==songName){
+        Song* current= songList->getValueAt(i);
+        if(current->getName()==songName){
             found=i;
         }
     }
     if(found>-1) {
         for (int i = 0; i < numOfPlaylists; i++) {
-            Playlist current = playListList->getValueAt(i);
-            if (current.getName() == playlistName) {
-                Song addsong = songList->getValueAt(found);
-                current.removeSong(addsong, found);
+            Playlist* current = playListList->getValueAt(i);
+            if (current->getName() == playlistName) {
+                Song* addsong = songList->getValueAt(found);
+                current->removeSong(addsong, found);
                 //update file
             }
         }
@@ -140,8 +140,8 @@ void Library::removeSongToPlaylist(std::string songName, std::string playlistNam
 std::string Library::printPlaylists(){
     std::string fullstring;
     for(int i=0; i<numOfPlaylists; i++){
-        Playlist current=playListList->getValueAt(i);
-        fullstring+=current.getName();
+        Playlist* current=playListList->getValueAt(i);
+        fullstring+=current->getName();
         fullstring+=" ";
     }
     return fullstring;
