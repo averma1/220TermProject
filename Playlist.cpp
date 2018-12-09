@@ -8,7 +8,7 @@
 
 Playlist::Playlist(std::string nameIn){
     name=nameIn;
-    songList= new LinkedList<Song>();
+    songList= new LinkedList<Song*>();
     duration=0;
 }
 

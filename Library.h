@@ -12,8 +12,8 @@
 
 class Library {
 private:
-    List<Playlist>* playListList;
-    List<Song>* songList;
+    List<Playlist*>* playListList;
+    List<Song*>* songList;
     int numOfPlaylists;
     int numOfSongs;
 public:
