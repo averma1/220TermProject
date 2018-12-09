@@ -43,7 +43,7 @@ public:
      * @return a copy of the item at index
      * @throws out_of_range exception if index is invalid
      */
-    int getValueAt(int index);
+    T getValueAt(int index);
 
     /**
      * gives a string representation of the current list

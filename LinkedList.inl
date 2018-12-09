@@ -310,7 +310,7 @@ void LinkedList<T>::insertAt(T itemToAdd, int index){
 //O(N)
 template <class T>
 T LinkedList<T>::removeValueAtEnd(){
-    int valueToRemove=0;
+    T valueToRemove;
     if(isEmpty()){
         throw std::out_of_range("queue is empty");
     }else if(size==1){
@@ -347,7 +347,7 @@ T LinkedList<T>::removeValueAtEnd(){
 //O(1)
 template <class T>
 T LinkedList<T>::removeValueAtFront(){
-    int valueToRemove=0;
+    T valueToRemove;
     if(isEmpty()){
         throw std::out_of_range("queue is empty");
     }else if(size==1){
@@ -381,7 +381,7 @@ T LinkedList<T>::removeValueAtFront(){
 //O(N)
 template <class T>
 T LinkedList<T>::removeValueAt(int index){
-    int valueToRemove=0;
+    T valueToRemove;
     if(index<0 || index>=size){
         throw std::out_of_range("invalid index");
     }else if(index==0){
