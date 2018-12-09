@@ -137,12 +137,37 @@ void Library::removeSongToPlaylist(std::string songName, std::string playlistNam
     }
 }
 
-std::string Library::libraryString(){
+std::string Library::printPlaylists(){
     std::string fullstring;
-    for(int i=0; i<numOfSongs; i++){
-        Song current=songList->getValueAt(i);
+    for(int i=0; i<numOfPlaylists; i++){
+        Playlist current=playListList->getValueAt(i);
         fullstring+=current.getName();
         fullstring+=" ";
     }
     return fullstring;
-};
+}
+
+std::string Library::libraryString(){
+    //print songs in alpha order
+}
+
+std::string Library::printSongsByArtist(std::string artist){
+    //print songs be given artist
+}
+
+std::string Library::printSongInfo(std::string song){
+
+}
+
+void Library::readFile(std::string file){
+    //read file of given name and add to library
+}
+
+std::string Library::printPlaylistInfo(std::string playlist){
+
+}
+
+void Library::playPlaylist(std::string playlist){
+
+}
+
