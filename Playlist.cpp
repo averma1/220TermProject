@@ -3,12 +3,12 @@
 //
 
 #include "Playlist.h"
-
+#include "LinkedList.h"
 
 
 Playlist::Playlist(std::string nameIn){
     name=nameIn;
-    songList= new LinkedList<Song*>(); //make ArrayList and LinkedList classes extend the list class!
+    songList= new LinkedList<Song*>();
     duration=0;
 }
 
@@ -41,20 +41,20 @@ Playlist& Playlist:: operator=(Playlist* playlistToCopy){
 
 void Playlist::addSong(Song* songToAdd){
     songList->insertAtEnd(songToAdd);
-    duration+=songToAdd.getDuration();
+    duration+=songToAdd->getDuration();
 }
 
 
 
 void Playlist::playNext(){
     Song* songPlayed=songList->removeValueAtFront();
-    duration-=songPlayed.getDuration();
+    duration-=songPlayed->getDuration();
 
 }
 
-void Playlist::removeSong(Song songToRemove, int index){
+void Playlist::removeSong(Song* songToRemove, int index){
     songList->removeValueAt(index);
-    duration-=songToRemove.getDuration();
+    duration-=songToRemove->getDuration();
 }
 
 void Playlist::rename(std::string newName){

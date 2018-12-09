@@ -1,60 +1,39 @@
 //
-// Created by Toby Dragon on 9/30/16.
+// Created by Toby Dragon on 10/30/18.
 //
 
-#ifndef COMP220_ARRAYLIST_H
-#define COMP220_ARRAYLIST_H
+#ifndef LAB8SOLN_LINKEDLIST_H
+#define LAB8SOLN_LINKEDLIST_H
 
-#include <stdexcept>
-#include <string>
 #include "List.h"
+#include "LinkedNode.h"
 
 template <class T>
-class ArrayList:public List<T> {
+class LinkedList : public List<T>{
 private:
-    //pointer to the start of the array
-    T* array;
-    //count of the number of valid items currently stored in the array
-    int currItemCount;
-    //size of the current array
-    int currCapacity;
+    //TODO: Your data here
 
-    /**
-     * replaces the old array with an array twice the size
-     * private method only called within ArrayList when necessary
-     * @post: array points to a new array of twice the size with values copied from the old one,
-     *        the old array is deleted.
-     */
-    void doubleCapacity();
+    LinkedNode<T>* front;
+    LinkedNode<T>* end;
+    int size;
 
-
+    //Private to disable copying and assigning from outside class, don't implement these methods
+    LinkedList(const LinkedList& arrayListToCopy);
+    LinkedList& operator=(const LinkedList& arrayListToCopy);
 public:
     /**
      * Constructor
-     * @throws an std::invalid_argument exception if size < 1
      */
-    ArrayList(int initialCapacity);
-
-    //Copy Constructor
-    ArrayList(const ArrayList& arrayListToCopy);
-
-    //Overloaded Assignment Operator
-    ArrayList& operator=(const ArrayList& arrayListToCopy);
+    LinkedList();
 
     //Destructor
-    ~ArrayList();
-
-    void replacAt(int location, T thing);
-
-    bool campareAt(int location, T thing);
-
-    int find(T numToFind);
+    ~LinkedList();
 
     /**
      * appends the new item to the end of the list
      * @post the list has an additional value in it, at the end
      */
-    void insertAtEnd( T itemToAdd);
+    void insertAtEnd(T itemToAdd);
 
     /**
      * gets a value from the list
@@ -62,8 +41,14 @@ public:
      * @return a copy of the item at index
      * @throws out_of_range exception if index is invalid
      */
-    T getValueAt(int index);
+    int getValueAt(int index);
 
+    /**
+     * gives a string representation of the current list
+     * @returns a string representing the given list in the exact format shown below
+     * {1, 2, 3, 4, 5}
+     */
+    std::string toString();
 
     /**
      * checks if there are any valid items in the list
@@ -87,22 +72,20 @@ public:
      * Searches an int array for a certain value
      * @return the index of the first occurrence of numToFind if it is present, otherwise returns -1
      */
-
-
-    int find( ArrayList<std::string>* arrayPtr, int size, std::string numToFind);
+    int find(T numToFind);
 
     /**
      * Searches an int array for a certain value
      * @return the index of the last occurrence of numToFind if it is present, otherwise returns -1
      */
-    int findLast( const T* arrayPtr, int size, T numToFind);
+    int findLast(T numToFind);
 
     /**
      * finds the largest value in the array
      * @return the first index of the maximum value
      * @throws out_of_range exception if there is no item to remove
      */
-    int findMaxIndex(const T* arrayPtr, int size);
+    int findMaxIndex();
 
     /**
      * appends the new item to the beginning of the list
@@ -147,5 +130,6 @@ public:
 
 };
 
-#include "ArrayList.inl"
-#endif //COMP220_ARRAYLIST_H
+#include "LinkedList.inl"
+
+#endif //LAB8SOLN_LINKEDLIST_H
