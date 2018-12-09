@@ -5,14 +5,23 @@
 #ifndef INC_220TERMPROJECT_LIBRARYFILES_H
 #define INC_220TERMPROJECT_LIBRARYFILES_H
 
-#include "ReadFiles.h"
+#include<iostream>
+#include<istream>
+#include<fstream>
+#include"ReadFiles.h"
+#include"Song.h"
 
 class ReadSongs: public ReadFiles {
+
 private:
-    //file thing?
+    std::ifstream infile;
+    std::string songInfo;
 
 public:
-    void writeToList(file file);
+    void removeSong(std::string fileName);
+    void addSong(std::string fileName);
+    void reloadLibrary(std::string fileName);
+    friend std::istream& operator>>(std::ifstream infile, Song());
 
 };
 
