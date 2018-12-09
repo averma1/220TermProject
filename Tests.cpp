@@ -32,12 +32,51 @@ void createSongAndPlaylistTest(){
 
     Playlist* playlist1=new Playlist("playlist1");
     printAssertEquals("playlist1", playlist1->getName());
+    playlist1->rename("playlist2");
+    printAssertEquals("playlist2", playlist1->getName());
+
+    playlist1->addSong(*song1);
+
+    playlist1->addSong(*song2);
+
+    printAssertEqualsDouble(2+33.333340,playlist1->getDuration());
+
+
+    Playlist* playlist2=new Playlist("playlist2");
+    printAssertEquals("playlist2", playlist2->getName());
+    playlist2->rename("playlist5");
+    printAssertEquals("playlist5", playlist2->getName());
+
+    playlist2->addSong(*song1);
+
+    playlist2->addSong(*song2);
+
+    printAssertEqualsDouble(2+33.333340,playlist2->getDuration());
+
+    playlist1->playNext();
+    printAssertEqualsDouble(33.333340,playlist1->getDuration());
+
+    playlist1->removeSong(*song1, 1);
+    
 
 
 }
 
+void createLibrarytest(){
+    std::cout << "-------createLibraryTest---------" <<std::endl;
+    Library* library1=new Library();
+    library1->addSongToList("Moss", "someone", 3.50);
+    library1->createPlaylist(2, "newPlaylist");
+    //library1->addSongToPlaylist("Moss", "newPlaylist");
+    printAssertEquals(true, library1->isSonginList("Moss"));
+    std::cout<<library1->libraryString()<<std::endl;
+
+}
+
+
 
 int main(){
     createSongAndPlaylistTest();
+    createLibrarytest();
 
 }

@@ -8,13 +8,13 @@
 
 Playlist::Playlist(std::string nameIn){
     name=nameIn;
-    songList= new ArrayList<Song>(10);
+    songList= new LinkedList<Song*>(); //make ArrayList and LinkedList classes extend the list class!
     duration=0;
 }
 
 Playlist::Playlist(){
     name="default";
-    songList=new ArrayList<Song>(10);
+    songList=new LinkedList<Song*>();
     duration=0;
 }
 
@@ -39,7 +39,7 @@ Playlist& Playlist:: operator=(Playlist* playlistToCopy){
     return *this;
 }
 
-void Playlist::addSong(Song songToAdd){
+void Playlist::addSong(Song* songToAdd){
     songList->insertAtEnd(songToAdd);
     duration+=songToAdd.getDuration();
 }
@@ -47,7 +47,7 @@ void Playlist::addSong(Song songToAdd){
 
 
 void Playlist::playNext(){
-    Song songPlayed=songList->removeValueAtFront();
+    Song* songPlayed=songList->removeValueAtFront();
     duration-=songPlayed.getDuration();
 
 }
@@ -63,4 +63,8 @@ void Playlist::rename(std::string newName){
 
 std::string Playlist::getName(){
     return name;
+}
+
+double Playlist::getDuration() {
+    return duration;
 }

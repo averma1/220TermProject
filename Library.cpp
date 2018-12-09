@@ -9,11 +9,11 @@
 
 Library::Library(){
     //read files and add songs and playlists
-    playListList= new ArrayList<Playlist>(10);
-    songList= new ArrayList<Song>(10);
+    playListList= new ArrayList<Playlist>(1);
+    songList= new ArrayList<Song>(1);
     //count number of both
-    numOfSongs=10;
-    numOfPlaylists=10;
+    numOfSongs=1;
+    numOfPlaylists=1;
 }
 
 Library::~Library(){
@@ -138,5 +138,11 @@ void Library::removeSongToPlaylist(std::string songName, std::string playlistNam
 }
 
 std::string Library::libraryString(){
-
+    std::string fullstring;
+    for(int i=0; i<numOfSongs; i++){
+        Song current=songList->getValueAt(i);
+        fullstring+=current.getName();
+        fullstring+=" ";
+    }
+    return fullstring;
 };

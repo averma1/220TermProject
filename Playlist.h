@@ -13,7 +13,7 @@ class Playlist{
 
 private:
     std::string name;
-    ArrayList<Song>* songList;
+    List<Song*>* songList;
     double duration;
 
 
@@ -24,11 +24,12 @@ public:
     Playlist(const Playlist& playlistToCopy);//copy constructor
     Playlist& operator=(Playlist* playlistToCopy);//assignment operator
 
-    void addSong(Song songToAdd);
+    void addSong(Song* songToAdd);
     void playNext();
     void removeSong(Song songToRemove, int index);
     void rename(std::string newName);
     std::string getName();
+    double getDuration();
 
 
 
