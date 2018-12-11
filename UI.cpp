@@ -8,7 +8,6 @@ int main(){
     Library* mainLibrary= new Library;
 
     std::cout<<"Welcome to the C++ DJ!"<<std::endl;
-    std::cout<<"Please choose a command"<<std::endl;
     std::cout<<"    1) Help (show this list again)"<<std::endl;
     std::cout<<"    2) Print Library of Songs"<<std::endl;
     std::cout<<"    3) Show Songs by Artist"<<std::endl;
@@ -23,6 +22,7 @@ int main(){
     std::cout<<"    12) Play Playlist"<<std::endl;
     std::cout<<"    13) Create Random Playlist"<<std::endl;
     std::cout<<"    14) Leave DJ"<<std::endl;
+    std::cout<<"Please choose a command by entering a number"<<std::endl;
 
     int choice;
     while(choice!=14) {

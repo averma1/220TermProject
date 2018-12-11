@@ -152,11 +152,43 @@ std::string Library::libraryString(){
 }
 
 std::string Library::printSongsByArtist(std::string artist){
-    //print songs be given artist
+    std::string songs= "";
+    for(int i=0; i<numOfSongs; i++){
+        std::string currentArtist= songList->getValueAt(i)->getArtist();
+        if(currentArtist == artist){
+            songs+= currentArtist;
+            songs+=", ";
+        }
+    }
+    if(songs==""){
+        songs="No songs by that artist";
+    }
+    return songs;
 }
 
 std::string Library::printSongInfo(std::string song){
-
+    int found=-1;
+    std::string songInfo;
+    for(int i=0; i<numOfSongs; i++){
+        Song* current= songList->getValueAt(i);
+        if(current->getName()==song){
+            found=i;
+        }
+    }
+    if(found!=-1) {
+        Song* currentSong= songList->getValueAt(found);
+        songInfo+="Artist: ";
+        songInfo+=currentSong->getArtist();
+        songInfo+=" Name: ";
+        songInfo+=currentSong->getName();
+        songInfo+=" Duration: ";
+        songInfo+=currentSong->getDuration();
+        songInfo+=" Play count: ";
+        songInfo+=currentSong->getPlayCount();
+    } else {
+        songInfo= "No song by that name in the library";
+    }
+    return songInfo;
 }
 
 void Library::readFile(std::string file){
@@ -164,10 +196,42 @@ void Library::readFile(std::string file){
 }
 
 std::string Library::printPlaylistInfo(std::string playlist){
-
+    int found=-1;
+    std::string playInfo;
+    for(int i=0; i<numOfPlaylists; i++){
+        Playlist* current= playListList->getValueAt(i);
+        if(current->getName()==playlist){
+            found=i;
+        }
+    }
+    if(found!=-1){
+        Playlist* currentPlay= playListList->getValueAt(found);
+        playInfo+="Name: ";
+        playInfo+=currentPlay->getName();
+        playInfo+=" Duration: ";
+        playInfo+=currentPlay->getDuration();
+        playInfo+=" Songs: ";
+        //playInfo+=currentPlay->songs();
+    } else {
+        playInfo="No playlist by that name in the Library";
+    }
+    return playInfo;
 }
 
 void Library::playPlaylist(std::string playlist){
-
+    int found=-1;
+    std::string playInfo;
+    for(int i=0; i<numOfPlaylists; i++){
+        Playlist* current= playListList->getValueAt(i);
+        if(current->getName()==playlist){
+            found=i;
+        }
+    }
+    if(found!=-1){
+        Playlist* currentPlay= playListList->getValueAt(found);
+        currentPlay->playNext();
+    } else {
+        playInfo="No playlist by that name in the Library";
+    }
 }
 
