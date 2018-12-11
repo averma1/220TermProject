@@ -68,3 +68,7 @@ std::string Playlist::getName(){
 double Playlist::getDuration() {
     return duration;
 }
+
+std::string Playlist::getSongList(){
+    return songList->toString();
+}

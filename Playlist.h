@@ -30,7 +30,7 @@ public:
     void rename(std::string newName);
     std::string getName();
     double getDuration();
-
+    std::string getSongList();
 
 
 
