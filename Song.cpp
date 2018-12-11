@@ -32,13 +32,9 @@ double Song::getDuration(){
     return duration;
 }
 
-int Song::getPlayCount() {
-    return playCount;
+std::string Song::toString(std::string artist, std::string title, double duration, int playCount){
+
+    std::string myString = "";
+    myString += artist + ", " + title + ", " + duration + ", " + playCount;
+
 }
-
-std::string Song::getArtist() {
-    return artist;
-}
-
-
-
