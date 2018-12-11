@@ -24,6 +24,27 @@ Library::~Library(){
 void Library::addSongToList(std::string songName, std::string artist, double duration){
     Song* newSong= new Song(artist, songName, duration);
     songList->insertAtEnd(newSong);
+//    int index=-1;
+//    //if the artist is already in the list
+//    for(int i=0; i<numOfSongs;i++){
+//        if(artist==songList[i].getArtist()){   //might not work if the song needs to go in the first spot
+//            if(songName<songList[i].getSong()){
+//                index=i;
+//            }
+//        }
+//    }
+//    //if the artist isn't already in the list
+//    if(index==-1){
+//        for(int i=0;i<numOfSongs;i++){
+//            if(artist<songList[i].getArtist()){
+//                index=i;
+//            }
+//        }
+//    }
+//
+//    songList->insertAt(i,newSong)
+
+    numOfSongs++;
     //write the song to the file
 }
 
@@ -65,6 +86,7 @@ void Library::addSongToPlaylist(std::string songName, std::string playlistName){
 void Library::createPlaylist(int numOfSongs, std::string playlistName){
     Playlist* newPlaylist= new Playlist(playlistName);
     playListList->insertAtEnd(newPlaylist);
+    numOfPlaylists++;
     //ask user which songs to add then add them until done
     //add the playlist to the file
 }
@@ -81,6 +103,7 @@ void Library::deletePlaylist(std::string playlistName){
         playListList->removeValueAt(found);
         //delete from file as well
     }
+    numOfPlaylists--;
 }
 
 int genRandInt(int min, int max){
