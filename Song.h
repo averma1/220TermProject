@@ -17,12 +17,11 @@ private:
 
 public:
     Song(std::string artist, std::string title, double duration);
+    Song();
     void addToPlayCount(int playCount);
     std::string getName();
     double getDuration();
-    Song();
-    std::string getArtist();
-    int getPlayCount();
+    std::string toString(std::string artist, std::string title, double duration, int playCount);
 };
 
 
