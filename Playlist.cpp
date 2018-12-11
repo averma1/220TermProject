@@ -9,6 +9,7 @@
 Playlist::Playlist(std::string nameIn){
     name=nameIn;
     songList= new LinkedList<Song*>();
+    numberOfSongs=0;
     duration=0;
 }
 
@@ -16,6 +17,7 @@ Playlist::Playlist(){
     name="default";
     songList=new LinkedList<Song*>();
     duration=0;
+    numberOfSongs=0;
 }
 
 Playlist::~Playlist(){
@@ -42,6 +44,7 @@ Playlist& Playlist:: operator=(Playlist* playlistToCopy){
 void Playlist::addSong(Song* songToAdd){
     songList->insertAtEnd(songToAdd);
     duration+=songToAdd->getDuration();
+    numberOfSongs++;
 }
 
 
@@ -59,6 +62,7 @@ void Playlist::removeSong(Song* songToRemove){
     }
     Song* songRemoved=songList->removeValueAt(index);
     duration-=songRemoved->getDuration();
+    numberOfSongs--;
 }
 
 void Playlist::rename(std::string newName){
@@ -74,5 +78,26 @@ double Playlist::getDuration() {
 }
 
 std::string Playlist::getSongList(){
-    return songList->toString();
+    if (numberOfSongs<0){
+        return "No songs in a playlist";
+    }
+    else {
+        std::string stringArray = "{";
+        int temp = 0;
+        while (temp != numberOfSongs) {
+            if (temp+1==numberOfSongs) {
+                std::string nameSong = songList->getValueAt(temp)->getName();
+                stringArray += nameSong;
+                temp++;
+            } else {
+                std::string nameSong = songList->getValueAt(temp)->getName();
+                stringArray += nameSong + ", ";
+                temp++;
+            }
+        }
+        stringArray = stringArray + "}";
+        return stringArray;
+    }
+
+
 }
