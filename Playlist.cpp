@@ -47,14 +47,14 @@ void Playlist::addSong(Song* songToAdd){
 
 
 void Playlist::playNext(){
-    Song* songPlayed=songList->removeValueAtFront();
-    duration-=songPlayed->getDuration();
-
+    duration-=songList->getValueAt(0)->getDuration();
+    songList->removeValueAtFront();
 }
 
-void Playlist::removeSong(Song* songToRemove, int index){
-    songList->removeValueAt(index);
-    duration-=songToRemove->getDuration();
+void Playlist::removeSong(Song* songToRemove){
+    int index=songList->find(songToRemove);
+    Song* songRemoved=songList->removeValueAt(index);
+    duration-=songRemoved->getDuration();
 }
 
 void Playlist::rename(std::string newName){
