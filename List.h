@@ -72,7 +72,7 @@ public:
      * Searches an int array for a certain value
      * @return the index of the first occurrence of numToFind if it is present, otherwise returns -1
      */
-   // virtual int find(T numToFind)=0;
+   virtual int find(T numToFind)=0;
 
     /**
      * Searches an int array for a certain value
