@@ -28,8 +28,16 @@ std::string Song::getName() {
     return title;
 }
 
+std::string Song::getArtist(){
+    return artist;
+}
+
 double Song::getDuration(){
     return duration;
+}
+
+int Song::getPlayCount(){
+    return playCount;
 }
 
 std::string Song::toString(std::string artist, std::string title, double duration, int playCount){
