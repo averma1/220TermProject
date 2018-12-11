@@ -48,11 +48,15 @@ void Playlist::addSong(Song* songToAdd){
 
 void Playlist::playNext(){
     duration-=songList->getValueAt(0)->getDuration();
-    songList->removeValueAtFront();
+    Song*songPlayed= songList->removeValueAtFront();
+    songPlayed->addToPlayCount(1);
 }
 
 void Playlist::removeSong(Song* songToRemove){
     int index=songList->find(songToRemove);
+    if(index==-1){
+        throw std::invalid_argument("song not in list");
+    }
     Song* songRemoved=songList->removeValueAt(index);
     duration-=songRemoved->getDuration();
 }
