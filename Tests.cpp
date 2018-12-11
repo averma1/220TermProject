@@ -56,10 +56,14 @@ void createSongAndPlaylistTest(){
     playlist1->playNext();
     printAssertEqualsDouble(33.333340,playlist1->getDuration());
 
-    playlist1->removeSong(song1, 1);
-    
+    playlist1->removeSong(song1);
+    printAssertEqualsDouble(33.333340,playlist1->getDuration());
 
+    playlist1->addSong(song2);
+    printAssertEqualsDouble(33.333340*2,playlist1->getDuration());
 
+    playlist1->rename("newName");
+    printAssertEquals("newName", playlist1->getName());
 }
 
 void createLibrarytest(){
@@ -70,13 +74,12 @@ void createLibrarytest(){
     //library1->addSongToPlaylist("Moss", "newPlaylist");
     printAssertEquals(true, library1->isSonginList("Moss"));
     std::cout<<library1->libraryString()<<std::endl;
-
 }
 
 
 
 int main(){
     createSongAndPlaylistTest();
-    createLibrarytest();
+   //createLibrarytest();
 
 }
