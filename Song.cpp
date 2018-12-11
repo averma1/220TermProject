@@ -36,5 +36,6 @@ std::string Song::toString(std::string artist, std::string title, double duratio
 
     std::string myString = "";
     myString += artist + ", " + title + ", " + duration + ", " + playCount;
+    return myString;
 
 }
