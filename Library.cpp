@@ -195,6 +195,10 @@ void Library::readFile(std::string file){
     //read file of given name and add to library
 }
 
+void Library::removeDuplicatesongs(std::string file){
+    //remove duplicate songs by reading a file
+}
+
 std::string Library::printPlaylistInfo(std::string playlist){
     int found=-1;
     std::string playInfo;

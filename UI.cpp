@@ -6,6 +6,7 @@
 
 int main(){
     Library* mainLibrary= new Library;
+    //mainLibrary->readFile(thing.txt);
 
     std::cout<<"Welcome to the C++ DJ!"<<std::endl;
     std::cout<<"    1) Help (show this list again)"<<std::endl;
@@ -121,7 +122,9 @@ int main(){
             std::cin>> length;
             mainLibrary->createRandomPlaylist(length,playlist);
         }
-        std::cout<<"What would you like to do next:"<<std::endl;
+        if(choice!=14) {
+            std::cout << "What would you like to do next:" << std::endl;
+        }
     }
     std::cout<<"Thank you for using the C++ DJ!"<<std::endl;
     std::cout<<"Everything that has transpired has been saved to your files."<<std::endl;
