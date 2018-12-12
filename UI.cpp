@@ -59,11 +59,17 @@ int main(){
             std::cin>> song;
             std::cout<<mainLibrary->printSongInfo(song)<<std::endl;
         }
-        else if (choice == 5 || choice==6) {
+        else if (choice == 5) {
             std::string file;
             std::cout<<"What is the name of the file you want to import:"<<std::endl;
             std::cin>> file;
             mainLibrary->readFile(file);
+        }
+        else if(choice==6){
+            std::string file;
+            std::cout<<"What is the name of the file you want to import:"<<std::endl;
+            std::cin>> file;
+            mainLibrary->removeDuplicatesongs(file);
         }
         else if (choice == 7) {
             std::cout<<mainLibrary->printPlaylists()<<std::endl;
@@ -103,7 +109,7 @@ int main(){
         }
         else if (choice == 12) {
             std::string playlist;
-            std::cout<<"What is the name of the playlist you to play:"<<std::endl;
+            std::cout<<"What is the name of the playlist you want to play:"<<std::endl;
             std::cin>> playlist;
             mainLibrary->playPlaylist(playlist);
             std::string contin;
