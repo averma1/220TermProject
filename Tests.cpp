@@ -50,7 +50,6 @@ void createSongAndPlaylistTest(){
     printAssertEquals("playlist2", playlist1->getName());
 
     playlist1->addSong(song1);
-
     playlist1->addSong(song2);
 
     printAssertEqualsDouble(2+33.333340,playlist1->getDuration());
@@ -84,6 +83,15 @@ void createSongAndPlaylistTest(){
 
     playlist1->rename("newName");
     printAssertEquals("newName", playlist1->getName());
+
+    Playlist* playlist3=new Playlist("playlist3");
+    printAssertEquals("No songs in a playlist", playlist3->getSongList());
+
+    printAssertEquals("{}",playlist1->getSongList());
+    playlist1->addSong(song1);
+    printAssertEquals("{, title1}",playlist1->getSongList());
+    playlist1->playNext();
+    printAssertEquals("{title1}",playlist1->getSongList());
 
 }
 
@@ -162,13 +170,6 @@ void createLibrarytest(){
     catch(std::invalid_argument& e){
         std::cout <<"pass"<<std::endl;
     }
-
-
-
-
-
-
-
 
 }
 

@@ -42,19 +42,18 @@ Playlist& Playlist:: operator=(Playlist* playlistToCopy){
 }
 
 void Playlist::addSong(Song* songToAdd){
-    for (int i=0; i<numberOfSongs; i++){
-        if (songList->getValueAt(i)==songToAdd){
-            return;
-        };
+    int index=songList->find(songToAdd);
+    if (index==-1) {
+        songList->insertAtEnd(songToAdd);
+        duration += songToAdd->getDuration();
+        numberOfSongs++;
     }
-    songList->insertAtEnd(songToAdd);
-    duration+=songToAdd->getDuration();
-    numberOfSongs++;
 }
 
 
 
 std::string Playlist::playNext(){
+    numberOfSongs--;
     duration-=songList->getValueAt(0)->getDuration();
     Song*songPlayed= songList->removeValueAtFront();
     songPlayed->addToPlayCount();
