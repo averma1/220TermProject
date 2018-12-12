@@ -10,41 +10,10 @@
 #include "ArrayList.h"
 #include <vector>
 
-/*
- * Song.cpp Playlist.cpp Tests.cpp ArrayList.inl TestLib.cpp
- * use ios::app to append to the file rather than rewrite
- */
-
-
-void addSongToLibrary(std::string myString){
-    //must call toString before this: split up the info then add to library
-    std::string artist;
-    std::string title;
-    double duration;
-    std::string delimiter = ", ";
-    std::string token;
-    myString.substr();
-    int pos = 0;
-    while((pos = myString.find(delimiter)) != std::string::npos){
-
-    }
-
-    //addSongToList(title, artist, duration); //adding it to library
-
-}
-
-
-
-
-//std::istream& operator>>(std::ifstream infile, Song()){
-//
-//}
-
-
 int main(){
 
     //read the file to an ArrayList of strings called all
-    std::ifstream infile("Sample.csv");
+    std::ifstream infile("Sample1.txt");
     if(!infile){
         std::cerr<<"text file could not be opened for reading"<<std::endl;
     }
@@ -61,15 +30,25 @@ int main(){
     infile.close();
 
     //break all up into playlists and songs
+    std::string song="Songs,,\r";
+    int count=-1;
+    for(int i= 0; i<length; i++){
+        if(all->getValueAt(i)==song){
+            count=i;
+        }
+    }
+    std::cout<<count<<std::endl;
+
+
     std::string delimiter = ",";
-    std::string token = all->getValueAt(1).substr(0, all->getValueAt(1).find(delimiter));
+    std::string death = all->getValueAt(0);
+    std::string token = all->getValueAt(2).substr(0, all->getValueAt(2).find(delimiter));
     Playlist* playlist1=new Playlist(token);
     std::cout<< playlist1->getName()<< std::endl;
 
 
-    for(int i=6;i<13; i++){
-        if(all->getValueAt(i)!=",,") {
-            std::cout<<all->getValueAt(i)<<std::endl;
+    for(int i=3;i<count-1; i++){
+        if (all->getValueAt(i) != death) {
             std::string str = all->getValueAt(i);
             std::stringstream ss(str);
             std::vector<std::string> result;
@@ -84,15 +63,34 @@ int main(){
             std::string title = result.at(0);
             double duration = std::stod(result.at(2));
 
-            Song *newsong = new Song(title, artist, duration);
+            Song *newsong = new Song(artist, title, duration);
             playlist1->addSong(newsong);
+            std::cout << playlist1->getDuration() << std::endl;
 
-        } else if (all->getValueAt(i)==",,"){
-            std::cout<<"new"<<std::endl;
-            token = all->getValueAt(i+1).substr(0, all->getValueAt(i+1).find(delimiter));
-            playlist1=new Playlist(token);
-            std::cout<< playlist1->getName()<< std::endl;
+        } else if (all->getValueAt(i) == death) {
+            i++;
+            token = all->getValueAt(i).substr(0, all->getValueAt(i).find(delimiter));
+            playlist1 = new Playlist(token);
+            std::cout << playlist1->getName() << std::endl;
         }
+    }
+    for(int i=count+1; i<length; i++){
+        std::string str = all->getValueAt(i);
+        std::stringstream ss(str);
+        std::vector<std::string> result;
+
+        while (ss.good()) {
+            std::string substr;
+            getline(ss, substr, ',');
+            result.push_back(substr);
+        }
+
+        std::string artist = result.at(1);
+        std::string title = result.at(0);
+        double duration = std::stod(result.at(2));
+
+        Song *newsong = new Song(artist, title, duration);
+        std::cout<<newsong->getName()<<std::endl;
     }
 
 
