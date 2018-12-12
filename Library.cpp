@@ -24,16 +24,16 @@ Library::~Library(){
 void Library::addSongToList(std::string songName, std::string artist, double duration){
     Song* newSong= new Song(artist, songName, duration);
     songList->insertAtEnd(newSong);
-    int index=numOfSongs;
-    for(int i=0; i<numOfSongs;i++){
-        for(int i=numOfSongs-1;i>0;i--){
-            if((songList->getValueAt(i)->getArtist()>artist)||(songList->getValueAt(i)->getArtist()==artist)&&(songList->getValueAt(i)->getName()>songName)){
-                index--;
-            }
-        }
-    }
-        songList->insertAt(newSong,index);
-        numOfSongs++;
+//    int index=numOfSongs;
+//    for(int i=0; i<numOfSongs;i++){
+//        for(int j=numOfSongs-1;j>0;j--){
+//            if((songList->getValueAt(i)->getArtist()>artist)||(songList->getValueAt(i)->getArtist()==artist)&&(songList->getValueAt(i)->getName()>songName)){
+//                index--;
+//            }
+//        }
+//    }
+//    songList->insertAt(newSong,index);
+    numOfSongs++;
     }
 
     //write the song to the file
@@ -77,7 +77,7 @@ void Library::addSongToPlaylist(std::string songName,std::string artistName, std
             }
         }
         if(index==-1){
-            throw std::out_of_range("Playlist does not exist");
+            throw std::invalid_argument("Playlist does not exist");
         }
     }
 }
@@ -136,6 +136,9 @@ int genRandInt(int min, int max){
  * @param playlistName
  */
 void Library::createRandomPlaylist(int numbOfSongs, std::string playlistName){
+    if(numbOfSongs>numOfSongs){
+        throw std::out_of_range("not enough songs in songlist");
+    }
     for(int i=0;i<numOfPlaylists;i++){
         if(playlistName==playListList->getValueAt(i)->getName()){
             throw std::invalid_argument("Playlist already exists");
@@ -144,7 +147,7 @@ void Library::createRandomPlaylist(int numbOfSongs, std::string playlistName){
     Playlist* newPlaylist= new Playlist(playlistName);
     playListList->insertAtEnd(newPlaylist);
     for(int i=0; i<numbOfSongs; i++){
-        int randInt= genRandInt(0,numOfSongs-1);
+        int randInt= genRandInt(0,numbOfSongs-1);
         Song* randSong= songList->getValueAt(randInt);
         newPlaylist->addSong(randSong);
     }
@@ -160,7 +163,7 @@ void Library::removeSongToPlaylist(std::string songName,std::string artistName, 
         }
     }
     if(found==-1){
-        throw std::out_of_range("Song is not in library");
+        throw std::invalid_argument("Song is not in library");
     } else{
         int index=-1;
         for (int i = 0; i < numOfPlaylists; i++) {
@@ -197,8 +200,8 @@ std::string Library::printSongsByArtist(std::string artist){
     for(int i=0; i<numOfSongs; i++){
         std::string currentArtist= songList->getValueAt(i)->getArtist();
         if(currentArtist == artist){
-            songs+= currentArtist;
-            songs+=", ";
+            songs+= songList->getValueAt(i)->getName();
+            songs+=" ";
         }
     }
     if(songs==""){
@@ -224,9 +227,9 @@ std::string Library::printSongInfo(std::string song, std::string artistName){
         songInfo+=" Name: ";
         songInfo+=currentSong->getName();
         songInfo+=" Duration: ";
-        songInfo+=currentSong->getDuration();
+        songInfo+=std::to_string(currentSong->getDuration());
         songInfo+=" Play count: ";
-        songInfo+=currentSong->getPlayCount();
+        songInfo+=std::to_string(currentSong->getPlayCount());
     } else {
         throw std::invalid_argument("Song does not exist");
         songInfo= "No song by that name in the library";
@@ -256,10 +259,11 @@ std::string Library::printPlaylistInfo(std::string playlist){
         playInfo+="Name: ";
         playInfo+=currentPlay->getName();
         playInfo+=" Duration: ";
-        playInfo+=currentPlay->getDuration();
+        playInfo+=std::to_string(currentPlay->getDuration());
         playInfo+=" Songs: ";
         playInfo+=currentPlay->getSongList();
-    } else {
+    }
+    else {
         throw std::invalid_argument("Playlist does not exist");
         playInfo="No playlist by that name in the Library";
     }
