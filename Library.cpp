@@ -83,7 +83,7 @@ void Library::addSongToPlaylist(std::string songName,std::string artistName, std
                 //update file
             }
         }
-        if(index=-1) {
+        if(index==-1) {
             throw std::invalid_argument("Playlist does not exist");
         }
 
@@ -172,10 +172,11 @@ void Library::createRandomPlaylist(int numbOfSongs, std::string playlistName){
     }
     Playlist* newPlaylist= new Playlist(playlistName);
     playListList->insertAtEnd(newPlaylist);
+    numOfPlaylists++;
     for(int i=0; i<numbOfSongs; i++){
         int randInt= genRandInt(0,numOfSongs-1);
         Song* randSong= songList->getValueAt(randInt);
-        while(!isSongInplaylist(randSong->getName(), randSong->getArtist(),playlistName)){
+        while(this->isSongInplaylist(randSong->getName(), randSong->getArtist(),playlistName)){
             randInt= genRandInt(0,numOfSongs-1);
             randSong= songList->getValueAt(randInt);
         }
