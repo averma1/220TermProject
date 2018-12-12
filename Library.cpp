@@ -24,27 +24,30 @@ Library::~Library(){
 void Library::addSongToList(std::string songName, std::string artist, double duration){
     Song* newSong= new Song(artist, songName, duration);
     songList->insertAtEnd(newSong);
-//    int index=-1;
-//    //if the artist is already in the list
-//    for(int i=0; i<numOfSongs;i++){
-//        if(artist==songList[i].getValueAt(i)->getArtist()&&songName<songList[i].getValueAt(i)->getName()){   //might not work if the song needs to go in the first spot
-//            index=i;
-//        }
-//    }
+    int index=numOfSongs;
+    for(int i=0; i<numOfSongs;i++){
+        for(int i=numOfSongs-1;i>0;i--){
+            if(songList->getValueAt(i)->getArtist()>artist||songList->getValueAt(i)->getArtist()==artist&&songList->getValueAt(i)->getName()>songName){
+                index--;
+            }
+        }
+    }
 //    //if the artist isn't already in the list
 //    if(index==-1){
-//        for(int i=0;i<numOfSongs;i++){
-//            if(artist<songList[i].getArtist()){
-//                index=i;
+//        int songIndex=numOfSongs;
+//        for(int i=numOfSongs-1;i>0;i--){
+//            if(songList->getValueAt(i)->getArtist()>artist){
+//                index--;
 //            }
 //        }
-//    }
-//
-//    //songList->insertAt(index,newSong)
+        songList->insertAt(newSong,index);
+        numOfSongs++;
+    }
 
-    numOfSongs++;
+    //songList->insertAt(index,newSong)
+
     //write the song to the file
-}
+
 
 bool Library::isSonginList(std::string songName,std::string artistName){
     int found=-1;

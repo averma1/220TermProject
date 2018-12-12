@@ -101,7 +101,7 @@ public:
      *        all further values have been shifted down by one index
      * @throws out_of_range exception if index is invalid (< 0 or > currItemCount)
      */
-  //  virtual void insertAt(T itemToAdd, int index)=0;
+    virtual void insertAt(T itemToAdd, int index)=0;
 
     /**
      * removes the item at the end of the list, and returns a copy of that item
