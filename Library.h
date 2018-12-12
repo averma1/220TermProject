@@ -21,16 +21,16 @@ public:
     ~Library();
 
     void addSongToList(std::string songName, std::string artist, double duration);
-    void addSongToPlaylist(std::string songName, std::string playlistName);
+    void addSongToPlaylist(std::string songName, std::string artistName, std::string playlistName);
     void createPlaylist(std::string playlistName);
     void deletePlaylist(std::string playlistName);
     void createRandomPlaylist(int numOfSongs, std::string playlistName);
-    bool isSonginList(std::string songName);
-    void removeSongToPlaylist(std::string songName, std::string playlistName);
+    bool isSonginList(std::string songName,std::string artistName);
+    void removeSongToPlaylist(std::string songName,std::string artistName,std::string playlistName);
     std::string printPlaylists();
     std::string libraryString();
     std::string printSongsByArtist(std::string artist);
-    std::string printSongInfo(std::string song);
+    std::string printSongInfo(std::string song,std::string artistName);
     void readFile(std::string file);
     std::string printPlaylistInfo(std::string playlist);
     void playPlaylist(std::string playlist);
