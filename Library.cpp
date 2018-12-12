@@ -55,13 +55,17 @@ bool Library::isSonginList(std::string songName,std::string artistName){
 }
 
 void Library::addSongToPlaylist(std::string songName,std::string artistName, std::string playlistName){
+
     int found=-1;
+
     for(int i=0; i<numOfSongs; i++){
         Song* current= songList->getValueAt(i);
         if(current->getName()==songName&&current->getArtist()==artistName){
             found=i;
         }
     }
+
+
     if (found==-1){
         throw std::invalid_argument("Song is not in library");
     }
@@ -70,16 +74,21 @@ void Library::addSongToPlaylist(std::string songName,std::string artistName, std
         for (int i = 0; i < numOfPlaylists; i++) {
             Playlist* current = playListList->getValueAt(i);
             if (current->getName() == playlistName) {
+                if(isSongInplaylist(songName, artistName, playlistName)){
+                    throw std::invalid_argument("Song is already in playlist");
+                }
                 Song* addsong = songList->getValueAt(found);
                 index=i;
                 current->addSong(addsong);
                 //update file
             }
         }
-        if(index==-1){
+        if(index==-1) {
             throw std::invalid_argument("Playlist does not exist");
         }
+
     }
+
 }
 
 void Library::createPlaylist(std::string playlistName){
@@ -130,6 +139,23 @@ int genRandInt(int min, int max){
     }
 }
 
+bool Library::isSongInplaylist(std::string songName, std::string artistName, std::string playlistName){
+    int found=-1;
+    std::string songList=printPlaylistInfo(playlistName);
+    if(songList.find(songName) != std::string::npos) {
+        found++;
+    }
+    if (songList.find(artistName) != std::string::npos){
+        found++;
+    }
+
+    if(found==1){
+        return true;
+    }else{
+        return false;
+    }
+};
+
 /**
  * NEED TO CALL SRAND IN MAIN
  * @param numbOfSongs
@@ -146,10 +172,15 @@ void Library::createRandomPlaylist(int numbOfSongs, std::string playlistName){
     }
     Playlist* newPlaylist= new Playlist(playlistName);
     playListList->insertAtEnd(newPlaylist);
+    numOfPlaylists++;
     for(int i=0; i<numbOfSongs; i++){
-        int randInt= genRandInt(0,numbOfSongs-1);
+        int randInt= genRandInt(0,numOfSongs-1);
         Song* randSong= songList->getValueAt(randInt);
-        newPlaylist->addSong(randSong);
+        while(this->isSongInplaylist(randSong->getName(), randSong->getArtist(),playlistName)){
+            randInt= genRandInt(0,numOfSongs-1);
+            randSong= songList->getValueAt(randInt);
+        }
+        addSongToPlaylist(randSong->getName(),randSong->getArtist(), playlistName);
     }
     //update file
 }
@@ -254,7 +285,11 @@ std::string Library::printPlaylistInfo(std::string playlist){
             found=i;
         }
     }
-    if(found!=-1){
+    if (found==-1){
+        throw std::invalid_argument("Playlist is not in a list");
+    }
+
+    else{
         Playlist* currentPlay= playListList->getValueAt(found);
         playInfo+="Name: ";
         playInfo+=currentPlay->getName();
@@ -263,10 +298,7 @@ std::string Library::printPlaylistInfo(std::string playlist){
         playInfo+=" Songs: ";
         playInfo+=currentPlay->getSongList();
     }
-    else {
-        throw std::invalid_argument("Playlist does not exist");
-        playInfo="No playlist by that name in the Library";
-    }
+
     return playInfo;
 }
 

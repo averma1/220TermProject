@@ -104,6 +104,5 @@ std::string Playlist::getSongList(){
         stringArray = stringArray + "}";
         return stringArray;
     }
-
-
+    
 }
