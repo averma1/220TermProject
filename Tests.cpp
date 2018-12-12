@@ -299,8 +299,17 @@ void createLibrarytest(){
         std::cout <<"pass"<<std::endl;
     }
 
-    library->createRandomPlaylist(3, "rand1");
-    std::cout <<library->printPlaylistInfo("rand1")<< std::endl;
+
+    try{
+        library->printPlaylistInfo("rand1");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+
+
+
     try{
         library->createRandomPlaylist(300, "none");
         std::cout << "FAIL: did not throw exception" << std::endl;
@@ -308,6 +317,12 @@ void createLibrarytest(){
     catch(std::out_of_range& e){
         std::cout <<"pass"<<std::endl;
     }
+
+    library->addSongToList("songNone", "singer", 3);
+
+    printAssertEquals(false,library->isSongInplaylist("songNone", "singer", "newPlaylist"));
+
+    library->createRandomPlaylist(3, "rand1");
 
 
 

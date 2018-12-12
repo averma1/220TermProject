@@ -26,6 +26,7 @@ public:
     void deletePlaylist(std::string playlistName);
     void createRandomPlaylist(int numOfSongs, std::string playlistName);
     bool isSonginList(std::string songName,std::string artistName);
+    bool isSongInplaylist(std::string songName, std::string artistName, std::string playlistName);
     void removeSongToPlaylist(std::string songName,std::string artistName,std::string playlistName);
     std::string printPlaylists();
     std::string libraryString();

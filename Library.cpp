@@ -130,6 +130,23 @@ int genRandInt(int min, int max){
     }
 }
 
+bool Library::isSongInplaylist(std::string songName, std::string artistName, std::string playlistName){
+    int found=-1;
+    std::string songList=printPlaylistInfo(playlistName);
+    if(songList.find(songName) != std::string::npos) {
+        found++;
+    }
+    if (songList.find(artistName) != std::string::npos){
+        found++;
+    }
+
+    if(found==-1){
+        return false;
+    }else{
+        return true;
+    }
+};
+
 /**
  * NEED TO CALL SRAND IN MAIN
  * @param numbOfSongs
@@ -147,9 +164,13 @@ void Library::createRandomPlaylist(int numbOfSongs, std::string playlistName){
     Playlist* newPlaylist= new Playlist(playlistName);
     playListList->insertAtEnd(newPlaylist);
     for(int i=0; i<numbOfSongs; i++){
-        int randInt= genRandInt(0,numbOfSongs-1);
+        int randInt= genRandInt(0,numOfSongs-1);
         Song* randSong= songList->getValueAt(randInt);
-        newPlaylist->addSong(randSong);
+        while(!isSongInplaylist(randSong->getName(), randSong->getArtist(),playlistName)){
+            randInt= genRandInt(0,numOfSongs-1);
+            randSong= songList->getValueAt(randInt);
+        }
+        addSongToPlaylist(randSong->getName(),randSong->getArtist(), playlistName);
     }
     //update file
 }
@@ -254,7 +275,11 @@ std::string Library::printPlaylistInfo(std::string playlist){
             found=i;
         }
     }
-    if(found!=-1){
+    if (found==-1){
+        throw std::invalid_argument("Playlist is not in a list");
+    }
+
+    else{
         Playlist* currentPlay= playListList->getValueAt(found);
         playInfo+="Name: ";
         playInfo+=currentPlay->getName();
@@ -263,10 +288,7 @@ std::string Library::printPlaylistInfo(std::string playlist){
         playInfo+=" Songs: ";
         playInfo+=currentPlay->getSongList();
     }
-    else {
-        throw std::invalid_argument("Playlist does not exist");
-        playInfo="No playlist by that name in the Library";
-    }
+
     return playInfo;
 }
 
