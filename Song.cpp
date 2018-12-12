@@ -20,7 +20,7 @@ Song::Song(){
     playCount = 0;
 }
 
-void Song::addToPlayCount(int playCount){
+void Song::addToPlayCount(){
     playCount++;
 }
 

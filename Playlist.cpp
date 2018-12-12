@@ -52,7 +52,7 @@ void Playlist::addSong(Song* songToAdd){
 void Playlist::playNext(){
     duration-=songList->getValueAt(0)->getDuration();
     Song*songPlayed= songList->removeValueAtFront();
-    songPlayed->addToPlayCount(1);
+    songPlayed->addToPlayCount();
 }
 
 void Playlist::removeSong(Song* songToRemove){
@@ -78,7 +78,7 @@ double Playlist::getDuration() {
 }
 
 std::string Playlist::getSongList(){
-    if (numberOfSongs<0){
+    if (numberOfSongs==0){
         return "No songs in a playlist";
     }
     else {
