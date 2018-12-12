@@ -12,7 +12,7 @@ private:
     //file thing?
 
 public:
-    void writeToList(file file);
+    void loadPreviouslySaved();
 
 };
 

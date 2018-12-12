@@ -26,7 +26,7 @@ public:
     Playlist& operator=(Playlist* playlistToCopy);//assignment operator
 
     void addSong(Song* songToAdd);
-    void playNext();
+    std::string playNext();
     void removeSong(Song* songToRemove);
     void rename(std::string newName);
     std::string getName();
