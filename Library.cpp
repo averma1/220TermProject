@@ -24,29 +24,20 @@ Library::~Library(){
 void Library::addSongToList(std::string songName, std::string artist, double duration){
     Song* newSong= new Song(artist, songName, duration);
     songList->insertAtEnd(newSong);
-//    int index=-1;
-//    //if the artist is already in the list
-//    for(int i=0; i<numOfSongs;i++){
-//        if(artist==songList[i].getArtist()){   //might not work if the song needs to go in the first spot
-//            if(songName<songList[i].getSong()){
-//                index=i;
-//            }
-//        }
-//    }
-//    //if the artist isn't already in the list
-//    if(index==-1){
-//        for(int i=0;i<numOfSongs;i++){
-//            if(artist<songList[i].getArtist()){
-//                index=i;
-//            }
-//        }
-//    }
-//
-//    songList->insertAt(i,newSong)
+    int index=numOfSongs;
+    for(int i=0; i<numOfSongs;i++){
+        for(int i=numOfSongs-1;i>0;i--){
+            if((songList->getValueAt(i)->getArtist()>artist)||(songList->getValueAt(i)->getArtist()==artist)&&(songList->getValueAt(i)->getName()>songName)){
+                index--;
+            }
+        }
+    }
+        songList->insertAt(newSong,index);
+        numOfSongs++;
+    }
 
-    numOfSongs++;
     //write the song to the file
-}
+
 
 bool Library::isSonginList(std::string songName,std::string artistName){
     int found=-1;
@@ -267,7 +258,7 @@ std::string Library::printPlaylistInfo(std::string playlist){
         playInfo+=" Duration: ";
         playInfo+=currentPlay->getDuration();
         playInfo+=" Songs: ";
-        //playInfo+=currentPlay->songs();
+        playInfo+=currentPlay->getSongList();
     } else {
         throw std::invalid_argument("Playlist does not exist");
         playInfo="No playlist by that name in the Library";

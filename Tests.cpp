@@ -41,7 +41,7 @@ void createSongAndPlaylistTest(){
 
 
 
-    std::cout << "-------PLaylistTest---------" <<std::endl;
+    std::cout << "-------PlaylistTest---------" <<std::endl;
 
 
     Playlist* playlist1=new Playlist("playlist1");
@@ -50,7 +50,6 @@ void createSongAndPlaylistTest(){
     printAssertEquals("playlist2", playlist1->getName());
 
     playlist1->addSong(song1);
-
     playlist1->addSong(song2);
 
     printAssertEqualsDouble(2+33.333340,playlist1->getDuration());
@@ -80,10 +79,19 @@ void createSongAndPlaylistTest(){
     printAssertEqualsDouble(33.333340,playlist1->getDuration());
 
     playlist1->addSong(song2);
-    printAssertEqualsDouble(33.333340*2,playlist1->getDuration());
+    printAssertEqualsDouble(33.333340,playlist1->getDuration());
 
     playlist1->rename("newName");
     printAssertEquals("newName", playlist1->getName());
+
+    Playlist* playlist3=new Playlist("playlist3");
+    printAssertEquals("No songs in a playlist", playlist3->getSongList());
+
+    printAssertEquals("{}",playlist1->getSongList());
+    playlist1->addSong(song1);
+    printAssertEquals("{, title1}",playlist1->getSongList());
+    playlist1->playNext();
+    printAssertEquals("{title1}",playlist1->getSongList());
 
 }
 
@@ -104,7 +112,7 @@ void printSongsFromPlaylist(){
     printAssertEquals("{title1, title2}", playlist1->getSongList());
 
     playlist1->addSong(song3);
-    printAssertEquals("{3title, title1, title2}", playlist1->getSongList());
+    printAssertEquals("{title1, title2, 3title}", playlist1->getSongList());
 
     playlist1->removeSong(song1);
     playlist1->removeSong(song3);
@@ -121,7 +129,6 @@ void printSongsFromPlaylist(){
 void createLibrarytest(){
     std::cout << "-------createLibraryTest---------" <<std::endl;
     Library* library=new Library();
-    //library1->addSongToList("Moss", "someone", 3.50);
     library->createPlaylist("newPlaylist"); //allows same name playlists
     try{
         library->createPlaylist("newPlaylist");
@@ -133,7 +140,7 @@ void createLibrarytest(){
 
 
     try{
-        library->addSongToPlaylist("Moss", "newPlaylist"); //does not throw expception when song is not in songlist
+        library->addSongToPlaylist("Moss", "me","newPlaylist"); //does not throw exception when song is not in songlist
         std::cout << "FAIL: did not throw exception" << std::endl;
     }
     catch(std::invalid_argument& e){
@@ -141,18 +148,19 @@ void createLibrarytest(){
     }
 
 
-    printAssertEquals(false, library->isSonginList("Moss"));
+    printAssertEquals(false, library->isSonginList("Moss","33"));
 
     library->addSongToList("Moss", "me", 3);
-    printAssertEquals(true, library->isSonginList("Moss"));
+    printAssertEquals(true, library->isSonginList("Moss","me"));
+
+    printAssertEquals(false, library->isSonginList("Moss","33"));
 
     library->addSongToList("Song1","Artist1",5);
-    printAssertEquals(true,  library->isSonginList("Song1"));
+    printAssertEquals(true,  library->isSonginList("Song1","Artist1"));
 
     library->addSongToList("","",0);
-    printAssertEquals(true, library->isSonginList(""));
-
-    library->addSongToPlaylist("Moss", "newPlaylist");
+    printAssertEquals(true, library->isSonginList("",""));
+    library->addSongToPlaylist("Moss", "ddd","newPlaylist");
     library->printPlaylistInfo("newPlaylist");
 
 
@@ -163,6 +171,7 @@ void createLibrarytest(){
     catch(std::invalid_argument& e){
         std::cout <<"pass"<<std::endl;
     }
+
 }
 
 
