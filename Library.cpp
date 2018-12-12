@@ -6,6 +6,12 @@
 #include "Song.h"
 #include "List.h"
 #include "Playlist.h"
+#include <fstream>
+#include <vector>
+#include <iostream>
+#include <cstdlib>
+#include <sstream>
+#include <string>
 
 Library::Library(){
     //read files and add songs and playlists
@@ -298,7 +304,10 @@ std::string Library::printPlaylistInfo(std::string playlist){
         playInfo+=" Songs: ";
         playInfo+=currentPlay->getSongList();
     }
-
+    else {
+        throw std::invalid_argument("Playlist does not exist");
+        playInfo="No playlist by that name in the Library";
+    }
     return playInfo;
 }
 
@@ -320,3 +329,22 @@ void Library::playPlaylist(std::string playlist){
     }
 }
 
+
+void Library::writeLibraryToFile(){
+
+    std::ofstream outfile("output.csv"); //change to text
+    if(!outfile){
+        throw std::invalid_argument("file could not be opened for writing");
+    }
+
+    for(int i = 0; i < numOfPlaylists; i++){
+        Playlist* current = playListList->getValueAt(i);
+        outfile << "Title: " + current->getName();
+        //outfile << " Artist: " + current->getArtist();
+        outfile << " Duration: " + std::to_string(current->getDuration())<<std::endl;
+    }
+
+    //outfile.close();
+
+
+}
