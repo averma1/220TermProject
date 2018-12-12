@@ -140,7 +140,7 @@ void createLibrarytest(){
 
 
     try{
-        library->addSongToPlaylist("Moss", "newPlaylist"); //does not throw exception when song is not in songlist
+        library->addSongToPlaylist("Moss", "me","newPlaylist"); //does not throw exception when song is not in songlist
         std::cout << "FAIL: did not throw exception" << std::endl;
     }
     catch(std::invalid_argument& e){
@@ -148,18 +148,19 @@ void createLibrarytest(){
     }
 
 
-    printAssertEquals(false, library->isSonginList("Moss"));
+    printAssertEquals(false, library->isSonginList("Moss","33"));
 
     library->addSongToList("Moss", "me", 3);
-    printAssertEquals(true, library->isSonginList("Moss"));
+    printAssertEquals(true, library->isSonginList("Moss","me"));
+
+    printAssertEquals(false, library->isSonginList("Moss","33"));
 
     library->addSongToList("Song1","Artist1",5);
-    printAssertEquals(true,  library->isSonginList("Song1"));
+    printAssertEquals(true,  library->isSonginList("Song1","Artist1"));
 
     library->addSongToList("","",0);
-    printAssertEquals(true, library->isSonginList(""));
-
-    library->addSongToPlaylist("Moss", "newPlaylist");
+    printAssertEquals(true, library->isSonginList("",""));
+    library->addSongToPlaylist("Moss", "ddd","newPlaylist");
     library->printPlaylistInfo("newPlaylist");
 
 
