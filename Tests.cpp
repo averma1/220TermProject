@@ -160,7 +160,7 @@ void createLibrarytest(){
 
     library->addSongToList("","",0);
     printAssertEquals(true, library->isSonginList("",""));
-    library->addSongToPlaylist("Moss", "ddd","newPlaylist");
+    library->addSongToPlaylist("Moss", "me","newPlaylist");
     library->printPlaylistInfo("newPlaylist");
 
 

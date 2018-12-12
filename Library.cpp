@@ -63,7 +63,7 @@ void Library::addSongToPlaylist(std::string songName,std::string artistName, std
         }
     }
     if (found==-1){
-        throw std::out_of_range("Song is not in library");
+        throw std::invalid_argument("Song is not in library");
     }
     else{
         int index=-1;
