@@ -48,7 +48,7 @@ public:
      * @returns a string representing the given list in the exact format shown below
      * {1, 2, 3, 4, 5}
      */
-    virtual std::string toString()=0;
+//    virtual std::string toString()=0;
 
     /**
      * checks if there are any valid items in the list

@@ -86,26 +86,7 @@ T LinkedList<T>::getValueAt(int index){
  * @returns a string representing the given list in the exact format shown below
  * {1, 2, 3, 4, 5}
  */
- //O(N)
- template <class T>
-std::string LinkedList<T>::toString(){
-    LinkedNode<T>* currentNode=front;
-    if(size>0){
-        std::string arrayString="{";
 
-        for(int i=0; i<size-1; i++){
-            arrayString=arrayString+std::to_string(currentNode->getItem())+", ";
-            currentNode=currentNode->getNext();
-        }
-        arrayString=arrayString+std::to_string(currentNode->getItem());
-        arrayString=arrayString+"}";
-
-        return arrayString;
-    }
-    else{
-        return "{}";
-    }
-}
 
 /**
  * checks if there are any valid items in the list

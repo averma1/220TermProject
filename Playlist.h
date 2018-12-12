@@ -15,6 +15,7 @@ private:
     std::string name;
     List<Song*>* songList;
     double duration;
+    int numberOfSongs;
 
 
 public:
