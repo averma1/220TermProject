@@ -136,6 +136,9 @@ int genRandInt(int min, int max){
  * @param playlistName
  */
 void Library::createRandomPlaylist(int numbOfSongs, std::string playlistName){
+    if(numbOfSongs>numOfSongs){
+        throw std::out_of_range("not enough songs in songlist");
+    }
     for(int i=0;i<numOfPlaylists;i++){
         if(playlistName==playListList->getValueAt(i)->getName()){
             throw std::invalid_argument("Playlist already exists");
@@ -144,7 +147,7 @@ void Library::createRandomPlaylist(int numbOfSongs, std::string playlistName){
     Playlist* newPlaylist= new Playlist(playlistName);
     playListList->insertAtEnd(newPlaylist);
     for(int i=0; i<numbOfSongs; i++){
-        int randInt= genRandInt(0,numOfSongs-1);
+        int randInt= genRandInt(0,numbOfSongs-1);
         Song* randSong= songList->getValueAt(randInt);
         newPlaylist->addSong(randSong);
     }
