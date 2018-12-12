@@ -55,13 +55,17 @@ bool Library::isSonginList(std::string songName,std::string artistName){
 }
 
 void Library::addSongToPlaylist(std::string songName,std::string artistName, std::string playlistName){
+
     int found=-1;
+
     for(int i=0; i<numOfSongs; i++){
         Song* current= songList->getValueAt(i);
         if(current->getName()==songName&&current->getArtist()==artistName){
             found=i;
         }
     }
+
+
     if (found==-1){
         throw std::invalid_argument("Song is not in library");
     }
@@ -70,16 +74,21 @@ void Library::addSongToPlaylist(std::string songName,std::string artistName, std
         for (int i = 0; i < numOfPlaylists; i++) {
             Playlist* current = playListList->getValueAt(i);
             if (current->getName() == playlistName) {
+                if(isSongInplaylist(songName, artistName, playlistName)){
+                    throw std::invalid_argument("Song is already in playlist");
+                }
                 Song* addsong = songList->getValueAt(found);
                 index=i;
                 current->addSong(addsong);
                 //update file
             }
         }
-        if(index==-1){
+        if(index=-1) {
             throw std::invalid_argument("Playlist does not exist");
         }
+
     }
+
 }
 
 void Library::createPlaylist(std::string playlistName){
@@ -140,10 +149,10 @@ bool Library::isSongInplaylist(std::string songName, std::string artistName, std
         found++;
     }
 
-    if(found==-1){
-        return false;
-    }else{
+    if(found==1){
         return true;
+    }else{
+        return false;
     }
 };
 

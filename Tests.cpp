@@ -322,8 +322,7 @@ void createLibrarytest(){
 
     printAssertEquals(false,library->isSongInplaylist("songNone", "singer", "newPlaylist"));
 
-    library->createRandomPlaylist(3, "rand1");
-
+    //library->createRandomPlaylist(3, "rand1");
 
 
 }
