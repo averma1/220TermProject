@@ -127,42 +127,27 @@ void printSongsFromPlaylist(){
 
 
 void createLibrarytest(){
-    std::cout << "-------createLibraryTest---------" <<std::endl;
+    std::cout << "-------LibraryTests---------" <<std::endl;
     Library* library=new Library();
-    library->createPlaylist("newPlaylist"); //allows same name playlists
-    try{
-        library->createPlaylist("newPlaylist");
-        std::cout << "FAIL: did not throw exception" << std::endl;
-    }
-    catch(std::invalid_argument& e){
-        std::cout <<"pass"<<std::endl;
-    }
+    printAssertEquals("", library->printPlaylists());
+    library->createPlaylist("newPlaylist");
+    printAssertEquals("newPlaylist ", library->printPlaylists());
+    printAssertEquals("Name: newPlaylist Duration: 0.000000 Songs: No songs in a playlist", library->printPlaylistInfo("newPlaylist"));
 
+    library->createPlaylist("newPlaylist1");
+    printAssertEquals("newPlaylist newPlaylist1 ", library->printPlaylists());
+    printAssertEquals("Name: newPlaylist1 Duration: 0.000000 Songs: No songs in a playlist", library->printPlaylistInfo("newPlaylist1"));
+    library->createPlaylist("newPlaylist2");
+    printAssertEquals("newPlaylist newPlaylist1 newPlaylist2 ", library->printPlaylists());
+    printAssertEquals("Name: newPlaylist2 Duration: 0.000000 Songs: No songs in a playlist", library->printPlaylistInfo("newPlaylist2"));
+    library->createPlaylist("newPlaylist3");
+    printAssertEquals("newPlaylist newPlaylist1 newPlaylist2 newPlaylist3 ", library->printPlaylists());
+    printAssertEquals("Name: newPlaylist3 Duration: 0.000000 Songs: No songs in a playlist", library->printPlaylistInfo("newPlaylist3"));
+    library->deletePlaylist("newPlaylist2");
+    printAssertEquals("newPlaylist newPlaylist1 newPlaylist3 ", library->printPlaylists());
 
-    try{
-        library->addSongToPlaylist("Moss", "me","newPlaylist"); //does not throw exception when song is not in songlist
-        std::cout << "FAIL: did not throw exception" << std::endl;
-    }
-    catch(std::invalid_argument& e){
-        std::cout <<"pass"<<std::endl;
-    }
-
-
-    printAssertEquals(false, library->isSonginList("Moss","33"));
-
-    library->addSongToList("Moss", "me", 3);
-    printAssertEquals(true, library->isSonginList("Moss","me"));
-
-    printAssertEquals(false, library->isSonginList("Moss","33"));
-
-    library->addSongToList("Song1","Artist1",5);
-    printAssertEquals(true,  library->isSonginList("Song1","Artist1"));
-
-    library->addSongToList("","",0);
-    printAssertEquals(true, library->isSonginList("",""));
-    library->addSongToPlaylist("Moss", "me","newPlaylist");
-    library->printPlaylistInfo("newPlaylist");
-
+    library->deletePlaylist("newPlaylist1");
+    printAssertEquals("newPlaylist newPlaylist3 ", library->printPlaylists());
 
     try{
         library->deletePlaylist("blah"); //should throw exception because playlist does not exist
@@ -171,6 +156,160 @@ void createLibrarytest(){
     catch(std::invalid_argument& e){
         std::cout <<"pass"<<std::endl;
     }
+
+    try{
+        library->printPlaylistInfo("newPlaylist5");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+    //tests if it lets to createPlaylist with the same name
+    try{
+        library->createPlaylist("newPlaylist");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+
+    //tests if non-existent song can be added
+    try{
+        library->addSongToPlaylist("Moss", "me","newPlaylist"); //does not throw exception when song is not in songlist
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+
+    //tests isSonginList
+    printAssertEquals(false, library->isSonginList("Moss","33"));
+
+    library->addSongToList("Moss", "me", 3);
+    printAssertEquals(true, library->isSonginList("Moss","me"));
+    printAssertEquals("Artist: me Name: Moss Duration: 3.000000 Play count: 0",library->printSongInfo("Moss","me"));
+
+    library->addSongToList("NO", "Yes", 2);
+    printAssertEquals(true, library->isSonginList("NO","Yes"));
+    printAssertEquals("Artist: Yes Name: NO Duration: 2.000000 Play count: 0",library->printSongInfo("NO","Yes"));
+
+    printAssertEquals(false, library->isSonginList("Moss","33"));
+    try{
+        library->printSongInfo("Moss","33");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+
+    library->addSongToList("Song1","Artist1",5);
+    printAssertEquals(true,  library->isSonginList("Song1","Artist1"));
+    printAssertEquals("Artist: Artist1 Name: Song1 Duration: 5.000000 Play count: 0",library->printSongInfo("Song1","Artist1"));
+
+    library->addSongToList("","",0);
+    printAssertEquals(true, library->isSonginList("",""));
+    library->addSongToPlaylist("Moss", "me","newPlaylist");
+    printAssertEquals("Name: newPlaylist Duration: 3.000000 Songs: {Moss}",library->printPlaylistInfo("newPlaylist"));
+
+
+
+
+    try{
+        library->addSongToPlaylist("Moss","me","Ff");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+    try{
+        library->addSongToPlaylist("none","me","newPlaylist");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+    try{
+        library->addSongToPlaylist("Moss","","Ff");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+    try{
+        library->addSongToPlaylist("Moss", "me","newPlaylist");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+
+    try{
+        library->removeSongToPlaylist("","me","newPlaylist");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+    try{
+        library->removeSongToPlaylist("Moss","me","none");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+    try{
+        library->removeSongToPlaylist("Moss","none","newPlaylist");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+    try{
+        library->playPlaylist("none");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+
+    library->removeSongToPlaylist("Moss", "me", "newPlaylist");
+    printAssertEquals("Name: newPlaylist Duration: 0.000000 Songs: No songs in a playlist",library->printPlaylistInfo("newPlaylist"));
+
+    library->addSongToPlaylist("Moss", "me", "newPlaylist");
+    printAssertEquals("Name: newPlaylist Duration: 3.000000 Songs: {Moss}",library->printPlaylistInfo("newPlaylist"));
+    library->addSongToPlaylist("Song1","Artist1", "newPlaylist");
+    printAssertEquals("Name: newPlaylist Duration: 8.000000 Songs: {Moss, Song1}",library->printPlaylistInfo("newPlaylist"));
+
+    try{
+        library->printSongsByArtist("none");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+    printAssertEquals("Moss ",library->printSongsByArtist("me"));
+    library->addSongToList("Kate", "me", 1);
+    printAssertEquals("Moss Kate ",library->printSongsByArtist("me"));
+
+    try{
+        library->createRandomPlaylist(3, "newPlaylist");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+
+
+    try{
+        library->createRandomPlaylist(300, "none");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+
+    library->createRandomPlaylist(3, "rand1");
+    std::cout <<library->printPlaylistInfo("rand1")<< std::endl;
 
 }
 
