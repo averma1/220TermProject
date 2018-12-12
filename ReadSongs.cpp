@@ -3,10 +3,8 @@
 //
 #include<iostream>
 #include<fstream>
-#include<istream>
-#include"Song.h"
-#include"Library.h"
-#include"ReadSongs.h"
+#include "string.h"
+#include "cstdlib"
 
 /*
  * Song.cpp Playlist.cpp Tests.cpp ArrayList.inl TestLib.cpp
@@ -34,19 +32,37 @@ void addSongToLibrary(std::string myString){
 
 
 
-std::istream& operator>>(std::ifstream infile, Song()){
-
-}
+//std::istream& operator>>(std::ifstream infile, Song()){
+//
+//}
 
 
 int main(){
 
-    std::string fileName = "input.txt"; //will change this to be user input in interface
-    std::ifstream infile(fileName);
-
+    //std::string fileName = "Sample.csv"; //will change this to be user input in interface
+    std::ifstream infile("Sample.txt");
     if(!infile){
         std::cerr<<"text file could not be opened for reading"<<std::endl;
     }
+    while (infile.good()) {
+        // read stuff from the file into a string and print it
+        std::string strInput;
+        infile>>strInput;
+        std::cout << strInput << std::endl;
+    }
+
+    infile.close();
+
+//    std::string artist;
+//    std::string title;
+//    double duration;
+//    std::string delimiter = ", ";
+//    std::string token;
+//    myString.substr();
+//    int pos = 0;
+//    while((pos = myString.find(delimiter)) != std::string::npos){
+//
+//    }
     /*
     std::ifstream infile("test.txt");
     //change the above to be entered by the user
