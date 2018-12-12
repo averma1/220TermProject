@@ -91,7 +91,7 @@ void Library::addSongToPlaylist(std::string songName, std::string playlistName){
     }
 }
 
-void Library::createPlaylist(int numOfSongs, std::string playlistName){
+void Library::createPlaylist(std::string playlistName){
     Playlist* newPlaylist= new Playlist(playlistName);
     playListList->insertAtEnd(newPlaylist);
     numOfPlaylists++;

@@ -22,7 +22,7 @@ public:
 
     void addSongToList(std::string songName, std::string artist, double duration);
     void addSongToPlaylist(std::string songName, std::string playlistName);
-    void createPlaylist(int numOfSongs, std::string playlistName);
+    void createPlaylist(std::string playlistName);
     void deletePlaylist(std::string playlistName);
     void createRandomPlaylist(int numOfSongs, std::string playlistName);
     bool isSonginList(std::string songName);
