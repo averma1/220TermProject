@@ -27,10 +27,8 @@ void Library::addSongToList(std::string songName, std::string artist, double dur
 //    int index=-1;
 //    //if the artist is already in the list
 //    for(int i=0; i<numOfSongs;i++){
-//        if(artist==songList[i].getArtist()){   //might not work if the song needs to go in the first spot
-//            if(songName<songList[i].getSong()){
-//                index=i;
-//            }
+//        if(artist==songList[i].getValueAt(i)->getArtist()&&songName<songList[i].getValueAt(i)->getName()){   //might not work if the song needs to go in the first spot
+//            index=i;
 //        }
 //    }
 //    //if the artist isn't already in the list
@@ -42,7 +40,7 @@ void Library::addSongToList(std::string songName, std::string artist, double dur
 //        }
 //    }
 //
-//    songList->insertAt(i,newSong)
+//    //songList->insertAt(index,newSong)
 
     numOfSongs++;
     //write the song to the file
@@ -267,7 +265,7 @@ std::string Library::printPlaylistInfo(std::string playlist){
         playInfo+=" Duration: ";
         playInfo+=currentPlay->getDuration();
         playInfo+=" Songs: ";
-        //playInfo+=currentPlay->songs();
+        playInfo+=currentPlay->getSongList();
     } else {
         throw std::invalid_argument("Playlist does not exist");
         playInfo="No playlist by that name in the Library";
