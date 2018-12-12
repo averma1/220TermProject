@@ -27,24 +27,14 @@ void Library::addSongToList(std::string songName, std::string artist, double dur
     int index=numOfSongs;
     for(int i=0; i<numOfSongs;i++){
         for(int i=numOfSongs-1;i>0;i--){
-            if(songList->getValueAt(i)->getArtist()>artist||songList->getValueAt(i)->getArtist()==artist&&songList->getValueAt(i)->getName()>songName){
+            if((songList->getValueAt(i)->getArtist()>artist)||(songList->getValueAt(i)->getArtist()==artist)&&(songList->getValueAt(i)->getName()>songName)){
                 index--;
             }
         }
     }
-//    //if the artist isn't already in the list
-//    if(index==-1){
-//        int songIndex=numOfSongs;
-//        for(int i=numOfSongs-1;i>0;i--){
-//            if(songList->getValueAt(i)->getArtist()>artist){
-//                index--;
-//            }
-//        }
         songList->insertAt(newSong,index);
         numOfSongs++;
     }
-
-    //songList->insertAt(index,newSong)
 
     //write the song to the file
 
