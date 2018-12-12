@@ -71,14 +71,22 @@ void Library::addSongToPlaylist(std::string songName, std::string playlistName){
             found=i;
         }
     }
-    if(found>-1) {
+    if (found==-1){
+        throw std::out_of_range("Song is not in library");
+    }
+    else{
+        int index=-1;
         for (int i = 0; i < numOfPlaylists; i++) {
             Playlist* current = playListList->getValueAt(i);
             if (current->getName() == playlistName) {
                 Song* addsong = songList->getValueAt(found);
+                index=i;
                 current->addSong(addsong);
                 //update file
             }
+        }
+        if(index==-1){
+            throw std::out_of_range("Playlist does not exist");
         }
     }
 }
