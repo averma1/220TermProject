@@ -6,7 +6,7 @@
 
 int main(){
     Library* mainLibrary= new Library;
-    //mainLibrary->readFile(thing.txt);
+    mainLibrary->createLibrary("Sample.csv");
 
     std::cout<<"Welcome to the C++ DJ!"<<std::endl;
     std::cout<<"    1) Help (show this list again)"<<std::endl;
@@ -54,10 +54,10 @@ int main(){
             std::cout<<mainLibrary->printSongsByArtist(artist)<<std::endl;
         }
         else if (choice == 4) {
-            std::string song;
-            std::cout<<"What song's info do you want to see:"<<std::endl;
-            std::cin>> song;
-            std::cout<<mainLibrary->printSongInfo(song)<<std::endl;
+//            std::string song;
+//            std::cout<<"What song's info do you want to see:"<<std::endl;
+//            std::cin>> song;
+//            std::cout<<mainLibrary->printSongInfo(song)<<std::endl;
         }
         else if (choice == 5) {
             std::string file;
@@ -81,31 +81,31 @@ int main(){
             std::cout<<mainLibrary->printPlaylistInfo(playlist)<<std::endl;
         }
         else if (choice == 9) {
-            std::string playlist;
-            std::cout<<"What is the name of the playlist you want to create:"<<std::endl;
-            std::cin>> playlist;
-            int length;
-            std::cout<<"How many songs long is it:"<<std::endl;
-            std::cin>> length;
-            mainLibrary->createPlaylist(length,playlist);
+//            std::string playlist;
+//            std::cout<<"What is the name of the playlist you want to create:"<<std::endl;
+//            std::cin>> playlist;
+//            int length;
+//            std::cout<<"How many songs long is it:"<<std::endl;
+//            std::cin>> length;
+//            mainLibrary->createPlaylist(length,playlist);
         }
         else if (choice == 10) {
-            std::string playlist;
-            std::cout<<"What is the name of the playlist you want to add to:"<<std::endl;
-            std::cin>> playlist;
-            std::string song;
-            std::cout<<"What is the name of the song you want to add:"<<std::endl;
-            std::cin>> song;
-            mainLibrary->addSongToPlaylist(song,playlist);
+//            std::string playlist;
+//            std::cout<<"What is the name of the playlist you want to add to:"<<std::endl;
+//            std::cin>> playlist;
+//            std::string song;
+//            std::cout<<"What is the name of the song you want to add:"<<std::endl;
+//            std::cin>> song;
+//            mainLibrary->addSongToPlaylist(song,playlist);
         }
         else if (choice == 11) {
-            std::string playlist;
-            std::cout<<"What is the name of the playlist you want to change:"<<std::endl;
-            std::cin>> playlist;
-            std::string song;
-            std::cout<<"What is the name of the song you want to remove:"<<std::endl;
-            std::cin>> song;
-            mainLibrary->removeSongToPlaylist(song,playlist);
+//            std::string playlist;
+//            std::cout<<"What is the name of the playlist you want to change:"<<std::endl;
+//            std::cin>> playlist;
+//            std::string song;
+//            std::cout<<"What is the name of the song you want to remove:"<<std::endl;
+//            std::cin>> song;
+//            mainLibrary->removeSongToPlaylist(song,playlist);
         }
         else if (choice == 12) {
             std::string playlist;

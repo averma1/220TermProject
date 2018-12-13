@@ -6,6 +6,12 @@
 #include "Song.h"
 #include "List.h"
 #include "Playlist.h"
+#include<iostream>
+#include<fstream>
+#include <sstream>
+#include "string.h"
+#include "cstdlib"
+#include <vector>
 
 Library::Library(){
     //read files and add songs and playlists
@@ -14,6 +20,7 @@ Library::Library(){
     //count number of both
     numOfSongs=0;
     numOfPlaylists=0;
+    length=0;
 }
 
 Library::~Library(){
@@ -267,9 +274,91 @@ std::string Library::printSongInfo(std::string song, std::string artistName){
     }
     return songInfo;
 }
+void Library::createLibrary(std::string file){
+    List<std::string>* all = readFile(file);
 
-void Library::readFile(std::string file){
-    //read file of given name and add to library
+    std::string song="Songs,,\r";
+    int count=-1;
+    for(int i= 0; i<length; i++){
+        if(all->getValueAt(i)==song){
+            count=i;
+        }
+    }
+
+    std::string delimiter = ",";
+    std::string death = all->getValueAt(0);
+    std::string token = all->getValueAt(2).substr(0, all->getValueAt(2).find(delimiter));
+    Playlist* playlist1=new Playlist(token);
+    playListList->insertAtEnd(playlist1);
+    numOfPlaylists++;
+
+    for(int i=3;i<count-1; i++){
+        if (all->getValueAt(i) != death) {
+            std::string str = all->getValueAt(i);
+            std::stringstream ss(str);
+            std::vector<std::string> result;
+
+            while (ss.good()) {
+                std::string substr;
+                getline(ss, substr, ',');
+                result.push_back(substr);
+            }
+
+            std::string artist = result.at(1);
+            std::string title = result.at(0);
+            double duration = std::stod(result.at(2));
+
+            Song *newsong = new Song(artist, title, duration);
+            playlist1->addSong(newsong);
+            songList->insertAtEnd(newsong);
+            numOfSongs++;
+
+        } else if (all->getValueAt(i) == death) {
+            i++;
+            token = all->getValueAt(i).substr(0, all->getValueAt(i).find(delimiter));
+            playlist1 = new Playlist(token);
+            playListList->insertAtEnd(playlist1);
+            numOfPlaylists++;
+        }
+    }
+    for(int i=count+1; i<length-1; i++){
+        std::string str = all->getValueAt(i);
+        std::stringstream ss(str);
+        std::vector<std::string> result;
+
+        while (ss.good()) {
+            std::string substr;
+            getline(ss, substr, ',');
+            result.push_back(substr);
+        }
+
+        std::string artist = result.at(1);
+        std::string title = result.at(0);
+        double duration = std::stod(result.at(2));
+
+        Song *newsong = new Song(artist, title, duration);
+        songList->insertAtEnd(newsong);
+        numOfSongs++;
+    }
+}
+
+List<std::string>* Library::readFile(std::string file){
+    std::ifstream infile(file);
+    if(!infile){
+        std::cerr<<"text file could not be opened for reading"<<std::endl;
+    }
+    List<std::string>* all= new ArrayList<std::string>(10);
+    length= 0;
+    while (infile.good()) {
+        // read stuff from the file into a string and print it
+        std::string strInput;
+        getline(infile, strInput);
+        all->insertAtEnd(strInput);
+        length++;
+    }
+
+    infile.close();
+    return all;
 }
 
 void Library::removeDuplicatesongs(std::string file){

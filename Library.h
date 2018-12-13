@@ -16,6 +16,7 @@ private:
     List<Song*>* songList;
     int numOfPlaylists;
     int numOfSongs;
+    int length;
 public:
     Library();
     ~Library();
@@ -32,7 +33,8 @@ public:
     std::string libraryString();
     std::string printSongsByArtist(std::string artist);
     std::string printSongInfo(std::string song,std::string artistName);
-    void readFile(std::string file);
+    List<std::string>* readFile(std::string file);
+    void createLibrary(std::string file);
     std::string printPlaylistInfo(std::string playlist);
     void playPlaylist(std::string playlist);
     void removeDuplicatesongs(std::string file);
