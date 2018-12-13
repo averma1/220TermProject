@@ -92,7 +92,7 @@ public:
      * @post the list has an additional value in it, at the beginning
      *    all other items are shifted down by one index
      */
-    //virtual void insertAtFront(T itemToAdd)=0;
+    virtual void insertAtFront(T itemToAdd)=0;
 
     /**
      * inserts the item into the list so that it can be found with get(index)
