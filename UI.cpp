@@ -83,12 +83,23 @@ int main(){
 
         else if (choice == 5) {
             std::string file;
+            int choice=2;
+//            std::cout<<"Does your file have 1) Only songs, or 2) Playlists and songs: "<<std::endl;
+//            getline(std::cin, choice);
             std::cout<<"What is the name of the file you want to import? "<<std::endl;
             getline(std::cin, file);
-            try {
-                mainLibrary->createLibrary(file);
-            } catch (std::invalid_argument& e) {
-                std::cout<<"Sorry, that file could not be opened. Please try another file."<<std::endl;
+            if(choice==1){
+                try {
+                    mainLibrary->createLibrarySongs(file);
+                } catch (std::invalid_argument &e) {
+                    std::cout << "Sorry, that file could not be opened. Please try another file." << std::endl;
+                }
+            } else if(choice==2) {
+                try {
+                    mainLibrary->createLibrary(file);
+                } catch (std::invalid_argument &e) {
+                    std::cout << "Sorry, that file could not be opened. Please try another file." << std::endl;
+                }
             }
         }
 
@@ -124,9 +135,6 @@ int main(){
             int length;
             std::cout<<"What is the name of the playlist you want to create? "<<std::endl;
             getline(std::cin, playlistName);
-            std::cout<<"How many songs long is it:"<<std::endl;
-            std::cin>>length;
-            std::cin.ignore();
             mainLibrary->createPlaylist(playlistName);
         }
 

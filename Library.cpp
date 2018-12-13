@@ -229,7 +229,9 @@ std::string Library::printPlaylists(){
     for(int i=0; i<numOfPlaylists; i++){
         Playlist* current=playListList->getValueAt(i);
         fullstring+=current->getName();
-        fullstring+=" ";
+        if(i!=numOfPlaylists-1){
+            fullstring+=", ";
+        }
     }
     return fullstring;
 }
@@ -251,7 +253,9 @@ std::string Library::printSongsByArtist(std::string artist){
         std::string currentArtist= songList->getValueAt(i)->getArtist();
         if(currentArtist == artist){
             songs+= songList->getValueAt(i)->getName();
-            songs+=" ";
+            if(i!=numOfSongs-1){
+                songs+=", ";
+            }
         }
     }
     if(songs==""){
@@ -274,11 +278,14 @@ std::string Library::printSongInfo(std::string song, std::string artistName){
         Song* currentSong= songList->getValueAt(found);
         songInfo+="Artist: ";
         songInfo+=currentSong->getArtist();
-        songInfo+=" Name: ";
+        songInfo+=", Name: ";
         songInfo+=currentSong->getName();
-        songInfo+=" Duration: ";
-        songInfo+=std::to_string(currentSong->getDuration());
-        songInfo+=" Play count: ";
+        songInfo+=", Duration: ";
+        std::string rounded_duration = std::to_string(currentSong->getDuration());
+        int decimal_pos = rounded_duration.find('.');
+        rounded_duration = rounded_duration.substr(0, decimal_pos+3);
+        songInfo+=rounded_duration;
+        songInfo+=", Play count: ";
         songInfo+=std::to_string(currentSong->getPlayCount());
     } else {
         throw std::invalid_argument("Song does not exist");
@@ -286,6 +293,31 @@ std::string Library::printSongInfo(std::string song, std::string artistName){
     }
     return songInfo;
 }
+void Library::createLibrarySongs(std::string file) {
+    List<std::string>* all = readFile(file);
+
+    for(int i=1; i<length; i++){
+        std::string str = all->getValueAt(i);
+        std::stringstream ss(str);
+        std::vector<std::string> result;
+
+        while (ss.good()) {
+            std::string substr;
+            getline(ss, substr, ',');
+            result.push_back(substr);
+        }
+
+        std::string artist = result.at(1);
+        std::string title = result.at(0);
+        double duration = std::stod(result.at(2));
+
+
+        Song *newsong = new Song(artist, title, duration);
+        songList->insertAtEnd(newsong);
+        numOfSongs++;
+    }
+}
+
 void Library::createLibrary(std::string file){
     List<std::string>* all = readFile(file);
 
@@ -434,9 +466,12 @@ std::string Library::printPlaylistInfo(std::string playlist){
         Playlist* currentPlay= playListList->getValueAt(found);
         playInfo+="Name: ";
         playInfo+=currentPlay->getName();
-        playInfo+=" Duration: ";
-        playInfo+=std::to_string(currentPlay->getDuration());
-        playInfo+=" Songs: ";
+        playInfo+=", Duration: ";
+        std::string rounded_duration = std::to_string(currentPlay->getDuration());
+        int decimal_pos = rounded_duration.find('.');
+        rounded_duration = rounded_duration.substr(0, decimal_pos+3);
+        playInfo+=rounded_duration;
+        playInfo+="\nSongs: \n";
         playInfo+=currentPlay->getSongList();
     }
 
