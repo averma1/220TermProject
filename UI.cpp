@@ -33,8 +33,7 @@ int main(){
 
     while(choice!=14) {
 
-        std::cin >> choice;
-        std::cin.ignore();
+        getline(std::cin, choice);
 
         if (choice == 1) {
             std::cout<<"    1) Help (show this list again)"<<std::endl;
@@ -64,7 +63,7 @@ int main(){
             try {
                 std::cout << mainLibrary->printSongsByArtist(artist) << std::endl;
             } catch (std::invalid_argument e){
-                std::cout<<"Sorry, that song is not in the library. "<<std::endl;
+                std::cout<<"Sorry, that artist's song is not in the library. "<<std::endl;
             }
         }
 
@@ -83,29 +82,34 @@ int main(){
 
         else if (choice == 5) {
             std::string file;
-            int choice=2;
-//            std::cout<<"Does your file have 1) Only songs, or 2) Playlists and songs: "<<std::endl;
-//            getline(std::cin, choice);
+            std::string option;
             std::cout<<"What is the name of the file you want to import? "<<std::endl;
             getline(std::cin, file);
-            if(choice==1){
-                try {
-                    mainLibrary->createLibrarySongs(file);
-                } catch (std::invalid_argument &e) {
-                    std::cout << "Sorry, that file could not be opened. Please try another file." << std::endl;
-                }
-            } else if(choice==2) {
-                try {
-                    mainLibrary->createLibrary(file);
-                } catch (std::invalid_argument &e) {
-                    std::cout << "Sorry, that file could not be opened. Please try another file." << std::endl;
-                }
+            std::cout<<"Does your file contain playlists, songs, or both?"<<std::endl;
+            getline(std::cin, option);
+            if(option == "Playlists" || option == "playlists"){
+
+            }
+            else if(option == "Songs" || option == "songs"){
+
+            }
+            else if(option == "Both" || option == "both"){
+
+            }
+            else{
+                std::cout<<"Sorry, that's not an option."<<std::endl;
+            }
+
+            try {
+                mainLibrary->createLibrary(file);
+            } catch (std::invalid_argument& e) {
+                std::cout<<"Sorry, that file could not be opened. Please try another file."<<std::endl;
             }
         }
 
         else if(choice==6){
             std::string file;
-            std::cout<<"What is the name of the file you want to import? "<<std::endl;
+            std::cout<<"What is the name of the file you want to import for removal? "<<std::endl;
             getline(std::cin, file);
             try {
                 mainLibrary->removeDuplicatesongs(file);
@@ -135,6 +139,9 @@ int main(){
             int length;
             std::cout<<"What is the name of the playlist you want to create? "<<std::endl;
             getline(std::cin, playlistName);
+            std::cout<<"How many songs long is it:"<<std::endl;
+            std::cin>>length;
+            std::cin.ignore();
             mainLibrary->createPlaylist(playlistName);
         }
 
