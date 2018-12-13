@@ -11,7 +11,6 @@
 
 int main(){
     Library* mainLibrary= new Library;
-    mainLibrary->createLibrary("Sample.csv");
 
     std::cout<<"Welcome to the C++ DJ!"<<std::endl;
     std::cout<<"    1) Help (show this list again)"<<std::endl;
@@ -87,7 +86,7 @@ int main(){
             std::cout<<"What is the name of the file you want to import? "<<std::endl;
             getline(std::cin, file);
             try {
-                mainLibrary->readFile(file);
+                mainLibrary->createLibrary(file);
             } catch (std::invalid_argument& e) {
                 std::cout<<"Sorry, that file could not be opened. Please try another file."<<std::endl;
             }
