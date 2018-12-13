@@ -29,7 +29,7 @@ std::ofstream writeLibraryToFile(){
 }
  */
 
-int main(){
+//int main(){
 /*
     Library* library = new Library();
     library->createPlaylist("myPlaylist");
@@ -40,4 +40,4 @@ int main(){
 
 
 
-}
+//}
