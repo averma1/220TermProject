@@ -291,32 +291,32 @@ void createLibrarytest(){
     library->addSongToList("Kate", "me", 1);
     printAssertEquals("Moss Kate ",library->printSongsByArtist("me"));
 
-//    try{
-//        library->createRandomPlaylist(3, "newPlaylist");
-//        std::cout << "FAIL: did not throw exception" << std::endl;
-//    }
-//    catch(std::invalid_argument& e){
-//        std::cout <<"pass"<<std::endl;
-//    }
-//
-//
-//    try{
-//        library->printPlaylistInfo("rand1");
-//        std::cout << "FAIL: did not throw exception" << std::endl;
-//    }
-//    catch(std::invalid_argument& e){
-//        std::cout <<"pass"<<std::endl;
-//    }
+    try{
+        library->createRandomPlaylist(3, "newPlaylist");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+
+
+    try{
+        library->printPlaylistInfo("rand1");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
 
 
 
-//    try{
-//        library->createRandomPlaylist(300, "none");
-//        std::cout << "FAIL: did not throw exception" << std::endl;
-//    }
-//    catch(std::out_of_range& e){
-//        std::cout <<"pass"<<std::endl;
-//    }
+    try{
+        library->createRandomPlaylist(300, "none");
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::out_of_range& e){
+        std::cout <<"pass"<<std::endl;
+    }
 
     library->addSongToList("songNone", "singer", 3);
 
@@ -327,12 +327,33 @@ void createLibrarytest(){
 
 }
 
+void testAddSongsToLibrary(){
+    std::cout<<"----------------Adding songs to song library alphabetical order by artist----------------"<<std::endl;
+    Library* lib=new Library();
+    lib->addSongToList("A","Artist", 2);
+    lib->addSongToList("B","Artist", 2);
+    lib->addSongToList("C","Artist",3);
+    lib->addSongToList("D","B",4);
+    std::cout<<lib->libraryString()<<std::endl;
+
+    try{
+        lib->addSongToList("C","title2",3);
+        std::cout << "FAIL: did not throw exception" << std::endl;
+    }
+    catch(std::invalid_argument& e){
+        std::cout <<"pass"<<std::endl;
+    }
+
+}
+
+
 
 
 int main(){
     srand(time(NULL));
     createSongAndPlaylistTest();
     printSongsFromPlaylist();
+    testAddSongsToLibrary();
 
     createLibrarytest();
 

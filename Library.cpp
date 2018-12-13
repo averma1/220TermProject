@@ -29,19 +29,24 @@ Library::~Library(){
 }
 
 void Library::addSongToList(std::string songName, std::string artist, double duration){
-    Song* newSong= new Song(artist, songName, duration);
-    songList->insertAtEnd(newSong);
-//    int index=numOfSongs;
-//    for(int i=0; i<numOfSongs;i++){
-//        for(int j=numOfSongs-1;j>0;j--){
-//            if((songList->getValueAt(i)->getArtist()>artist)||(songList->getValueAt(i)->getArtist()==artist)&&(songList->getValueAt(i)->getName()>songName)){
-//                index--;
-//            }
-//        }
-//    }
-//    songList->insertAt(newSong,index);
-    numOfSongs++;
+    if(isSonginList(songName,artist)){
+        throw std::invalid_argument("Song is already in list");
     }
+    Song* newSong= new Song(artist, songName, duration);
+    //songList->insertAtEnd(newSong);
+    int index=numOfSongs;
+    for(int j=numOfSongs-1;j>0;j--){
+        if((songList->getValueAt(j)->getArtist()>artist)||((songList->getValueAt(j)->getArtist()==artist)&&(songList->getValueAt(j)->getName()>songName))){
+            index--;
+        }
+    }
+    if(index==numOfSongs){
+        songList->insertAtEnd(newSong);
+    }else{
+        songList->insertAt(newSong,index);
+    }
+    numOfSongs++;
+}
 
     //write the song to the file
 
@@ -229,9 +234,15 @@ std::string Library::printPlaylists(){
     return fullstring;
 }
 
+
 std::string Library::libraryString(){
-    //print songs in alpha order
+    std::string songsInLibrary="";
+    for(int i=0; i<numOfSongs; i++){
+        songsInLibrary+=printSongInfo(songList->getValueAt(i)->getName(),songList->getValueAt(i)->getArtist());
+    }
+    return songsInLibrary;
 }
+
 
 std::string Library::printSongsByArtist(std::string artist){
     std::string songs= "";
