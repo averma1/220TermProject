@@ -290,7 +290,7 @@ void createLibrarytest(){
     printAssertEquals("Moss ",library->printSongsByArtist("me"));
     library->addSongToList("Kate", "me", 1);
     //std::cout<<"not working"<<std::endl;
-    printAssertEquals("Moss Kate ",library->printSongsByArtist("me"));
+    printAssertEquals("Kate Moss ",library->printSongsByArtist("me"));
 
     try{
         library->createRandomPlaylist(3, "newPlaylist");
