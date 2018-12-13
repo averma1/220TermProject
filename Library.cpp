@@ -35,7 +35,7 @@ void Library::addSongToList(std::string songName, std::string artist, double dur
     Song* newSong= new Song(artist, songName, duration);
     //songList->insertAtEnd(newSong);
     int index=numOfSongs;
-    for(int j=numOfSongs-1;j>0;j--){
+    for(int j=numOfSongs-1;j>=0;j--){
         if((songList->getValueAt(j)->getArtist()>artist)||((songList->getValueAt(j)->getArtist()==artist)&&(songList->getValueAt(j)->getName()>songName))){
             index--;
         }

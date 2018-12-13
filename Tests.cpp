@@ -289,6 +289,7 @@ void createLibrarytest(){
     }
     printAssertEquals("Moss ",library->printSongsByArtist("me"));
     library->addSongToList("Kate", "me", 1);
+    //std::cout<<"not working"<<std::endl;
     printAssertEquals("Moss Kate ",library->printSongsByArtist("me"));
 
     try{
@@ -331,15 +332,18 @@ void testAddSongsToLibrary(){
     std::cout<<"----------------Adding songs to song library alphabetical order by artist----------------"<<std::endl;
     Library* lib=new Library();
 
+
     lib->addSongToList("Forever Young","Bob Dylan", 2);
     lib->addSongToList("This Is Gospel","Panic! at the Disco",3);
     lib->addSongToList("Death of a Bachelor","Panic! at the Disco",3.5);
-    //lib->addSongToList("Want You Back","5 Seconds of Summer",5);//always puts the ones with numbers in the second and third spots
+    lib->addSongToList("Want You Back","5 Seconds of Summer",5);//always puts the ones with numbers in the second and third spots
     lib->addSongToList("Ballad of the Mona Lisa","Panic! at the Disco",4);
     lib->addSongToList("Hello","Adele", 2);
-    //lib->addSongToList("These Are Days","10,000 Maniacs",2);
     lib->addSongToList("Tik Tok","Ke$ha",4);
+    lib->addSongToList("Hello","Beatles", 2);
+    lib->addSongToList("Dancing Queen","ABBA",9);
     lib->addSongToList("Water Under the Bridge","Adele",5);
+
     std::cout<<lib->libraryString()<<std::endl;
 
 
