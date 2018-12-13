@@ -17,6 +17,8 @@ Can you add multiple songs to the library
 Are they in alphabetical order
         Can you save the library when the user puts in ‘quit’
 Does file i/o work
+
+ test for removeDuplicateSongs + createLibrary
  **/
 void createSongAndPlaylistTest(){
     std::cout << "-------SongTest---------" <<std::endl;
@@ -358,6 +360,48 @@ void testAddSongsToLibrary(){
 }
 
 
+void testRemoveDuplicateSongs(){
+    //removeDuplicateSongs:
+    //looks to see if there are songs in library that match what's in the file.
+    //if there are matches in the file, remove from the library.
+
+    std::cout<<"---------------- Testing Duplicate Song Removal with Files ----------------"<<std::endl;
+    Library* myLib = new Library();
+    myLib->addSongToList("Summer Skin", "Parekh & Singh", 3.5);
+    myLib->addSongToList("Domino", "The Karma Killers", 3.05);
+
+    myLib->removeDuplicatesongs("Sample.csv");
+    if(myLib->isSonginList("Domino", "The Karma Killers") == 0){
+        std::cout<<"pass"<<std::endl;
+    }
+
+    myLib->addSongToList("cold/mess", "Prateek Kuhad", 5.0);
+    myLib->addSongToList("The Wolf", "Foxworth Hall", 3.05);
+    myLib->addSongToList("Bookstore Girl", "Charlie Burg", 4.1);
+
+    myLib->removeDuplicatesongs("Sample.csv");
+    if(myLib->isSonginList("Domino", "The Karma Killers") == 0){
+        std::cout<<"pass"<<std::endl;
+    }
+
+    delete myLib;
+
+}
+
+
+void testCreateLibrary(){
+
+    std::cout<<"---------------- Testing Create Library ----------------"<<std::endl;
+
+    Library* myLib = new Library();
+    myLib->createLibrary("Sample.csv");
+
+    if(myLib->isSonginList("Moss", "Cosmo Sheldrake") == 1){
+        std::cout<<"pass"<<std::endl;
+    }
+
+}
+
 
 
 int main(){
@@ -366,7 +410,11 @@ int main(){
     printSongsFromPlaylist();
     testAddSongsToLibrary();
 
+    testCreateLibrary();
+    testRemoveDuplicateSongs();
+
     createLibrarytest();
     std::cout<<"--------------------done----------------------------"<<std::endl;
+
 
 }
