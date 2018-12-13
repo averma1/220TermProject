@@ -38,7 +38,7 @@ public:
     std::string printPlaylistInfo(std::string playlist);
     void playPlaylist(std::string playlist);
     void removeDuplicatesongs(std::string file);
-    void writeLibraryToFile();
+    void writeLibraryToFile(std::string file);
 };
 
 #endif //FINAL_LIBRARY_H

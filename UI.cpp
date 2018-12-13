@@ -212,8 +212,12 @@ int main(){
         }
 
     }
+    std::string file;
+    std::cout<<"What is the name of the file you want to save your library too "<<std::endl;
+    getline(std::cin, file);
+    mainLibrary->writeLibraryToFile(file);
+    std::cout<<"All your activity has been saved to your files."<<std::endl;
 
     std::cout<<"Thank you for using the C++ DJ! "<<std::endl;
-    std::cout<<"All your activity has been saved to your files."<<std::endl;
 }
 

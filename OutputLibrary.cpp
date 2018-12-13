@@ -3,8 +3,9 @@
 //
 #include<iostream>
 #include<fstream>
+#include<ostream>
 #include "Library.h"
-#include "Library.cpp"
+
 
 /*
 std::ofstream writeLibraryToFile(){
@@ -29,15 +30,23 @@ std::ofstream writeLibraryToFile(){
 }
  */
 
-//int main(){
-/*
-    Library* library = new Library();
-    library->createPlaylist("myPlaylist");
-    library-addSongToPlayList("Beautiful", "myPlaylist");
-*/
+int main(){
+    Library* mainLibrary= new Library;
+    mainLibrary->createLibrary("Sample.csv");
+    if(mainLibrary->isSonginList("Wounded Healer", "Watsky")){
+        std::cout<<"yes"<<std::endl;
+    } else {
+        std::cout<<"no"<<std::endl;
+    }
+    mainLibrary->writeLibraryToFile("SampleNew.csv");
+    std::cout<<"done"<<std::endl;
 
-    //std::string fileName = "Sample.csv"; //will change this to be user input in interface
+    return 0;
 
 
-
-//}
+//    Library* library = new Library();
+//    library->createPlaylist("myPlaylist");
+//    library-addSongToPlayList("Beautiful", "myPlaylist");
+//
+//    std::string fileName = "Sample.csv"; //will change this to be user input in interface
+}

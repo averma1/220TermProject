@@ -4,6 +4,8 @@
 
 #include "Playlist.h"
 #include "LinkedList.h"
+#include <iomanip>
+#include <math.h>
 
 
 Playlist::Playlist(std::string nameIn){
@@ -88,20 +90,28 @@ std::string Playlist::getSongList(){
         return "No songs in a playlist";
     }
     else {
-        std::string stringArray = "{";
+        std::string stringArray = "";
         int temp = 0;
         while (temp != numberOfSongs) {
-            if (temp+1==numberOfSongs) {
+            if(temp==0){
                 std::string nameSong = songList->getValueAt(temp)->getName();
-                stringArray += nameSong;
-                temp++;
+                std::string artist = songList->getValueAt(temp)->getArtist();
+                double duration = songList->getValueAt(temp)->getDuration();
+                std::string rounded_duration = std::to_string(duration);
+                int decimal_pos = rounded_duration.find('.');
+                rounded_duration = rounded_duration.substr(0, decimal_pos+3);
+                stringArray = stringArray + nameSong + "," + artist + "," + rounded_duration;
             } else {
                 std::string nameSong = songList->getValueAt(temp)->getName();
-                stringArray += nameSong + ", ";
-                temp++;
+                std::string artist = songList->getValueAt(temp)->getArtist();
+                double duration = songList->getValueAt(temp)->getDuration();
+                std::string rounded_duration = std::to_string(duration);
+                int decimal_pos = rounded_duration.find('.');
+                rounded_duration = rounded_duration.substr(0, decimal_pos+3);
+                stringArray = stringArray + "\n" + nameSong + "," + artist + "," + rounded_duration;
             }
+            temp++;
         }
-        stringArray = stringArray + "}";
         return stringArray;
     }
     
