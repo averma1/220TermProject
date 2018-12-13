@@ -239,6 +239,7 @@ std::string Library::libraryString(){
     std::string songsInLibrary="";
     for(int i=0; i<numOfSongs; i++){
         songsInLibrary+=printSongInfo(songList->getValueAt(i)->getName(),songList->getValueAt(i)->getArtist());
+        songsInLibrary+="\n";
     }
     return songsInLibrary;
 }

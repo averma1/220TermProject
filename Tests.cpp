@@ -330,14 +330,20 @@ void createLibrarytest(){
 void testAddSongsToLibrary(){
     std::cout<<"----------------Adding songs to song library alphabetical order by artist----------------"<<std::endl;
     Library* lib=new Library();
-    lib->addSongToList("A","Artist", 2);
-    lib->addSongToList("B","Artist", 2);
-    lib->addSongToList("C","Artist",3);
-    lib->addSongToList("D","B",4);
+    lib->addSongToList("Hello","Adele", 2);
+    lib->addSongToList("Forever Young","Bob Dylan", 2);
+    lib->addSongToList("This Is Gospel","Panic! at the Disco",3);
+    lib->addSongToList("Ballad of the Mona Lisa","Panic! at the Disco",4);
+    lib->addSongToList("Death of a Bachelor","Panic! at the Disco",3.5);
+    lib->addSongToList("Want You Back","5 Seconds of Summer",5);//always puts the ones with numbers in the second and third spots
+    lib->addSongToList("These Are Days","10,000 Maniacs",2);
+    lib->addSongToList("Tik Tok","Ke$ha",4);
+    lib->addSongToList("Water Under the Bridge","Adele",5);
     std::cout<<lib->libraryString()<<std::endl;
 
+
     try{
-        lib->addSongToList("C","title2",3);
+        lib->addSongToList("Tik Tok","Ke$ha",4);
         std::cout << "FAIL: did not throw exception" << std::endl;
     }
     catch(std::invalid_argument& e){
@@ -356,5 +362,6 @@ int main(){
     testAddSongsToLibrary();
 
     createLibrarytest();
+    std::cout<<"--------------------done----------------------------"<<std::endl;
 
 }
