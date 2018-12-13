@@ -39,3 +39,12 @@ double Song::getDuration(){
 int Song::getPlayCount(){
     return playCount;
 }
+
+std::string Song::getSongInfo(){
+    std::string info="";
+    std::string rounded_duration = std::to_string(duration);
+    int decimal_pos = rounded_duration.find('.');
+    rounded_duration = rounded_duration.substr(0, decimal_pos+3);
+    info = info + title + "," + artist + "," + rounded_duration;
+    return info;
+}

@@ -289,7 +289,7 @@ std::string Library::printSongInfo(std::string song, std::string artistName){
 void Library::createLibrary(std::string file){
     List<std::string>* all = readFile(file);
 
-    std::string song="Songs,,\r";
+    std::string song="Songs,,";
     int count=-1;
     for(int i= 0; i<length; i++){
         if(all->getValueAt(i)==song){
@@ -333,7 +333,7 @@ void Library::createLibrary(std::string file){
             numOfPlaylists++;
         }
     }
-    for(int i=count+1; i<length-1; i++){
+    for(int i=count+1; i<length; i++){
         std::string str = all->getValueAt(i);
         std::stringstream ss(str);
         std::vector<std::string> result;
@@ -347,6 +347,7 @@ void Library::createLibrary(std::string file){
         std::string artist = result.at(1);
         std::string title = result.at(0);
         double duration = std::stod(result.at(2));
+
 
         Song *newsong = new Song(artist, title, duration);
         songList->insertAtEnd(newsong);
@@ -458,5 +459,43 @@ void Library::playPlaylist(std::string playlist){
         throw std::invalid_argument("Playlist does not exist");
         playInfo="No playlist by that name in the Library";
     }
+}
+
+void Library::writeLibraryToFile(std::string file){
+    std::ofstream outf(file);
+
+    // If we couldn't open the output file stream for writing
+    if (!outf)
+    {
+        // Print an error and exit
+        std::cerr << "Uh oh, Sample.dat could not be opened for writing!" << std::endl;
+        exit(1);
+    }
+
+    std::string songs="";
+    std::string allSongs="";
+    outf << ",," << std::endl;
+    outf << "Playlists,," << std::endl;
+    for(int i=0; i<numOfPlaylists; i++){
+        std::string name= playListList->getValueAt(i)->getName();
+        name+=",,";
+        outf << name << std::endl;
+        Playlist* current= playListList->getValueAt(i);
+        songs=current->getSongList();
+        if(i>0){
+            allSongs+="\n";
+        }
+        allSongs+=songs;
+        outf << songs << std::endl;
+        outf << ",," << std::endl;
+    }
+    outf << "Songs,," << std::endl;
+    for(int i=0;i<numOfSongs; i++){
+        Song* current= songList->getValueAt(i);
+        if(allSongs.find(current->getSongInfo())==-1) {
+            outf << current->getSongInfo() << std::endl;
+        }
+    }
+
 }
 
