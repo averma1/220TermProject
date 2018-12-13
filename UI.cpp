@@ -3,6 +3,14 @@
 //
 #include "iostream"
 #include "Library.h"
+#include <stdio.h>
+
+
+//add so that user can input multiple words for everything
+//anything that involves songs also ask for artist
+//anythign that throws an exception: print out whaz going on
+//also: finish the write files
+//test readfiles
 
 int main(){
     Library* mainLibrary= new Library;
@@ -28,6 +36,7 @@ int main(){
     int choice;
     while(choice!=14) {
         std::cin >> choice;
+        std::cin.ignore();
         if (choice == 1) {
             std::cout<<"    1) Help (show this list again)"<<std::endl;
             std::cout<<"    2) Print Library of Songs"<<std::endl;
@@ -50,25 +59,26 @@ int main(){
         else if (choice == 3) {
             std::string artist;
             std::cout<<"What artist's songs would you like to see:"<<std::endl;
-            std::cin>> artist;
-            std::cout<<mainLibrary->printSongsByArtist(artist)<<std::endl;
+            getline(std::cin, artist);
         }
         else if (choice == 4) {
-//            std::string song;
-//            std::cout<<"What song's info do you want to see:"<<std::endl;
-//            std::cin>> song;
-//            std::cout<<mainLibrary->printSongInfo(song)<<std::endl;
+            std::string song;
+            std::string artist;
+            std::cout<<"What song's info do you want to see:"<<std::endl;
+            std::cin>>song;
+            std::cin.ignore();
+            std::cout<<mainLibrary->printSongInfo(song)<<std::endl;
         }
         else if (choice == 5) {
             std::string file;
             std::cout<<"What is the name of the file you want to import:"<<std::endl;
-            std::cin>> file;
+            getline(std::cin, file);
             mainLibrary->readFile(file);
         }
         else if(choice==6){
             std::string file;
             std::cout<<"What is the name of the file you want to import:"<<std::endl;
-            std::cin>> file;
+            getline(std::cin, file);
             mainLibrary->removeDuplicatesongs(file);
         }
         else if (choice == 7) {
@@ -77,55 +87,59 @@ int main(){
         else if (choice == 8) {
             std::string playlist;
             std::cout<<"What is the name of the playlist you want information on:"<<std::endl;
-            std::cin>> playlist;
+            getline(std::cin, playlist);
             std::cout<<mainLibrary->printPlaylistInfo(playlist)<<std::endl;
         }
         else if (choice == 9) {
-//            std::string playlist;
-//            std::cout<<"What is the name of the playlist you want to create:"<<std::endl;
-//            std::cin>> playlist;
-//            int length;
-//            std::cout<<"How many songs long is it:"<<std::endl;
-//            std::cin>> length;
-//            mainLibrary->createPlaylist(length,playlist);
+            std::string playlistName;
+            std::cout<<"What is the name of the playlist you want to create:"<<std::endl;
+            getline(std::cin, playlistName);
+            /* IMPORTANT - ask about parameters to createPlaylist
+            int length;
+            std::cout<<"How many songs long is it:"<<std::endl;
+            std::cin>> length;
+            std::cin.ignore();*/
+            mainLibrary->createPlaylist(playlistName);
+
         }
         else if (choice == 10) {
-//            std::string playlist;
-//            std::cout<<"What is the name of the playlist you want to add to:"<<std::endl;
-//            std::cin>> playlist;
-//            std::string song;
-//            std::cout<<"What is the name of the song you want to add:"<<std::endl;
-//            std::cin>> song;
-//            mainLibrary->addSongToPlaylist(song,playlist);
+            std::string playlist;
+            std::cout<<"What is the name of the playlist you want to add to:"<<std::endl;
+            getline(std::cin, playlist);
+            std::string song;
+            std::cout<<"What is the name of the song you want to add:"<<std::endl;
+            getline(std::cin, song);
+            mainLibrary->addSongToPlaylist(song,playlist);
         }
         else if (choice == 11) {
-//            std::string playlist;
-//            std::cout<<"What is the name of the playlist you want to change:"<<std::endl;
-//            std::cin>> playlist;
-//            std::string song;
-//            std::cout<<"What is the name of the song you want to remove:"<<std::endl;
-//            std::cin>> song;
-//            mainLibrary->removeSongToPlaylist(song,playlist);
+            std::string playlist;
+            std::cout<<"What is the name of the playlist you want to change:"<<std::endl;
+            getline(std::cin, playlist);
+            std::string song;
+            std::cout<<"What is the name of the song you want to remove:"<<std::endl;
+            std::cin>> song;
+            mainLibrary->removeSongToPlaylist(song,playlist);
         }
         else if (choice == 12) {
             std::string playlist;
             std::cout<<"What is the name of the playlist you want to play:"<<std::endl;
-            std::cin>> playlist;
+            getline(std::cin, playlist);
             mainLibrary->playPlaylist(playlist);
             std::string contin;
-            while(contin!="no"){
+            while(contin != "no"){
                 mainLibrary->playPlaylist(playlist);
                 std::cout<<"Would you like to play next:"<<std::endl;
-                std::cin>> contin;
+                getline(std::cin, contin);
             }
         }
         else if (choice == 13) {
             std::string playlist;
             std::cout<<"What is the name of the playlist you want to create:"<<std::endl;
-            std::cin>> playlist;
+            getline(std::cin, playlist);
             int length;
             std::cout<<"How many songs long is it:"<<std::endl;
-            std::cin>> length;
+            std::cin>>length;
+            std::cin.ignore();
             mainLibrary->createRandomPlaylist(length,playlist);
         }
         if(choice!=14) {
