@@ -362,7 +362,46 @@ List<std::string>* Library::readFile(std::string file){
 }
 
 void Library::removeDuplicatesongs(std::string file){
-    //remove duplicate songs by reading a file
+    List<std::string>* all = readFile(file);
+
+    for(int i=1; i<length-1; i++){
+        std::string str = all->getValueAt(i);
+        std::stringstream ss(str);
+        std::vector<std::string> result;
+
+        while (ss.good()) {
+            std::string substr;
+            getline(ss, substr, ',');
+            result.push_back(substr);
+        }
+
+        std::string artist = result.at(1);
+        std::string title = result.at(0);
+        double duration = std::stod(result.at(2));
+
+        int found=-1;
+        for(int i=0; i<numOfSongs; i++){
+            Song* current= songList->getValueAt(i);
+            if(current->getName()==title &&current->getArtist()==artist){
+                found=i;
+            }
+        }
+        if(found!=-1) {
+            Song* current= songList->getValueAt(found);
+            for (int i = 0; i < numOfPlaylists; i++) {
+                try {
+                    playListList->getValueAt(i)->removeSong(current);
+                } catch (std::invalid_argument& e) {
+
+                }
+            }
+            delete current;
+            songList->removeValueAt(found);
+            numOfSongs--;
+        }
+
+    }
+
 }
 
 std::string Library::printPlaylistInfo(std::string playlist){
