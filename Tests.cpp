@@ -91,8 +91,7 @@ void createSongAndPlaylistTest(){
     printAssertEquals("No songs in a playlist", playlist3->getSongList());
 
 
-    playlist1->addSong(song1);
-    printAssertEquals("title1, name1, 2.00",playlist1->getSongList());
+    printAssertEquals("No songs in a playlist",playlist1->getSongList());
     try{
         playlist1->playNext();
         std::cout << "FAIL:did not throw exception" << std::endl;
@@ -100,7 +99,7 @@ void createSongAndPlaylistTest(){
     catch(std::out_of_range& e){
         std::cout<<("pass")<<std::endl;
     }
-
+    playlist1->addSong(song1);
     printAssertEquals("title1, name1, 2.00",playlist1->getSongList());
 
 }
