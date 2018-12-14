@@ -361,7 +361,10 @@ void createLibrarytest(){
     library->createRandomPlaylist(1, "rand3");
     std::cout<<library->printPlaylistInfo("rand3")<<std::endl;
     library->createRandomPlaylist(0, "rand4");
-    std::cout<<library->printPlaylistInfo("rand4")<<std::endl;
+    printAssertEquals("Name: rand4, Duration: 0.00\n"
+                      "Songs: \n"
+                      "No songs in a playlist",library->printPlaylistInfo("rand4"));
+
 
 
 }
