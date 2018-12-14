@@ -88,23 +88,31 @@ int main(){
             std::cout<<"Does your file contain playlists, songs, or both?"<<std::endl;
             getline(std::cin, option);
             if(option == "Playlists" || option == "playlists"){
-
+                try {
+                    mainLibrary->createLibraryPlaylists(file);
+                } catch (std::invalid_argument& e) {
+                    std::cout<<"Sorry, that file could not be opened. Please try another file."<<std::endl;
+                }
             }
             else if(option == "Songs" || option == "songs"){
-
+                try {
+                    mainLibrary->createLibrarySongs(file);
+                } catch (std::invalid_argument& e) {
+                    std::cout<<"Sorry, that file could not be opened. Please try another file."<<std::endl;
+                }
             }
             else if(option == "Both" || option == "both"){
-
+                try {
+                    mainLibrary->createLibrary(file);
+                } catch (std::invalid_argument& e) {
+                    std::cout<<"Sorry, that file could not be opened. Please try another file."<<std::endl;
+                }
             }
             else{
                 std::cout<<"Sorry, that's not an option."<<std::endl;
             }
 
-            try {
-                mainLibrary->createLibrary(file);
-            } catch (std::invalid_argument& e) {
-                std::cout<<"Sorry, that file could not be opened. Please try another file."<<std::endl;
-            }
+
         }
 
         else if(choice==6){
@@ -185,12 +193,12 @@ int main(){
             std::cout<<"What is the name of the playlist you want to play:"<<std::endl;
             getline(std::cin, playlist);
             try {
-                mainLibrary->playPlaylist(playlist);
+                std::cout<<mainLibrary->playPlaylist(playlist)<<std::endl;
             } catch (std::invalid_argument& e) {
                 std::cout<<"Sorry, that playlist doesn't exist. "<<std::endl;
             }
             while(contin != "no" || contin != "No"){
-                mainLibrary->playPlaylist(playlist);
+                std::cout<<mainLibrary->playPlaylist(playlist)<<std::endl;
                 std::cout<<"Would you like to play next? "<<std::endl;
                 getline(std::cin, contin);
             }
@@ -201,7 +209,7 @@ int main(){
             int length;
             std::cout<<"What is the name of the playlist you want to create? "<<std::endl;
             getline(std::cin, playlist);
-            std::cout<<"How many songs long is it? "<<std::endl;
+            std::cout<<"How many long is it in minutes? "<<std::endl;
             std::cin>>length;
             std::cin.ignore();
             mainLibrary->createRandomPlaylist(length,playlist);
@@ -217,7 +225,7 @@ int main(){
     std::cout<<"What is the name of the file you want to save your library too "<<std::endl;
     getline(std::cin, file);
     mainLibrary->writeLibraryToFile(file);
-    std::cout<<"All your activity has been saved to your files."<<std::endl;
+    std::cout<<"All your activity has been saved to your file."<<std::endl;
     std::cin.ignore();
     std::cout<<"Thank you for using the C++ DJ! "<<std::endl;
 }

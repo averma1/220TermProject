@@ -36,10 +36,11 @@ public:
     List<std::string>* readFile(std::string file);
     void createLibrary(std::string file);
     std::string printPlaylistInfo(std::string playlist);
-    void playPlaylist(std::string playlist);
+    std::string playPlaylist(std::string playlist);
     void removeDuplicatesongs(std::string file);
     void writeLibraryToFile(std::string file);
     void createLibrarySongs(std::string file);
+    void createLibraryPlaylists(std::string file);
 };
 
 #endif //FINAL_LIBRARY_H

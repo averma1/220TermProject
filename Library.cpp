@@ -478,7 +478,7 @@ std::string Library::printPlaylistInfo(std::string playlist){
     return playInfo;
 }
 
-void Library::playPlaylist(std::string playlist){
+std::string Library::playPlaylist(std::string playlist){
     int found=-1;
     std::string playInfo;
     for(int i=0; i<numOfPlaylists; i++){
@@ -489,7 +489,7 @@ void Library::playPlaylist(std::string playlist){
     }
     if(found!=-1){
         Playlist* currentPlay= playListList->getValueAt(found);
-        currentPlay->playNext();
+        return currentPlay->playNext();
     } else {
         throw std::invalid_argument("Playlist does not exist");
         playInfo="No playlist by that name in the Library";
@@ -532,5 +532,46 @@ void Library::writeLibraryToFile(std::string file){
         }
     }
 
+}
+
+void Library::createLibraryPlaylists(std::string file){
+    List<std::string>* all = readFile(file);
+
+    std::string delimiter = ",";
+    std::string death = all->getValueAt(0);
+    std::string token = all->getValueAt(2).substr(0, all->getValueAt(2).find(delimiter));
+    Playlist* playlist1=new Playlist(token);
+    playListList->insertAtEnd(playlist1);
+    numOfPlaylists++;
+
+    for(int i=3;i<length; i++){
+        if (all->getValueAt(i) != death) {
+            std::string str = all->getValueAt(i);
+            std::stringstream ss(str);
+            std::vector<std::string> result;
+
+            while (ss.good()) {
+                std::string substr;
+                getline(ss, substr, ',');
+                result.push_back(substr);
+            }
+
+            std::string artist = result.at(1);
+            std::string title = result.at(0);
+            double duration = std::stod(result.at(2));
+
+            Song *newsong = new Song(artist, title, duration);
+            playlist1->addSong(newsong);
+            songList->insertAtEnd(newsong);
+            numOfSongs++;
+
+        } else if (all->getValueAt(i) == death) {
+            i++;
+            token = all->getValueAt(i).substr(0, all->getValueAt(i).find(delimiter));
+            playlist1 = new Playlist(token);
+            playListList->insertAtEnd(playlist1);
+            numOfPlaylists++;
+        }
+    }
 }
 
