@@ -175,7 +175,7 @@ bool Library::isSongInplaylist(std::string songName, std::string artistName, std
  */
 void Library::createRandomPlaylist(int numbOfSongs, std::string playlistName){
     if(numbOfSongs>numOfSongs){
-        throw std::out_of_range("not enough songs in songlist");
+        throw std::invalid_argument("not enough songs in songlist");
     }
     for(int i=0;i<numOfPlaylists;i++){
         if(playlistName==playListList->getValueAt(i)->getName()){
@@ -503,10 +503,7 @@ std::string Library::playPlaylist(std::string playlist){
 void Library::writeLibraryToFile(std::string file){
     std::ofstream outf(file);
 
-    // If we couldn't open the output file stream for writing
-    if (!outf)
-    {
-        // Print an error and exit
+    if (!outf) {
         std::cerr << "Uh oh, Sample.dat could not be opened for writing!" << std::endl;
         exit(1);
     }
@@ -529,8 +526,10 @@ void Library::writeLibraryToFile(std::string file){
         outf << ",," << std::endl;
     }
     outf << "Songs,," << std::endl;
+
     for(int i=0;i<numOfSongs; i++){
         Song* current= songList->getValueAt(i);
+
         if(allSongs.find(current->getSongInfo())==-1) {
             outf << current->getSongInfo() << std::endl;
         }

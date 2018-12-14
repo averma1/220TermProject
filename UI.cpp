@@ -167,9 +167,6 @@ int main(){
             int length;
             std::cout<<"What is the name of the playlist you want to create? "<<std::endl;
             getline(std::cin, playlistName);
-            std::cout<<"How many songs long is it:"<<std::endl;
-            std::cin>>length;
-            std::cin.ignore();
             mainLibrary->createPlaylist(playlistName);
         }
 
@@ -235,10 +232,14 @@ int main(){
             int length;
             std::cout<<"What is the name of the playlist you want to create? "<<std::endl;
             getline(std::cin, playlist);
-            std::cout<<"How long is it in minutes? "<<std::endl;
+            std::cout<<"How many songs long is it? "<<std::endl;
             std::cin>>length;
             std::cin.ignore();
-            mainLibrary->createRandomPlaylist(length,playlist);
+            try {
+                mainLibrary->createRandomPlaylist(length, playlist);
+            } catch(std::invalid_argument e) {
+                std::cout<<"That Playlist already exists, or there are not enough songs. "<<std::endl;
+            }
         }
 
         if(choice != 14){
@@ -253,7 +254,6 @@ int main(){
     getline(std::cin, file);
     mainLibrary->writeLibraryToFile(file);
     std::cout<<"All your activity has been saved to your file."<<std::endl;
-    std::cin.ignore();
     std::cout<<"Thank you for using the C++ DJ! "<<std::endl;
 
 }
