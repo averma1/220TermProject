@@ -310,6 +310,15 @@ void createLibrarytest(){
                       "Songs: \n"
                       "Moss, me, 3.00\n"
                       "Song1, Artist1, 5.00",library->printPlaylistInfo("newPlaylist"));
+    library->removeSongToPlaylist("Song1","Artist1","newPlaylist");
+    printAssertEquals("Name: newPlaylist, Duration: 3.00\n"
+                      "Songs: \n"
+                      "Moss, me, 3.00",library->printPlaylistInfo("newPlaylist"));
+    library->addSongToPlaylist("Song1","Artist1", "newPlaylist");
+    printAssertEquals("Name: newPlaylist, Duration: 8.00\n"
+                      "Songs: \n"
+                      "Moss, me, 3.00\n"
+                      "Song1, Artist1, 5.00",library->printPlaylistInfo("newPlaylist"));
 
     try{
         library->printSongsByArtist("none");
@@ -320,7 +329,6 @@ void createLibrarytest(){
     }
     printAssertEquals("Moss",library->printSongsByArtist("me"));
     library->addSongToList("Kate", "me", 1);
-    //std::cout<<"not working"<<std::endl;
     printAssertEquals("Kate, Moss",library->printSongsByArtist("me"));
 
     try{
