@@ -310,6 +310,15 @@ void createLibrarytest(){
                       "Songs: \n"
                       "Moss, me, 3.00\n"
                       "Song1, Artist1, 5.00",library->printPlaylistInfo("newPlaylist"));
+    library->removeSongToPlaylist("Song1","Artist1","newPlaylist");
+    printAssertEquals("Name: newPlaylist, Duration: 3.00\n"
+                      "Songs: \n"
+                      "Moss, me, 3.00",library->printPlaylistInfo("newPlaylist"));
+    library->addSongToPlaylist("Song1","Artist1", "newPlaylist");
+    printAssertEquals("Name: newPlaylist, Duration: 8.00\n"
+                      "Songs: \n"
+                      "Moss, me, 3.00\n"
+                      "Song1, Artist1, 5.00",library->printPlaylistInfo("newPlaylist"));
 
     try{
         library->printSongsByArtist("none");
@@ -320,7 +329,6 @@ void createLibrarytest(){
     }
     printAssertEquals("Moss",library->printSongsByArtist("me"));
     library->addSongToList("Kate", "me", 1);
-    //std::cout<<"not working"<<std::endl;
     printAssertEquals("Kate, Moss",library->printSongsByArtist("me"));
 
     try{
@@ -353,8 +361,20 @@ void createLibrarytest(){
     library->addSongToList("songNone", "singer", 3);
 
     printAssertEquals(false,library->isSongInplaylist("songNone", "singer", "newPlaylist"));
+    library->addSongToPlaylist("songNone","singer","newPlaylist");
+    printAssertEquals(true,library->isSongInplaylist("songNone","singer","newPlaylist"));
 
     library->createRandomPlaylist(3, "rand1");
+    std::cout<<library->printPlaylistInfo("rand1")<<std::endl;
+    library->createRandomPlaylist(3,"rand2");
+    std::cout<<library->printPlaylistInfo("rand2")<<std::endl;
+    library->createRandomPlaylist(1, "rand3");
+    std::cout<<library->printPlaylistInfo("rand3")<<std::endl;
+    library->createRandomPlaylist(0, "rand4");
+    printAssertEquals("Name: rand4, Duration: 0.00\n"
+                      "Songs: \n"
+                      "No songs in a playlist",library->printPlaylistInfo("rand4"));
+
 
 
 }
