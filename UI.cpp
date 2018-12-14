@@ -26,12 +26,15 @@ int main(){
     std::cout<<"    12) Play Playlist"<<std::endl;
     std::cout<<"    13) Create Random Playlist"<<std::endl;
     std::cout<<"    14) Leave DJ"<<std::endl;
+
+    int choice = 0;
+
     std::cout<<"Please choose a command by entering a number: "<<std::endl;
+    std::cin>>choice;
+    std::cin.ignore();
 
-    int choice;
-
-    while(choice!=14) {
-
+    while(choice != 14){
+        choice = 0;
         std::cin>>choice;
         std::cin.ignore();
 
@@ -50,10 +53,16 @@ int main(){
             std::cout<<"    12) Play Playlist"<<std::endl;
             std::cout<<"    13) Create Random Playlist"<<std::endl;
             std::cout<<"    14) Leave DJ"<<std::endl;
+
         }
 
         else if (choice == 2) {
-            std::cout<<mainLibrary->libraryString()<<std::endl;
+            try {
+                std::cout << mainLibrary->libraryString() << std::endl;
+            }
+            catch(std::invalid_argument& e){
+                std::cout<<"Sorry, an error occured. Please try again. "<<std::endl;
+            }
         }
 
         else if (choice == 3) {
@@ -63,7 +72,7 @@ int main(){
             try {
                 std::cout << mainLibrary->printSongsByArtist(artist) << std::endl;
             } catch (std::invalid_argument e){
-                std::cout<<"Sorry, that artist's song is not in the library. "<<std::endl;
+                std::cout<<"Sorry, that artist's songs are not in the library. "<<std::endl;
             }
         }
 
@@ -115,7 +124,7 @@ int main(){
 
         }
 
-        else if(choice==6){
+        else if(choice == 6){
             std::string file;
             std::cout<<"What is the name of the file you want to import for removal? "<<std::endl;
             getline(std::cin, file);
@@ -166,8 +175,7 @@ int main(){
             try {
                 mainLibrary->addSongToPlaylist(song, artist, playlist);
             } catch (std::invalid_argument& e) {
-                std::cout<<"Sorry, that playlist doesn't exist. "<<std::endl;
-                std::cout<<"Please choose another playlist to add to. "<<std::endl;
+                std::cout<<"Sorry, an error occurred. "<<std::endl;
             }
         }
 
@@ -209,18 +217,22 @@ int main(){
             int length;
             std::cout<<"What is the name of the playlist you want to create? "<<std::endl;
             getline(std::cin, playlist);
-            std::cout<<"How many long is it in minutes? "<<std::endl;
+            std::cout<<"How long is it in minutes? "<<std::endl;
             std::cin>>length;
             std::cin.ignore();
             mainLibrary->createRandomPlaylist(length,playlist);
         }
 
-        if(choice!=14) {
-            std::cout << "What would you like to do next? " << std::endl;
+        if(choice != 14){
+            choice = 0;
+            std::cout<<"Sorry, that's not an option. Please enter in another command."<<std::endl;
+            std::cin>>choice;
+            std::cin.ignore();
         }
-        std::cin.ignore();
+
 
     }
+
     std::string file;
     std::cout<<"What is the name of the file you want to save your library too "<<std::endl;
     getline(std::cin, file);
@@ -228,5 +240,6 @@ int main(){
     std::cout<<"All your activity has been saved to your file."<<std::endl;
     std::cin.ignore();
     std::cout<<"Thank you for using the C++ DJ! "<<std::endl;
+
 }
 
