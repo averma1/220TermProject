@@ -41,6 +41,7 @@ public:
     void writeLibraryToFile(std::string file);
     void createLibrarySongs(std::string file);
     void createLibraryPlaylists(std::string file);
+    int checkInput();
 };
 
 #endif //FINAL_LIBRARY_H

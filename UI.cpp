@@ -27,17 +27,27 @@ int main(){
     std::cout<<"    13) Create Random Playlist"<<std::endl;
     std::cout<<"    14) Leave DJ"<<std::endl;
 
+
     int choice = 0;
 
     std::cout<<"Please choose a command by entering a number: "<<std::endl;
-    std::cin>>choice;
-    std::cin.ignore();
+
 
     while(choice != 14){
-        choice = 0;
         std::cin>>choice;
-        std::cin.ignore();
+        //std::cin.ignore();
 
+        int fail=0;
+        while(1) {
+            if (std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore();
+                std::cout << "PLEASE do not enter letters. Try again:" << std::endl;
+                std::cin>>choice;
+            } if(!std::cin.fail()){
+                break;
+            }
+        }
         if (choice == 1) {
             std::cout<<"    1) Help (show this list again)"<<std::endl;
             std::cout<<"    2) Print Library of Songs"<<std::endl;
@@ -224,10 +234,7 @@ int main(){
         }
 
         if(choice != 14){
-            choice = 0;
-            std::cout<<"Sorry, that's not an option. Please enter in another command."<<std::endl;
-            std::cin>>choice;
-            std::cin.ignore();
+            std::cout<<"Enter next choice:"<<std::endl;
         }
 
 
