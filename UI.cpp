@@ -6,7 +6,6 @@
 #include <stdio.h>
 
 //anythign that throws an exception: print out whaz going on
-//also: finish the write files
 //test readfiles
 
 int main(){
@@ -33,7 +32,8 @@ int main(){
 
     while(choice!=14) {
 
-        getline(std::cin, choice);
+        std::cin>>choice;
+        std::cin.ignore();
 
         if (choice == 1) {
             std::cout<<"    1) Help (show this list again)"<<std::endl;
@@ -210,6 +210,7 @@ int main(){
         if(choice!=14) {
             std::cout << "What would you like to do next? " << std::endl;
         }
+        std::cin.ignore();
 
     }
     std::string file;
@@ -217,7 +218,7 @@ int main(){
     getline(std::cin, file);
     mainLibrary->writeLibraryToFile(file);
     std::cout<<"All your activity has been saved to your file."<<std::endl;
-
+    std::cin.ignore();
     std::cout<<"Thank you for using the C++ DJ! "<<std::endl;
 }
 
