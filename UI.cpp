@@ -209,6 +209,8 @@ int main(){
 
         if(choice!=14) {
             std::cout << "What would you like to do next? " << std::endl;
+            std::cin>>choice;
+            std::cin.ignore();
         }
         std::cin.ignore();
 
