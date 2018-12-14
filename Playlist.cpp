@@ -85,6 +85,10 @@ double Playlist::getDuration() {
     return duration;
 }
 
+int Playlist::getNumberOfSongs(){
+    return numberOfSongs;
+}
+
 std::string Playlist::getSongList(){
     if (numberOfSongs==0){
         return "No songs in a playlist";
