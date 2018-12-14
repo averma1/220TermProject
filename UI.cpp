@@ -10,6 +10,7 @@
 
 int main(){
     Library* mainLibrary= new Library;
+    mainLibrary->createLibrary("Sample.csv");
 
     std::cout<<"Welcome to the C++ DJ!"<<std::endl;
     std::cout<<"    1) Help (show this list again)"<<std::endl;
@@ -35,7 +36,7 @@ int main(){
 
     while(choice != 14){
         std::cin>>choice;
-        //std::cin.ignore();
+        std::cin.ignore();
 
         int fail=0;
         while(1) {
@@ -211,14 +212,21 @@ int main(){
             std::cout<<"What is the name of the playlist you want to play:"<<std::endl;
             getline(std::cin, playlist);
             try {
+                std::cout<<"Songs Played:"<<std::endl;
                 std::cout<<mainLibrary->playPlaylist(playlist)<<std::endl;
             } catch (std::invalid_argument& e) {
                 std::cout<<"Sorry, that playlist doesn't exist. "<<std::endl;
             }
+            std::cout<<"Would you like to play next? "<<std::endl;
+            getline(std::cin, contin);
+
             while(contin != "no" || contin != "No"){
-                std::cout<<mainLibrary->playPlaylist(playlist)<<std::endl;
-                std::cout<<"Would you like to play next? "<<std::endl;
+                std::cout << mainLibrary->playPlaylist(playlist) << std::endl;
+                std::cout << "Would you like to play next? " << std::endl;
                 getline(std::cin, contin);
+                if(contin == "no" || contin == "No"){
+                    break;
+                }
             }
         }
 

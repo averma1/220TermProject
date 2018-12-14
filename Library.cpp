@@ -321,7 +321,7 @@ void Library::createLibrarySongs(std::string file) {
 void Library::createLibrary(std::string file){
     List<std::string>* all = readFile(file);
 
-    std::string song="Songs,,\r";
+    std::string song="Songs,,";
     int count=-1;
     for(int i= 0; i<length; i++){
         if(all->getValueAt(i)==song){
@@ -487,11 +487,15 @@ std::string Library::playPlaylist(std::string playlist){
             found=i;
         }
     }
-    if(found!=-1){
-        Playlist* currentPlay= playListList->getValueAt(found);
-        return currentPlay->playNext();
+    if(found!=-1) {
+        try {
+            Playlist *currentPlay = playListList->getValueAt(found);
+            return currentPlay->playNext();
+        } catch (std::out_of_range& e) {
+            return "Playlist does not exist";
+        }
     } else {
-        throw std::invalid_argument("Playlist does not exist");
+        return "Playlist does not exist";
         playInfo="No playlist by that name in the Library";
     }
 }
