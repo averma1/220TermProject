@@ -201,7 +201,7 @@ int main(){
             int length;
             std::cout<<"What is the name of the playlist you want to create? "<<std::endl;
             getline(std::cin, playlist);
-            std::cout<<"How many songs long is it? "<<std::endl;
+            std::cout<<"How many long is it in minutes? "<<std::endl;
             std::cin>>length;
             std::cin.ignore();
             mainLibrary->createRandomPlaylist(length,playlist);
@@ -217,7 +217,7 @@ int main(){
     std::cout<<"What is the name of the file you want to save your library too "<<std::endl;
     getline(std::cin, file);
     mainLibrary->writeLibraryToFile(file);
-    std::cout<<"All your activity has been saved to your files."<<std::endl;
+    std::cout<<"All your activity has been saved to your file."<<std::endl;
     std::cin.ignore();
     std::cout<<"Thank you for using the C++ DJ! "<<std::endl;
 }
