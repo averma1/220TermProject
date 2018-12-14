@@ -55,12 +55,19 @@ void Playlist::addSong(Song* songToAdd){
 
 
 std::string Playlist::playNext(){
-    numberOfSongs--;
-    duration-=songList->getValueAt(0)->getDuration();
-    Song*songPlayed= songList->removeValueAtFront();
-    songPlayed->addToPlayCount();
-    std::string songInfo=songList->getValueAt(0)->getName()+','+songList->getValueAt(0)->getArtist()+','+std::to_string(songList->getValueAt(0)->getDuration())+','+std::to_string(songList->getValueAt(0)->getPlayCount());
-    return songInfo;
+    if (numberOfSongs==0){
+        throw std::out_of_range("No more songs in the playlist");
+    }
+    else {
+        numberOfSongs--;
+        duration -= songList->getValueAt(0)->getDuration();
+        Song *songPlayed = songList->removeValueAtFront();
+        songPlayed->addToPlayCount();
+        std::string songInfo = songList->getValueAt(0)->getName() + ',' + songList->getValueAt(0)->getArtist() + ',' +
+                               std::to_string(songList->getValueAt(0)->getDuration()) + ',' +
+                               std::to_string(songList->getValueAt(0)->getPlayCount());
+        return songInfo;
+    }
 }
 
 void Playlist::removeSong(Song* songToRemove){
@@ -85,6 +92,10 @@ double Playlist::getDuration() {
     return duration;
 }
 
+int Playlist::getNumberOfSongs(){
+    return numberOfSongs;
+}
+
 std::string Playlist::getSongList(){
     if (numberOfSongs==0){
         return "No songs in a playlist";
@@ -100,7 +111,7 @@ std::string Playlist::getSongList(){
                 std::string rounded_duration = std::to_string(duration);
                 int decimal_pos = rounded_duration.find('.');
                 rounded_duration = rounded_duration.substr(0, decimal_pos+3);
-                stringArray = stringArray + nameSong + "," + artist + "," + rounded_duration;
+                stringArray = stringArray + nameSong + ", " + artist + ", " + rounded_duration;
             } else {
                 std::string nameSong = songList->getValueAt(temp)->getName();
                 std::string artist = songList->getValueAt(temp)->getArtist();
@@ -108,7 +119,7 @@ std::string Playlist::getSongList(){
                 std::string rounded_duration = std::to_string(duration);
                 int decimal_pos = rounded_duration.find('.');
                 rounded_duration = rounded_duration.substr(0, decimal_pos+3);
-                stringArray = stringArray + "\n" + nameSong + "," + artist + "," + rounded_duration;
+                stringArray = stringArray + "\n" + nameSong + ", " + artist + ", " + rounded_duration;
             }
             temp++;
         }

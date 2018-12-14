@@ -32,7 +32,7 @@ public:
     std::string getName();
     double getDuration();
     std::string getSongList();
-
+    int getNumberOfSongs();
 
 
 
