@@ -82,6 +82,7 @@ void createSongAndPlaylistTest(){
 
     playlist1->addSong(song2);
     printAssertEqualsDouble(33.333340,playlist1->getDuration());
+    playlist1->removeSong(song2);
 
     playlist1->rename("newName");
     printAssertEquals("newName", playlist1->getName());
@@ -89,11 +90,18 @@ void createSongAndPlaylistTest(){
     Playlist* playlist3=new Playlist("playlist3");
     printAssertEquals("No songs in a playlist", playlist3->getSongList());
 
-    printAssertEquals("{}",playlist1->getSongList());
+
     playlist1->addSong(song1);
-    printAssertEquals("{, title1}",playlist1->getSongList());
-    playlist1->playNext();
-    printAssertEquals("{title1}",playlist1->getSongList());
+    printAssertEquals("title1, name1, 2.00",playlist1->getSongList());
+    try{
+        playlist1->playNext();
+        std::cout << "FAIL:did not throw exception" << std::endl;
+    }
+    catch(std::out_of_range& e){
+        std::cout<<("pass")<<std::endl;
+    }
+
+    printAssertEquals("title1, name1, 2.00",playlist1->getSongList());
 
 }
 
