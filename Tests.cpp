@@ -353,6 +353,8 @@ void createLibrarytest(){
     library->addSongToList("songNone", "singer", 3);
 
     printAssertEquals(false,library->isSongInplaylist("songNone", "singer", "newPlaylist"));
+    library->addSongToPlaylist("songNone","singer","newPlaylist");
+    printAssertEquals(true,library->isSongInplaylist("songNone","singer","newPlaylist"));
 
     library->createRandomPlaylist(3, "rand1");
     std::cout<<library->printPlaylistInfo("rand1")<<std::endl;
