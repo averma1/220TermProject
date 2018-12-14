@@ -32,13 +32,7 @@ std::ofstream writeLibraryToFile(){
 
 int main(){
     Library* mainLibrary= new Library;
-    mainLibrary->createLibrary("Sample.csv");
-    if(mainLibrary->isSonginList("Wounded Healer", "Watsky")){
-        std::cout<<"yes"<<std::endl;
-    } else {
-        std::cout<<"no"<<std::endl;
-    }
-    mainLibrary->writeLibraryToFile("SampleNew.csv");
+    mainLibrary->createLibrarySongs("SongsDU.csv");
     std::cout<<"done"<<std::endl;
 
     return 0;
