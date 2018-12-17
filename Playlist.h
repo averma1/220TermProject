@@ -34,8 +34,7 @@ public:
     double getDuration();
     std::string getSongList();
     int getNumberOfSongs();
-
-
+    std::string getSongListForFile();
 
 };
 

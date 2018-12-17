@@ -25,6 +25,7 @@ public:
     int getPlayCount();
     double getDuration();
     std::string getSongInfo();
+    std::string getSongInfoForFile();
 };
 
 

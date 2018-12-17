@@ -513,7 +513,7 @@ void Library::writeLibraryToFile(std::string file){
         name+=",,";
         outf << name << std::endl;
         Playlist* current= playListList->getValueAt(i);
-        songs=current->getSongList();
+        songs=current->getSongListForFile();
         if(i>0){
             allSongs+="\n";
         }
@@ -526,8 +526,8 @@ void Library::writeLibraryToFile(std::string file){
     for(int i=0;i<numOfSongs; i++){
         Song* current= songList->getValueAt(i);
 
-        if(allSongs.find(current->getSongInfo())==-1) {
-            outf << current->getSongInfo() << std::endl;
+        if(allSongs.find(current->getSongInfoForFile())==-1) {
+            outf << current->getSongInfoForFile() << std::endl;
         }
     }
 
