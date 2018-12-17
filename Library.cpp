@@ -339,8 +339,9 @@ void Library::createLibrarySongs(std::string file) {
         std::string title = result.at(0);
         double duration = std::stod(result.at(2));
 
-
-        addSongToList(title,artist,duration);
+        if(!isSonginList(title,artist)){
+            addSongToList(title, artist, duration);
+        }
     }
 }
 

@@ -1,5 +1,6 @@
 //
 // Created by Toby Dragon on 10/30/18.
+//Header file for the LinkedList implementation of the List class
 //
 
 #ifndef LAB8SOLN_LINKEDLIST_H

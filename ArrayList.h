@@ -1,5 +1,6 @@
 //
 // Created by Toby Dragon on 9/30/16.
+//Header file for the ArrayList implementation of List
 //
 
 #ifndef COMP220_ARRAYLIST_H

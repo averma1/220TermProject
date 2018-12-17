@@ -1,5 +1,6 @@
 //
 // Created by Anika on 11/20/18.
+// Purpose: Store all information about songs and what can be done with/to them
 //
 
 #include "Song.h"

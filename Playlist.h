@@ -1,5 +1,6 @@
 //
 // Created by Molly on 11/23/2018.
+// Purpose: Store all information about playlists and what can be done with/to them
 //
 
 #ifndef TERMPROJECT_PLAYLIST_H

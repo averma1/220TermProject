@@ -1,5 +1,7 @@
 //
 // Created by Aine on 10/16/2018.
+//Templated implementation of the ArrayList class of type List
+//Used to implement songList and playlistList in the Library class
 //
 
 #include <iostream>
