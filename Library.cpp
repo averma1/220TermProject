@@ -1,5 +1,6 @@
 //
 // Created by Aine on 11/23/2018.
+//Implementation of the Library class that contains the list of songs and playlists, and functions that are used by the UI
 //
 #include "Library.h"
 #include "ArrayList.h"
@@ -24,9 +25,43 @@ Library::Library(){
 }
 
 Library::~Library(){
-    delete[] playListList;
-    delete[] songList;
+    delete playListList;
+    delete songList;
 }
+
+Library::Library(const Library &libraryToCopy){
+    numOfSongs=libraryToCopy.numOfSongs;
+    numOfPlaylists=libraryToCopy.numOfPlaylists;
+    length=libraryToCopy.length;
+    playListList=new ArrayList<Playlist*>(numOfPlaylists);
+    for(int i=0;i<numOfPlaylists;i++){
+        playListList->insertAtEnd(libraryToCopy.playListList->getValueAt(i));
+    }
+    songList=new ArrayList<Song*>(numOfSongs);
+    for(int i=0;i<numOfSongs;i++){
+        songList->insertAtEnd(libraryToCopy.songList->getValueAt(i));
+    }
+}
+
+Library &Library::operator=(const Library* & libraryToCopy){
+    if(this!=libraryToCopy){
+        delete playListList;
+        delete songList;
+        numOfSongs=libraryToCopy->numOfSongs;
+        numOfPlaylists=libraryToCopy->numOfPlaylists;
+        length=libraryToCopy->length;
+        playListList=new ArrayList<Playlist*>(numOfPlaylists);
+        for(int i=0;i<numOfPlaylists;i++){
+            playListList->insertAtEnd(libraryToCopy->playListList->getValueAt(i));
+        }
+        songList=new ArrayList<Song*>(numOfSongs);
+        for(int i=0;i<numOfSongs;i++){
+            songList->insertAtEnd(libraryToCopy->songList->getValueAt(i));
+        }
+    }
+    return *this;
+}
+
 
 void Library::addSongToList(std::string songName, std::string artist, double duration){
     if(isSonginList(songName,artist)){
