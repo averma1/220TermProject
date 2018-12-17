@@ -10,7 +10,7 @@
 
 int main(){
     Library* mainLibrary= new Library;
-    mainLibrary->createLibrary("Sample.csv");
+    //mainLibrary->createLibrary("Sample.csv");
 
     std::cout<<"Welcome to the C++ DJ!"<<std::endl;
     std::cout<<"    1) Help (show this list again)"<<std::endl;
