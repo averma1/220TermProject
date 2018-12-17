@@ -312,9 +312,7 @@ void Library::createLibrarySongs(std::string file) {
         double duration = std::stod(result.at(2));
 
 
-        Song *newsong = new Song(artist, title, duration);
-        songList->insertAtEnd(newsong);
-        numOfSongs++;
+        addSongToList(title,artist,duration);
     }
 }
 
@@ -354,8 +352,7 @@ void Library::createLibrary(std::string file){
 
             Song *newsong = new Song(artist, title, duration);
             playlist1->addSong(newsong);
-            songList->insertAtEnd(newsong);
-            numOfSongs++;
+            addSongToList(title,artist,duration);
 
         } else if (all->getValueAt(i) == death) {
             i++;
@@ -381,9 +378,7 @@ void Library::createLibrary(std::string file){
         double duration = std::stod(result.at(2));
 
 
-        Song *newsong = new Song(artist, title, duration);
-        songList->insertAtEnd(newsong);
-        numOfSongs++;
+        addSongToList(title,artist,duration);
     }
 }
 
