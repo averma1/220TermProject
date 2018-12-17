@@ -1,5 +1,6 @@
 //
 // Created by Molly on 11/23/2018.
+// Purpose: Store all information about songs and what can be done with/to them
 //
 
 #include "Playlist.h"

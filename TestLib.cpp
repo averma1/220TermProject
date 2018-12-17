@@ -1,5 +1,6 @@
 //
 // Created by Toby Dragon on 9/4/18.
+// Purpose: functions to print if two thing are equal for every type
 //
 #include <iostream>
 #include "TestLib.h"

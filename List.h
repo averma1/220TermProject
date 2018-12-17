@@ -1,5 +1,6 @@
 //
 // Created by Toby Dragon on 9/30/16.
+// Purpose: an ADT to store the basic functions for both array lists and linked lists
 //
 
 #ifndef COMP220_LIST_H
