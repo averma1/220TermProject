@@ -1,5 +1,6 @@
 //
 // Created by Toby Dragon on 10/24/16.
+//Header file for the LinkedNode class, used to implement the LinkedList class
 //
 
 #ifndef LINKEDNODE_H

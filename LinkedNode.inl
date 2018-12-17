@@ -1,5 +1,6 @@
 //
 // Created by Toby Dragon on 10/17/17.
+//Templated implementation of the LinkedNode class, used to implement the LinkedList class
 //
 #include "LinkedNode.h"
 #include "Song.h"

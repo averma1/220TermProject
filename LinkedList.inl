@@ -1,5 +1,7 @@
 //
-// Created by Toby Dragon on 10/30/18.
+// Created by Molly on 10/30/18.
+//Templated implementation of the LinkedList class of type List
+//Used to implement songList in the Playlist class
 //
 
 #include "LinkedList.h"
