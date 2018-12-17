@@ -211,7 +211,9 @@ void Library::createRandomPlaylist(int playDuration, std::string playlistName){
             randInt= genRandInt(0,numOfSongs-1);
             randSong= songList->getValueAt(randInt);
         }
-        addSongToPlaylist(randSong->getName(),randSong->getArtist(), playlistName);
+        if (durationOfSongList-randSong->getDuration()>=0) {
+            addSongToPlaylist(randSong->getName(), randSong->getArtist(), playlistName);
+        }
     }
     while (samePlaylists(playlistName)){
         newPlaylist->playNext();
