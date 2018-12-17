@@ -1,12 +1,12 @@
 //
 // Created by Aine on 12/9/2018.
 //
+
+
 #include "iostream"
 #include "Library.h"
 #include <stdio.h>
 
-//anythign that throws an exception: print out whaz going on
-//test readfiles
 
 int main(){
     Library* mainLibrary= new Library;
