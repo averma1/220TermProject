@@ -33,7 +33,7 @@ Playlist::Playlist(const Playlist& playlistToCopy){
     duration=playlistToCopy.duration;
     songList=playlistToCopy.songList;
 }
-Playlist& Playlist:: operator=(Playlist* playlistToCopy){
+Playlist& Playlist:: operator=(const Playlist* playlistToCopy){
     if(this != playlistToCopy){
         delete songList;
         songList=nullptr;
@@ -131,4 +131,36 @@ std::string Playlist::getSongList(){
         return stringArray;
     }
     
+}
+
+std::string Playlist::getSongListForFile(){
+    if (numberOfSongs==0){
+        return "No songs in a playlist";
+    }
+    else {
+        std::string stringArray = "";
+        int temp = 0;
+        while (temp != numberOfSongs) {
+            if(temp==0){
+                std::string nameSong = songList->getValueAt(temp)->getName();
+                std::string artist = songList->getValueAt(temp)->getArtist();
+                double duration = songList->getValueAt(temp)->getDuration();
+                std::string rounded_duration = std::to_string(duration);
+                int decimal_pos = rounded_duration.find('.');
+                rounded_duration = rounded_duration.substr(0, decimal_pos+3);
+                stringArray = stringArray + nameSong + "," + artist + "," + rounded_duration;
+            } else {
+                std::string nameSong = songList->getValueAt(temp)->getName();
+                std::string artist = songList->getValueAt(temp)->getArtist();
+                double duration = songList->getValueAt(temp)->getDuration();
+                std::string rounded_duration = std::to_string(duration);
+                int decimal_pos = rounded_duration.find('.');
+                rounded_duration = rounded_duration.substr(0, decimal_pos+3);
+                stringArray = stringArray + "\n" + nameSong + "," + artist + "," + rounded_duration;
+            }
+            temp++;
+        }
+        return stringArray;
+    }
+
 }
