@@ -11,7 +11,7 @@
 
 int main(){
     Library* mainLibrary= new Library;
-    mainLibrary->createLibrary("SampleNew.csv");
+    mainLibrary->createLibrary("Sample.csv");
 
     std::cout<<"Welcome to the C++ DJ!"<<std::endl;
     std::cout<<"    1) Help (show this list again)"<<std::endl;
@@ -232,7 +232,7 @@ int main(){
             int length;
             std::cout<<"What is the name of the playlist you want to create? "<<std::endl;
             getline(std::cin, playlist);
-            std::cout<<"How many songs long is it? "<<std::endl;
+            std::cout<<"How many minutes long should it be? "<<std::endl;
             std::cin>>length;
             std::cin.ignore();
             try {
@@ -249,10 +249,10 @@ int main(){
 
     }
 
-    std::string file;
-    std::cout<<"What is the name of the file you want to save your library to? "<<std::endl;
-    getline(std::cin, file);
-    mainLibrary->writeLibraryToFile(file);
+//    std::string file;
+//    std::cout<<"What is the name of the file you want to save your library to? "<<std::endl;
+//    getline(std::cin, file);
+    mainLibrary->writeLibraryToFile("SampleNew.csv");
     std::cout<<"All your activity has been saved to your file."<<std::endl;
     std::cout<<"Thank you for using the C++ DJ! "<<std::endl;
 

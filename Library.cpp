@@ -203,16 +203,13 @@ bool Library::isSongInplaylist(std::string songName, std::string artistName, std
     }
 };
 
-bool Library::samePlaylists(std::string playlistName){
-    Playlist* newPlaylist=playListList->getValueAt(numOfPlaylists-1);
-    for (int i=0; i<numOfPlaylists; i++){
-        if (newPlaylist->getDuration()==numOfPlaylists){
-            for (int j=0; j<newPlaylist->getNumberOfSongs(); i++){
-                if(newPlaylist->getSongList()==playListList->getValueAt(i)->getSongList() ){
-                    return false;
-                }
+bool Library::samePlaylists(Playlist* playlistName){
+    for (int i=0; i<numOfPlaylists-1; i++){
+        Playlist* currentPlaylist=playListList->getValueAt(i);
+        if (currentPlaylist->getDuration()==playlistName->getDuration()){
+            if(currentPlaylist->getSongList()!=playlistName->getSongList() ){
+                return false;
             }
-
         }
     }
     return true;
@@ -236,30 +233,31 @@ void Library::createRandomPlaylist(int playDuration, std::string playlistName){
             throw std::invalid_argument("Playlist already exists");
         }
     }
+
     Playlist* newPlaylist= new Playlist(playlistName);
     playListList->insertAtEnd(newPlaylist);
     numOfPlaylists++;
-    while(playDuration<=newPlaylist->getDuration()){
+    while(newPlaylist->getDuration()<playDuration){
         int randInt= genRandInt(0,numOfSongs-1);
         Song* randSong= songList->getValueAt(randInt);
         while(this->isSongInplaylist(randSong->getName(), randSong->getArtist(),playlistName)){
             randInt= genRandInt(0,numOfSongs-1);
             randSong= songList->getValueAt(randInt);
         }
-        if (durationOfSongList-randSong->getDuration()>=0) {
-            addSongToPlaylist(randSong->getName(), randSong->getArtist(), playlistName);
-        }
+        newPlaylist->addSong(randSong);
     }
-    while (samePlaylists(playlistName)){
-        newPlaylist->playNext();
-        int randInt= genRandInt(0,numOfSongs-1);
-        Song* randSong= songList->getValueAt(randInt);
-        while(this->isSongInplaylist(randSong->getName(), randSong->getArtist(),playlistName)){
-            randInt= genRandInt(0,numOfSongs-1);
-            randSong= songList->getValueAt(randInt);
-        }
-        addSongToPlaylist(randSong->getName(),randSong->getArtist(), playlistName);
-    }
+//    while (samePlaylists(newPlaylist)){
+//        int randInt= genRandInt(0,numOfSongs-1);
+//        Song* randSong= songList->getValueAt(randInt);
+//        while(this->isSongInplaylist(randSong->getName(), randSong->getArtist(),playlistName)){
+//            randInt= genRandInt(0,numOfSongs-1);
+//            randSong= songList->getValueAt(randInt);
+//        }
+//        if (durationOfSongList-randSong->getDuration()>=0) {
+//            addSongToPlaylist(randSong->getName(), randSong->getArtist(), playlistName);
+//        }
+    //}
+
 }
 
 void Library::removeSongToPlaylist(std::string songName,std::string artistName, std::string playlistName){
@@ -385,7 +383,7 @@ void Library::createLibrarySongs(std::string file) {
 void Library::createLibrary(std::string file){
     List<std::string>* all = readFile(file);
 
-    std::string song="Songs,,\r";
+    std::string song="Songs,,";
     int count=-1;
     for(int i= 0; i<length; i++){
         if(all->getValueAt(i)==song){

@@ -31,7 +31,7 @@ public:
     bool isSonginList(std::string songName,std::string artistName);
     bool isSongInplaylist(std::string songName, std::string artistName, std::string playlistName);
     void removeSongToPlaylist(std::string songName,std::string artistName,std::string playlistName);
-    bool samePlaylists(std::string playlistName);
+    bool samePlaylists(Playlist* playlistName);
     std::string printPlaylists();
     std::string libraryString();
     std::string printSongsByArtist(std::string artist);
@@ -44,7 +44,6 @@ public:
     void writeLibraryToFile(std::string file);
     void createLibrarySongs(std::string file);
     void createLibraryPlaylists(std::string file);
-    int checkInput();
 };
 
 #endif //FINAL_LIBRARY_H
