@@ -1,5 +1,6 @@
 //
 // Created by Aine on 11/23/2018.
+//Header file for the Library class
 //
 
 #ifndef FINAL_LIBRARY_H
@@ -20,7 +21,8 @@ private:
 public:
     Library();
     ~Library();
-
+    Library(const Library & libraryToCopy);
+    Library &operator=(const Library* & libraryToCopy);
     void addSongToList(std::string songName, std::string artist, double duration);
     void addSongToPlaylist(std::string songName, std::string artistName, std::string playlistName);
     void createPlaylist(std::string playlistName);
@@ -29,6 +31,7 @@ public:
     bool isSonginList(std::string songName,std::string artistName);
     bool isSongInplaylist(std::string songName, std::string artistName, std::string playlistName);
     void removeSongToPlaylist(std::string songName,std::string artistName,std::string playlistName);
+    bool samePlaylists(std::string playlistName);
     std::string printPlaylists();
     std::string libraryString();
     std::string printSongsByArtist(std::string artist);

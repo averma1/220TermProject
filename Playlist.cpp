@@ -33,7 +33,7 @@ Playlist::Playlist(const Playlist& playlistToCopy){
     duration=playlistToCopy.duration;
     songList=playlistToCopy.songList;
 }
-Playlist& Playlist:: operator=(Playlist* playlistToCopy){
+Playlist& Playlist:: operator=(const Playlist* playlistToCopy){
     if(this != playlistToCopy){
         delete songList;
         songList=nullptr;
