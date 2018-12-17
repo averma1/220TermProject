@@ -29,14 +29,13 @@ int main(){
     std::cout<<"    14) Leave DJ"<<std::endl;
 
 
-    int choice = 0;
+    std::string choice = "0";
 
     std::cout<<"Please choose a command by entering a number: "<<std::endl;
 
 
-    while(choice != 14){
-        std::cin>>choice;
-        std::cin.ignore();
+    while(choice != "14"){
+        getline(std::cin, choice);
 
         int fail=0;
         while(1) {
@@ -49,7 +48,7 @@ int main(){
                 break;
             }
         }
-        if (choice == 1) {
+        if (choice == "1") {
             std::cout<<"    1) Help (show this list again)"<<std::endl;
             std::cout<<"    2) Print Library of Songs"<<std::endl;
             std::cout<<"    3) Show Songs by Artist"<<std::endl;
@@ -67,7 +66,7 @@ int main(){
 
         }
 
-        else if (choice == 2) {
+        else if (choice == "2") {
             try {
                 std::cout << mainLibrary->libraryString() << std::endl;
             }
@@ -76,7 +75,7 @@ int main(){
             }
         }
 
-        else if (choice == 3) {
+        else if (choice == "3") {
             std::string artist;
             std::cout<<"What artist's songs would you like to see? "<<std::endl;
             getline(std::cin, artist);
@@ -87,7 +86,7 @@ int main(){
             }
         }
 
-        else if (choice == 4) {
+        else if (choice == "4") {
             std::string song;
             std::string artist;
             std::cout<<"What song's info do you want to see? Please enter the song, then the artist name:"<<std::endl;
@@ -100,7 +99,7 @@ int main(){
             }
         }
 
-        else if (choice == 5) {
+        else if (choice == "5") {
             std::string file;
             std::string option;
             std::cout<<"What is the name of the file you want to import? "<<std::endl;
@@ -135,7 +134,7 @@ int main(){
 
         }
 
-        else if(choice == 6){
+        else if(choice == "6"){
             std::string file;
             std::cout<<"What is the name of the file you want to import for removal? "<<std::endl;
             getline(std::cin, file);
@@ -147,11 +146,11 @@ int main(){
 
         }
 
-        else if (choice == 7) {
+        else if (choice == "7") {
             std::cout<<mainLibrary->printPlaylists()<<std::endl;
         }
 
-        else if (choice == 8) {
+        else if (choice == "8") {
             std::string playlist;
             std::cout<<"What is the name of the playlist you want information on? "<<std::endl;
             getline(std::cin, playlist);
@@ -162,7 +161,7 @@ int main(){
             }
         }
 
-        else if (choice == 9) {
+        else if (choice == "9") {
             std::string playlistName;
             int length;
             std::cout<<"What is the name of the playlist you want to create? "<<std::endl;
@@ -170,7 +169,7 @@ int main(){
             mainLibrary->createPlaylist(playlistName);
         }
 
-        else if (choice == 10) {
+        else if (choice == "10") {
             std::string playlist;
             std::string artist;
             std::string song;
@@ -187,7 +186,7 @@ int main(){
             }
         }
 
-        else if (choice == 11) {
+        else if (choice == "11") {
             std::string playlist;
             std::string song;
             std::string artist;
@@ -203,7 +202,7 @@ int main(){
                 std::cout<<"Sorry, an error occurred while trying to remove the song from your playlist. "<<std::endl;
             }
         }
-        else if (choice == 12) {
+        else if (choice == "12") {
             std::string playlist;
             std::string contin;
             std::cout<<"What is the name of the playlist you want to play:"<<std::endl;
@@ -227,7 +226,7 @@ int main(){
             }
         }
 
-        else if (choice == 13) {
+        else if (choice == "13") {
             std::string playlist;
             int length;
             std::cout<<"What is the name of the playlist you want to create? "<<std::endl;
@@ -242,7 +241,7 @@ int main(){
             }
         }
 
-        if(choice != 14){
+        if(choice != "14"){
             std::cout<<"Enter next choice:"<<std::endl;
         }
 
@@ -250,7 +249,7 @@ int main(){
     }
 
     std::string file;
-    std::cout<<"What is the name of the file you want to save your library too "<<std::endl;
+    std::cout<<"What is the name of the file you want to save your library to? "<<std::endl;
     getline(std::cin, file);
     mainLibrary->writeLibraryToFile(file);
     std::cout<<"All your activity has been saved to your file."<<std::endl;
