@@ -31,6 +31,7 @@ public:
     bool isSonginList(std::string songName,std::string artistName);
     bool isSongInplaylist(std::string songName, std::string artistName, std::string playlistName);
     void removeSongToPlaylist(std::string songName,std::string artistName,std::string playlistName);
+    bool samePlaylists(std::string playlistName);
     std::string printPlaylists();
     std::string libraryString();
     std::string printSongsByArtist(std::string artist);
