@@ -1,5 +1,6 @@
 //
 // Created by Aine on 12/9/2018.
+// Purpose: Interact with the user and make changes to files based on their input
 //
 
 

@@ -1,5 +1,6 @@
 //
-// Created by stgte on 11/29/18.
+// Created by Tea on 11/29/18.
+// Purpose: Completely test all functions of the song, playlist, and library classes
 //
 #include <iostream>
 #include "TestLib.h"
