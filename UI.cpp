@@ -2,12 +2,12 @@
 // Created by Aine on 12/9/2018.
 // Purpose: Interact with the user and make changes to files based on their input
 //
+
+
 #include "iostream"
 #include "Library.h"
 #include <stdio.h>
 
-//anythign that throws an exception: print out whaz going on
-//test readfiles
 
 int main(){
     Library* mainLibrary= new Library;
