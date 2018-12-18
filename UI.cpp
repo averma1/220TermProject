@@ -236,7 +236,7 @@ int main(){
             std::cin>>length;
             std::cin.ignore();
             try {
-                mainLibrary->createRandomPlaylist(length, playlist);
+                mainLibrary->createRandomPlaylistStart(length, playlist);
             } catch(std::invalid_argument e) {
                 std::cout<<"That Playlist already exists, or there are not enough songs. "<<std::endl;
             }

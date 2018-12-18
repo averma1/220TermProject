@@ -163,7 +163,6 @@ void Library::deletePlaylist(std::string playlistName){
         throw std::invalid_argument("Playlist does not exist");
     }else{
         playListList->removeValueAt(found);
-        //delete from file as well
     }
     numOfPlaylists--;
 }
@@ -207,12 +206,12 @@ bool Library::samePlaylists(Playlist* playlistName){
     for (int i=0; i<numOfPlaylists-1; i++){
         Playlist* currentPlaylist=playListList->getValueAt(i);
         if (currentPlaylist->getDuration()==playlistName->getDuration()){
-            if(currentPlaylist->getSongList()!=playlistName->getSongList() ){
-                return false;
+            if(currentPlaylist->getSongList()==playlistName->getSongList() ){
+                return true;
             }
         }
     }
-    return true;
+    return false;
 }
 
 /**
@@ -246,18 +245,26 @@ void Library::createRandomPlaylist(int playDuration, std::string playlistName){
         }
         newPlaylist->addSong(randSong);
     }
-//    while (samePlaylists(newPlaylist)){
-//        int randInt= genRandInt(0,numOfSongs-1);
-//        Song* randSong= songList->getValueAt(randInt);
-//        while(this->isSongInplaylist(randSong->getName(), randSong->getArtist(),playlistName)){
-//            randInt= genRandInt(0,numOfSongs-1);
-//            randSong= songList->getValueAt(randInt);
-//        }
-//        if (durationOfSongList-randSong->getDuration()>=0) {
-//            addSongToPlaylist(randSong->getName(), randSong->getArtist(), playlistName);
-//        }
-    //}
+    newPlaylist->removeSongByIndex(newPlaylist->getNumberOfSongs()-1);
 
+    for(int i=0; i<numOfSongs; i++){
+        Song* randSong= songList->getValueAt(i);
+        if(!isSongInplaylist(randSong->getName(), randSong->getArtist(),playlistName)){
+            newPlaylist->addSong(randSong);
+        }
+        if(newPlaylist->getDuration()>playDuration){
+            newPlaylist->removeSongByIndex(newPlaylist->getNumberOfSongs()-1);
+        }
+    }
+}
+
+void Library::createRandomPlaylistStart(int playDuration, std::string playlistName){
+    createRandomPlaylist(playDuration, playlistName);
+    Playlist* newPlaylist= playListList->getValueAt(numOfPlaylists-1);
+    while(samePlaylists(newPlaylist)){
+        deletePlaylist(newPlaylist->getName());
+        createRandomPlaylist(playDuration, playlistName);
+    }
 }
 
 void Library::removeSongToPlaylist(std::string songName,std::string artistName, std::string playlistName){

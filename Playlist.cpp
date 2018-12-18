@@ -85,6 +85,15 @@ void Playlist::removeSong(Song* songToRemove){
     numberOfSongs--;
 }
 
+void Playlist::removeSongByIndex(int index){
+    if(index==-1){
+        throw std::invalid_argument("song not in list");
+    }
+    Song* songRemoved=songList->removeValueAt(index);
+    duration-=songRemoved->getDuration();
+    numberOfSongs--;
+}
+
 void Playlist::rename(std::string newName){
     name=newName;
 }
