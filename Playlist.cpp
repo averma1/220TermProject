@@ -31,7 +31,10 @@ Playlist::~Playlist(){
 Playlist::Playlist(const Playlist& playlistToCopy){
     name=playlistToCopy.name;
     duration=playlistToCopy.duration;
-    songList=playlistToCopy.songList;
+    songList=new LinkedList<Song*>();
+    for(int i=0;i<numberOfSongs;i++){
+        songList->insertAtEnd(playlistToCopy.songList->getValueAt(i));
+    }
 }
 Playlist& Playlist:: operator=(const Playlist* playlistToCopy){
     if(this != playlistToCopy){
