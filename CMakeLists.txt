@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 
 
-add_executable(220TermProject Song.cpp Playlist.cpp ArrayList.inl TestLib.cpp Library.cpp Tests.cpp)
+add_executable(220TermProject Song.cpp Playlist.cpp ArrayList.inl TestLib.cpp Library.cpp UI.cpp)

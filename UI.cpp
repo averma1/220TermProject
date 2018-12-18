@@ -224,6 +224,9 @@ int main(){
                 if(contin == "no" || contin == "No"){
                     break;
                 }
+                if(contin != "yes" || contin != "Yes"){
+                    break;
+                }
             }
         }
 

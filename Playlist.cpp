@@ -65,18 +65,24 @@ std::string Playlist::playNext(){
         songPlayed->addToPlayCount();
 
         std::string rounded_duration = std::to_string(songList->getValueAt(0)->getDuration());
-        int decimal_pos = rounded_duration.find('.');
+        int decimal_pos = rounded_duration.find(".");
         rounded_duration = rounded_duration.substr(0, decimal_pos+3);
 
-        std::string songInfo = songList->getValueAt(0)->getName() + ',' + songList->getValueAt(0)->getArtist() + ',' +
-                               rounded_duration + ',' +
+        std::string songInfo = songList->getValueAt(0)->getName() + ", " + songList->getValueAt(0)->getArtist() + ", " +
+                               rounded_duration + ", " +
                                std::to_string(songList->getValueAt(0)->getPlayCount());
         return songInfo;
     }
 }
 
 void Playlist::removeSong(Song* songToRemove){
-    int index=songList->find(songToRemove);
+    int index=-1;
+    for(int i=0; i<numberOfSongs; i++){
+        Song* current= songList->getValueAt(i);
+        if(current->getName()==songToRemove->getName() && current->getArtist()==songToRemove->getArtist()){
+            index=i;
+        }
+    }
     if(index==-1){
         throw std::invalid_argument("song not in list");
     }

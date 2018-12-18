@@ -271,7 +271,7 @@ void Library::removeSongToPlaylist(std::string songName,std::string artistName, 
     int found=-1;
     for(int i=0; i<numOfSongs; i++){
         Song* current= songList->getValueAt(i);
-        if(current->getName()==songName&&current->getArtist()==artistName){
+        if(current->getName()==songName && current->getArtist()==artistName){
             found=i;
         }
     }
@@ -285,7 +285,6 @@ void Library::removeSongToPlaylist(std::string songName,std::string artistName, 
                 Song* addsong = songList->getValueAt(found);
                 current->removeSong(addsong);
                 index=i;
-                //update file
             }
         }
         if(index==-1){
@@ -366,7 +365,7 @@ std::string Library::printSongInfo(std::string song, std::string artistName){
 void Library::createLibrarySongs(std::string file) {
     List<std::string>* all = readFile(file);
 
-    for(int i=1; i<length; i++){
+    for(int i=1; i<length-1; i++){
         std::string str = all->getValueAt(i);
         std::stringstream ss(str);
         std::vector<std::string> result;
@@ -390,7 +389,7 @@ void Library::createLibrarySongs(std::string file) {
 void Library::createLibrary(std::string file){
     List<std::string>* all = readFile(file);
 
-    std::string song="Songs,,\r";
+    std::string song="Songs,,";
     int count=-1;
     for(int i= 0; i<length; i++){
         if(all->getValueAt(i)==song){
@@ -433,7 +432,7 @@ void Library::createLibrary(std::string file){
             numOfPlaylists++;
         }
     }
-    for(int i=count+1; i<length; i++){
+    for(int i=count+1; i<length-1; i++){
         std::string str = all->getValueAt(i);
         std::stringstream ss(str);
         std::vector<std::string> result;
@@ -456,7 +455,7 @@ void Library::createLibrary(std::string file){
 List<std::string>* Library::readFile(std::string file){
     std::ifstream infile(file);
     if(!infile){
-        std::cerr<<"text file could not be opened for reading"<<std::endl;
+        throw std::invalid_argument("File could not be read");
     }
     List<std::string>* all= new ArrayList<std::string>(10);
     length= 0;
@@ -613,7 +612,7 @@ void Library::createLibraryPlaylists(std::string file){
     playListList->insertAtEnd(playlist1);
     numOfPlaylists++;
 
-    for(int i=3;i<length; i++){
+    for(int i=3;i<length-1; i++){
         if (all->getValueAt(i) != death) {
             std::string str = all->getValueAt(i);
             std::stringstream ss(str);
