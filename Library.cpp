@@ -29,38 +29,38 @@ Library::~Library(){
     delete songList;
 }
 
-Library::Library(const Library &libraryToCopy){
-    numOfSongs=libraryToCopy.numOfSongs;
-    numOfPlaylists=libraryToCopy.numOfPlaylists;
-    length=libraryToCopy.length;
-    playListList=new ArrayList<Playlist*>(numOfPlaylists);
-    for(int i=0;i<numOfPlaylists;i++){
-        playListList->insertAtEnd(libraryToCopy.playListList->getValueAt(i));
-    }
-    songList=new ArrayList<Song*>(numOfSongs);
-    for(int i=0;i<numOfSongs;i++){
-        songList->insertAtEnd(libraryToCopy.songList->getValueAt(i));
-    }
-}
+//Library::Library(const Library &libraryToCopy){
+//    numOfSongs=libraryToCopy.numOfSongs;
+//    numOfPlaylists=libraryToCopy.numOfPlaylists;
+//    length=libraryToCopy.length;
+//    playListList=new ArrayList<Playlist*>(numOfPlaylists);
+//    for(int i=0;i<numOfPlaylists;i++){
+//        playListList->insertAtEnd(libraryToCopy.playListList->getValueAt(i));
+//    }
+//    songList=new ArrayList<Song*>(numOfSongs);
+//    for(int i=0;i<numOfSongs;i++){
+//        songList->insertAtEnd(libraryToCopy.songList->getValueAt(i));
+//    }
+//}
 
-Library &Library::operator=(const Library* & libraryToCopy){
-    if(this!=libraryToCopy){
-        delete playListList;
-        delete songList;
-        numOfSongs=libraryToCopy->numOfSongs;
-        numOfPlaylists=libraryToCopy->numOfPlaylists;
-        length=libraryToCopy->length;
-        playListList=new ArrayList<Playlist*>(numOfPlaylists);
-        for(int i=0;i<numOfPlaylists;i++){
-            playListList->insertAtEnd(libraryToCopy->playListList->getValueAt(i));
-        }
-        songList=new ArrayList<Song*>(numOfSongs);
-        for(int i=0;i<numOfSongs;i++){
-            songList->insertAtEnd(libraryToCopy->songList->getValueAt(i));
-        }
-    }
-    return *this;
-}
+//Library &Library::operator=(const Library* & libraryToCopy){
+//    if(this!=libraryToCopy){
+//        delete playListList;
+//        delete songList;
+//        numOfSongs=libraryToCopy->numOfSongs;
+//        numOfPlaylists=libraryToCopy->numOfPlaylists;
+//        length=libraryToCopy->length;
+//        playListList=new ArrayList<Playlist*>(numOfPlaylists);
+//        for(int i=0;i<numOfPlaylists;i++){
+//            playListList->insertAtEnd(libraryToCopy->playListList->getValueAt(i));
+//        }
+//        songList=new ArrayList<Song*>(numOfSongs);
+//        for(int i=0;i<numOfSongs;i++){
+//            songList->insertAtEnd(libraryToCopy->songList->getValueAt(i));
+//        }
+//    }
+//    return *this;
+//}
 
 
 void Library::addSongToList(std::string songName, std::string artist, double duration){
@@ -389,7 +389,7 @@ void Library::createLibrarySongs(std::string file) {
 void Library::createLibrary(std::string file){
     List<std::string>* all = readFile(file);
 
-    std::string song="Songs,,";
+    std::string song="Songs,,\r";
     int count=-1;
     for(int i= 0; i<length; i++){
         if(all->getValueAt(i)==song){
@@ -420,9 +420,16 @@ void Library::createLibrary(std::string file){
             std::string title = result.at(0);
             double duration = std::stod(result.at(2));
 
-            Song *newsong = new Song(artist, title, duration);
-            playlist1->addSong(newsong);
             addSongToList(title,artist,duration);
+            int found=-1;
+            for(int i=0; i<numOfSongs; i++){
+                Song* current= songList->getValueAt(i);
+                if(current->getName()==title && current->getArtist()==artist){
+                    found=i;
+                }
+            }
+            Song* newsong= songList->getValueAt(found);
+            playlist1->addSong(newsong);
 
         } else if (all->getValueAt(i) == death) {
             i++;
@@ -545,7 +552,6 @@ std::string Library::printPlaylistInfo(std::string playlist){
 
 std::string Library::playPlaylist(std::string playlist){
     int found=-1;
-    std::string playInfo;
     for(int i=0; i<numOfPlaylists; i++){
         Playlist* current= playListList->getValueAt(i);
         if(current->getName()==playlist){
@@ -561,7 +567,6 @@ std::string Library::playPlaylist(std::string playlist){
         }
     } else {
         return "Playlist does not exist";
-        playInfo="No playlist by that name in the Library";
     }
 }
 
@@ -628,10 +633,16 @@ void Library::createLibraryPlaylists(std::string file){
             std::string title = result.at(0);
             double duration = std::stod(result.at(2));
 
-            Song *newsong = new Song(artist, title, duration);
+            addSongToList(title,artist,duration);
+            int found=-1;
+            for(int i=0; i<numOfSongs; i++){
+                Song* current= songList->getValueAt(i);
+                if(current->getName()==title && current->getArtist()==artist){
+                    found=i;
+                }
+            }
+            Song* newsong= songList->getValueAt(found);
             playlist1->addSong(newsong);
-            songList->insertAtEnd(newsong);
-            numOfSongs++;
 
         } else if (all->getValueAt(i) == death) {
             i++;
