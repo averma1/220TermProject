@@ -425,6 +425,7 @@ void testRemoveDuplicateSongs(){
 }
 
 void testRandomPlaylist(){
+    std::cout<<"---------- Testing Random Playlist Generation ---------"<<std::endl;
     Library* lib=new Library();
     lib->createPlaylist("La la land");
     lib->addSongToList("Not","song",4);
@@ -437,6 +438,29 @@ void testRandomPlaylist(){
         std::cout <<"pass"<<std::endl;
     }
 
+    Library* test= new Library();
+    test->createLibrary("Sample.csv");
+    test->createRandomPlaylistStart(12, "test");
+    printAssertEquals("Oh Boy, Fun, test", test->printPlaylists());
+
+    test->createRandomPlaylistStart(12, "test2");
+    printAssertEquals("Oh Boy, Fun, test, test2", test->printPlaylists());
+    if(test->printPlaylistInfo("test")!= test->printPlaylistInfo("test2")){
+        std::cout<<"pass"<<std::endl;
+    } else {
+        std::cout<<"failed"<<std::endl;
+    }
+
+    test->createRandomPlaylistStart(30, "test3");
+    printAssertEquals("Oh Boy, Fun, test, test2, test3", test->printPlaylists());
+    std::cout<<"Duration should be close to, but not over 12:"<<std::endl;
+    std::cout<<test->printPlaylistInfo("test")<<std::endl;
+    std::cout<<""<<std::endl;
+    std::cout<<"Duration should be close to, but not over 12:"<<std::endl;
+    std::cout<<test->printPlaylistInfo("test2")<<std::endl;
+    std::cout<<""<<std::endl;
+    std::cout<<"Duration should be close to, but not over 30:"<<std::endl;
+    std::cout<<test->printPlaylistInfo("test3")<<std::endl;
 }
 
 

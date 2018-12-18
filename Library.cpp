@@ -390,7 +390,7 @@ void Library::createLibrarySongs(std::string file) {
 void Library::createLibrary(std::string file){
     List<std::string>* all = readFile(file);
 
-    std::string song="Songs,,";
+    std::string song="Songs,,\r";
     int count=-1;
     for(int i= 0; i<length; i++){
         if(all->getValueAt(i)==song){
